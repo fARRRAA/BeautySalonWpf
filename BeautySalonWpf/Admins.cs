@@ -12,17 +12,17 @@ namespace BeautySalonWpf
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class Admins
     {
-        public int userID { get; set; }
+        public int adminId { get; set; }
         public string Lname { get; set; }
-        public string FName { get; set; }
+        public string Fname { get; set; }
+        public string Patronymic { get; set; }
         public Nullable<System.DateTime> dateBirth { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
+        public string login { get; set; }
+        public string password { get; set; }
         public string photo { get; set; }
-        public string Preferences { get; set; }
     }
 }

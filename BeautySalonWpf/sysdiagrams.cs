@@ -12,17 +12,12 @@ namespace BeautySalonWpf
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class sysdiagrams
     {
-        public int userID { get; set; }
-        public string Lname { get; set; }
-        public string FName { get; set; }
-        public Nullable<System.DateTime> dateBirth { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
-        public string photo { get; set; }
-        public string Preferences { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -25,6 +25,9 @@ namespace BeautySalonWpf
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admins> Admins { get; set; }
+        public virtual DbSet<Clients> Clients { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }
