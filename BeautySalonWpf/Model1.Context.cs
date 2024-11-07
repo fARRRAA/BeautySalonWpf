@@ -27,7 +27,7 @@ namespace BeautySalonWpf
     
         public virtual DbSet<Admins> Admins { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
+        public virtual DbSet<na_vsyakiy> na_vsyakiy { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
     }
 }

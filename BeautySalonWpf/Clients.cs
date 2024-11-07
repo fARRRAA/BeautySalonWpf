@@ -14,10 +14,15 @@ namespace BeautySalonWpf
     
     public partial class Clients
     {
-        public int clientId { get; set; }
-        public string LName { get; set; }
+        public int userID { get; set; }
+        public string Lname { get; set; }
         public string FName { get; set; }
+        public Nullable<System.DateTime> dateBirth { get; set; }
+        public string login { get; set; }
+        public string password { get; set; }
         public string phone { get; set; }
+        public string email { get; set; }
+        public string photo { get; set; }
         public string Preferences { get; set; }
     }
 }

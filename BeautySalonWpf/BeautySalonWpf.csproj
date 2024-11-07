@@ -78,14 +78,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdminPage.xaml.cs">
+    <Compile Include="na_vsyakiy.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Users.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="WindowDialogs\Admin\RedactAdmin.xaml.cs">
+      <DependentUpon>RedactAdmin.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -100,7 +103,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\AdminPage.xaml">
+    <Page Include="Pages\Admin\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SignUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\Admin\RedactAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,7 +171,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pages\house.png" />
     <Resource Include="imgs\media\icons\house.png" />
     <Resource Include="imgs\media\icons\admin.png" />
     <Resource Include="imgs\media\icons\client.png" />
@@ -173,6 +179,9 @@
     <Resource Include="imgs\media\icons\orders.png" />
     <Resource Include="imgs\media\icons\master.png" />
     <Resource Include="imgs\media\icons\appointment.png" />
+    <Resource Include="imgs\media\icons\hairdresser.png" />
+    <Resource Include="imgs\pfp\admins\admin1.png" />
+    <Resource Include="imgs\pfp\admins\admin2.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -189,7 +198,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="imgs\media\default\" />
-    <Folder Include="imgs\pfp\" />
+    <Folder Include="imgs\pfp\clients\" />
+    <Folder Include="imgs\pfp\products\" />
+    <Folder Include="Pages\Client\" />
+    <Folder Include="Pages\Master\" />
+    <Folder Include="WindowDialogs\Client\" />
+    <Folder Include="WindowDialogs\Master\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

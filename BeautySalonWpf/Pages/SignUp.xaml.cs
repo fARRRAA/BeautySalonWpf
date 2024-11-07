@@ -45,7 +45,7 @@ namespace BeautySalonWpf.Pages
             var phone = PhoneTextUser.Text;
             var email = EmailTextUser.Text;
             var password = PasswordTextUser.Password;
-            var temp = new Users()
+            var temp = new Clients()
             {
                 login = login,
                 password = password,
@@ -62,13 +62,13 @@ namespace BeautySalonWpf.Pages
                 Growl.Clear();
                 return;
             }
-            var check = await ConnectionDb.db.Users.FirstOrDefaultAsync(u => u.login == temp.login);
+            var check = await ConnectionDb.db.Clients.FirstOrDefaultAsync(u => u.login == temp.login);
             if (check != null)
             {
                 Growl.Error("Аккаунт с таким логином уже есть");
                 return;
             }
-             ConnectionDb.db.Users.Add(temp);
+             ConnectionDb.db.Clients.Add(temp);
              ConnectionDb.db.SaveChanges();
             Growl.Success("вы успешно зарегистрировались");
             await Task.Delay(1500);

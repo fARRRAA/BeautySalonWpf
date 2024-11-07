@@ -1,4 +1,5 @@
-﻿using HandyControl.Controls;
+﻿using BeautySalonWpf.Pages.Admin;
+using HandyControl.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -31,6 +32,8 @@ namespace BeautySalonWpf.Pages
             InitializeComponent();
             _mw = mw;
             _mw.ChangeWindowSize(600, 700);
+            LoginTextAdmin.Text = "farra";
+            PasswordTextAdmin.Password = "123";
         }
 
 
@@ -39,7 +42,7 @@ namespace BeautySalonWpf.Pages
         {
             var login = LoginTextUser.Text;
             var password = PasswordTextUser.Password;
-            var temp = new Users()
+            var temp = new Clients()
             {
                 login = login,
                 password = password,
@@ -51,7 +54,7 @@ namespace BeautySalonWpf.Pages
                 Growl.Clear();
                 return;
             }
-            var check = await ConnectionDb.db.Users.FirstOrDefaultAsync(x=>x.login == login&&x.password==password);
+            var check = await ConnectionDb.db.Clients.FirstOrDefaultAsync(x=>x.login == login&&x.password==password);
             if(check == null){
                 Growl.Error("Неправильный логин или пароль");
                 return;

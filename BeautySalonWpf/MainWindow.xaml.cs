@@ -25,7 +25,7 @@ namespace BeautySalonWpf
         public MainWindow()
         {
             InitializeComponent();
-            ConfigHelper.Instance.SetLang("en");
+            ConfigHelper.Instance.SetLang("ru");
             MainFrame.NavigationService.Navigate(new SignIn(this));
 
         }
