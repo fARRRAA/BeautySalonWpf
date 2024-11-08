@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ee2183eab40f45e79ba5c0565736c9c1" Name="Diagram1">
-        <EntityTypeShape EntityType="BeautySalonModel.Admins" Width="1.75" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BeautySalonModel.Clients" Width="1.75" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BeautySalonModel.na_vsyakiy" Width="1.75" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BeautySalonModel.sysdiagrams" Width="1.75" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.Admins" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.Clients" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.na_vsyakiy" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

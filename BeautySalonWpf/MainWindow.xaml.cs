@@ -27,7 +27,6 @@ namespace BeautySalonWpf
             InitializeComponent();
             ConfigHelper.Instance.SetLang("ru");
             MainFrame.NavigationService.Navigate(new SignIn(this));
-
         }
         public void ChangeWindowSize(double height, double width)
         {

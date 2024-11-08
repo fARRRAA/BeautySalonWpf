@@ -14,7 +14,7 @@
         <TabControl TabStripPlacement="Left">
             <TabItem Width="218" HorizontalAlignment="Left">
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="208" >
+                    <StackPanel  Orientation="Horizontal"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="208" >
                         <Image Source="/imgs/media/icons/house.png" Width="30" Height="30" />
                         <TextBlock Text="Главная" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16"/>
                     </StackPanel>
@@ -32,20 +32,29 @@
                 </StackPanel>
 
             </TabItem>
-            <TabItem >
+            <TabItem>
                 <TabItem.Header >
                     <StackPanel Orientation="Horizontal"  Margin="0,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="196" >
                         <Image Source="/imgs/media/icons/admin.png" Width="30" Height="30" />
                         <TextBlock Text="Администраторы" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16"/>
                     </StackPanel>
                 </TabItem.Header>
-                <StackPanel Background="#2C2C2E">
+                <Frame x:Name="AdminTabFrame" ></Frame>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="198" >
+                        <Image Source="/imgs/media/icons/master.png" Width="30" Height="30" />
+                        <TextBlock Text="Мастеры" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16"/>
+                    </StackPanel>
+                 </TabItem.Header>
+                <!--<StackPanel Background="#2C2C2E">
                     <StackPanel Margin="15,0,0,0">
                         <StackPanel HorizontalAlignment="Left">
-                            <hc:SearchBar x:Name="AdminsSearchText" Height="40" FontSize="18" hc:InfoElement.ShowClearButton="True"  Width="600"  hc:InfoElement.Placeholder="Введите данные о администраторе" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="" Style="{StaticResource SearchBarPlus}" hc:InfoElement.Necessary="True" TextChanged="AdminsSearchText_TextChanged" Margin="0,20,0,0" />
+                            <hc:SearchBar x:Name="MasterSearchText" Height="35" FontSize="16" hc:InfoElement.ShowClearButton="True"  Width="600"  hc:InfoElement.Placeholder="Введите данные о мастере" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="" Style="{StaticResource SearchBarPlus}" hc:InfoElement.Necessary="True" TextChanged="AdminsSearchText_TextChanged" Margin="0,25,0,0" />
                         </StackPanel>
                         <StackPanel >
-                            <ListView Margin="0,35,0,0" x:Name="AdminsList" ItemsSource="{Binding admins}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="624" Width="1088" HorizontalAlignment="Left">
+                            <ListView Margin="0,25,0,0" x:Name="MastersList" ItemsSource="{Binding masters}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="624" Width="1088" HorizontalAlignment="Left">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn DisplayMemberBinding="{Binding adminId}" Width="60" Header="id"/>
@@ -64,27 +73,18 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <hc:Pagination x:Name="paginationElem" MaxPageCount="10" PageIndex="1"  PageUpdated="page_PageUpdated" Margin="0,20,0,0"></hc:Pagination>
+                            <hc:Pagination x:Name="paginationElemMasters" MaxPageCount="10" PageIndex="1"  PageUpdated="page_PageUpdated" Margin="0,20,0,0"></hc:Pagination>
                         </StackPanel>
                         <StackPanel Margin="0,20,0,0" VerticalAlignment="Bottom" Orientation="Horizontal">
-                            <Label x:Name="AdminsCountText" Content="Всего администраторов: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
+                            <Label x:Name="MastersCountText" Content="Всего мастеров: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="500,0,0,0">
-                                <Button x:Name="deleteAdmin" Content="Удалить админа" Margin="5" Style="{StaticResource ButtonDanger}" Click="deleteAdmin_Click"/>
-                                <Button x:Name="redactAdmin" Content="Отредактировать админа" Margin="5" Style="{StaticResource ButtonWarning}" Click="redactAdmin_Click"/>
-                                <Button x:Name="addAdmin" Content="Добавить админа" Margin="5" Style="{StaticResource ButtonInfo}"/>
+                                <Button x:Name="deletemaster" Content="Удалить админа" Margin="5" Style="{StaticResource ButtonDanger}" Click="deleteAdmin_Click"/>
+                                <Button x:Name="redactMaster" Content="Отредактировать админа" Margin="5" Style="{StaticResource ButtonWarning}" Click="redactAdmin_Click"/>
+                                <Button x:Name="addMaster" Content="Добавить админа" Margin="5" Style="{StaticResource ButtonInfo}" Click="addAdmin_Click"/>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
-                </StackPanel>
-
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="198" >
-                        <Image Source="/imgs/media/icons/master.png" Width="30" Height="30" />
-                        <TextBlock Text="Мастеры" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16"/>
-                    </StackPanel>
-                </TabItem.Header>
+                </StackPanel>-->
             </TabItem>
             <TabItem>
                 <TabItem.Header>

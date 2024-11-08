@@ -84,8 +84,17 @@
     <Compile Include="Pages\Admin\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Admin\Tabs\AdminTab.xaml.cs">
+      <DependentUpon>AdminTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\Tabs\MastersTab.xaml.cs">
+      <DependentUpon>MastersTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WindowDialogs\Admin\AddAdmin.xaml.cs">
+      <DependentUpon>AddAdmin.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowDialogs\Admin\RedactAdmin.xaml.cs">
       <DependentUpon>RedactAdmin.xaml</DependentUpon>
@@ -107,11 +116,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Admin\Tabs\AdminTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Admin\Tabs\MastersTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\SignIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SignUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\Admin\AddAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

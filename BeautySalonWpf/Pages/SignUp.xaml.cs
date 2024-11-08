@@ -33,9 +33,8 @@ namespace BeautySalonWpf.Pages
 
         private void AlreadyRegistered_Click(object sender, RoutedEventArgs e)
         {
-
+            _mw.MainFrame.NavigationService.Navigate(new SignIn(_mw));
         }
-
         private async void RegisterBtnUser_Click(object sender, RoutedEventArgs e)
         {
             var login = LoginTextUser.Text;
@@ -60,7 +59,7 @@ namespace BeautySalonWpf.Pages
                 Growl.Error("Заполните все поля");
                 await Task.Delay(1500);
                 Growl.Clear();
-                return;
+                return; 
             }
             var check = await ConnectionDb.db.Clients.FirstOrDefaultAsync(u => u.login == temp.login);
             if (check != null)
