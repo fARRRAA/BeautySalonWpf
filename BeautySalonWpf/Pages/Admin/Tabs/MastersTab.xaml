@@ -14,7 +14,7 @@
                 <hc:SearchBar x:Name="MastersSearchText" Height="35" FontSize="16" hc:InfoElement.ShowClearButton="True"  Width="600"  hc:InfoElement.Placeholder="Введите данные о мастере" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="" Style="{StaticResource SearchBarPlus}" hc:InfoElement.Necessary="True" TextChanged="MastersSearchText_TextChanged" Margin="0,25,0,0" />
             </StackPanel>
             <StackPanel >
-                <ListView Margin="0,25,0,0" x:Name="MastersList" ItemsSource="{Binding masters}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="624" Width="1088" HorizontalAlignment="Left">
+                <ListView Margin="0,25,0,0" x:Name="MastersList" ItemsSource="{Binding masters}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="624" Width="1130" HorizontalAlignment="Left">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding masterId}" Width="60" Header="id"/>
@@ -28,16 +28,19 @@
                             <GridViewColumn DisplayMemberBinding="{Binding Lname}" Width="220" Header="Фамилия"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Fname}" Width="155" Header="Имя"/>
                             <GridViewColumn DisplayMemberBinding="{Binding phone}" Width="130" Header="Телефон"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding login}" Width="180" Header="Логин"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding email}" Width="160" Header="Почта"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding login}" Width="150" Header="Логин"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding MastersQualifications.TypeServices.name}" Width="160" Header="Специализация"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding MastersSkills.name}" Width="160" Header="Мастерство"/>
+
+
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <hc:Pagination x:Name="paginationElem" MaxPageCount="10" PageIndex="1"  PageUpdated="page_PageUpdated" Margin="0,20,0,0"></hc:Pagination>
+                <hc:Pagination x:Name="paginationElem" MaxPageCount="10" PageIndex="1" PageUpdated="page_PageUpdated"  Margin="0,20,0,0"></hc:Pagination>
             </StackPanel>
             <StackPanel Margin="0,20,0,0" VerticalAlignment="Bottom" Orientation="Horizontal">
                 <Label x:Name="MastersCountText" Content="Всего мастеров: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="540,0,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="500,0,0,0">
                     <Button x:Name="deleteMaster" Content="Удалить мастера" Margin="5" Style="{StaticResource ButtonDanger}" Click="deleteMaster_Click"/>
                     <Button x:Name="redactMaster" Content="Отредактировать мастера" Margin="5" Style="{StaticResource ButtonWarning}" Click="redactMaster_Click"/>
                     <Button x:Name="addMaster" Content="Добавить мастера" Margin="5" Style="{StaticResource ButtonInfo}" Click="addMaster_Click"/>

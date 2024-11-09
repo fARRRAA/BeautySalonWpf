@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	        xmlns:hc="https://handyorg.github.io/handycontrol"
+	  xmlns:hc="https://handyorg.github.io/handycontrol"
       xmlns:local="clr-namespace:BeautySalonWpf.Pages.Admin.Tabs"
       mc:Ignorable="d"
       d:DesignHeight="950" d:DesignWidth="1180"
@@ -39,9 +39,9 @@
 		<StackPanel Margin="0,20,0,0" VerticalAlignment="Bottom" Orientation="Horizontal">
 			<Label x:Name="AdminsCountText" Content="Всего администраторов: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="500,0,0,0">
-				<Button x:Name="deleteAdmin" Content="Удалить админа" Margin="5" Style="{StaticResource ButtonDanger}" Click="deleteAdmin_Click"/>
-				<Button x:Name="redactAdmin" Content="Отредактировать админа" Margin="5" Style="{StaticResource ButtonWarning}" Click="redactAdmin_Click"/>
-				<Button x:Name="addAdmin" Content="Добавить админа" Margin="5" Style="{StaticResource ButtonInfo}" Click="addAdmin_Click"/>
+                    <Button x:Name="deleteAdmin" Content="Удалить админа" Style="{StaticResource ButtonDanger}" Margin="5" Click="deleteAdmin_Click"/>
+                    <Button x:Name="redactAdmin" Content="Отредактировать админа" Margin="5"  Style="{StaticResource ButtonWarning}" Click="redactAdmin_Click"/>
+                    <Button x:Name="addAdmin" Content="Добавить админа" Margin="5" Style="{StaticResource ButtonInfo}" Click="addAdmin_Click"/>
 			</StackPanel>
 		</StackPanel>
 	</StackPanel>

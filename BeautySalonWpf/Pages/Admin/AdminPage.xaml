@@ -85,6 +85,7 @@
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>-->
+                <Frame x:Name="MastersTabFrame"></Frame>
             </TabItem>
             <TabItem>
                 <TabItem.Header>

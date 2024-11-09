@@ -20,14 +20,34 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
     /// </summary>
     public partial class MastersTab : Page
     {
-        public MastersTab()
+        private MainWindow _mw;
+        private Admins _admin;
+        private List<Masters> _masters;
+        private int pageCount;
+        private int pageSize = 9;
+        public MastersTab(MainWindow mw,Admins admin)
         {
             InitializeComponent();
+            _mw = mw;
+            _admin = admin;
+            _masters = ConnectionDb.db.Masters.ToList();
+            MastersList.ItemsSource = _masters;
+            pageCount = (int)Math.Round(Convert.ToDouble(_masters.Count / 9)) + 1;
+            paginationElem.MaxPageCount = pageCount;
+            MastersCountText.Content = $"Всего администраторов: {_masters.Count}";
         }
 
         private void MastersSearchText_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            var searchText = MastersSearchText.Text.ToLower();
+            var filtered = _masters.Where(a => a.Lname.ToLower().Contains(searchText)
+            || a.Fname.ToLower().Contains(searchText)
+            || a.MastersQualifications.TypeServices.name.ToLower().Contains(searchText)
+            || a.login.ToLower().Contains(searchText)
+            || a.email.ToLower().Contains(searchText)
+            || a.MastersSkills.name.ToLower().Contains(searchText)
+            ).ToList();
+            MastersList.ItemsSource = filtered;
         }
 
         private void deleteMaster_Click(object sender, RoutedEventArgs e)
@@ -43,6 +63,10 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         private void addMaster_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
+        {
+            MastersList.ItemsSource = _masters.Skip((e.Info - 1) * pageSize).Take(pageSize).ToList();
         }
     }
 }

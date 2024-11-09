@@ -19,6 +19,7 @@
           <Property Name="login" Type="nvarchar" MaxLength="100" />
           <Property Name="password" Type="nvarchar" MaxLength="100" />
           <Property Name="photo" Type="nvarchar" MaxLength="100" />
+          <Property Name="roleId" Type="int" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -34,6 +35,41 @@
           <Property Name="email" Type="nvarchar" MaxLength="100" />
           <Property Name="photo" Type="nvarchar" MaxLength="200" />
           <Property Name="Preferences" Type="nvarchar(max)" />
+          <Property Name="roleId" Type="int" Nullable="false" />
+          <Property Name="visitsCount" Type="int" />
+        </EntityType>
+        <EntityType Name="Masters">
+          <Key>
+            <PropertyRef Name="masterId" />
+          </Key>
+          <Property Name="masterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lname" Type="nvarchar" MaxLength="100" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="100" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="100" />
+          <Property Name="dateBirth" Type="date" />
+          <Property Name="phone" Type="nvarchar" MaxLength="12" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="login" Type="nvarchar" MaxLength="100" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" />
+          <Property Name="photo" Type="nvarchar" MaxLength="100" />
+          <Property Name="qualificationId" Type="int" />
+          <Property Name="skillId" Type="int" />
+          <Property Name="roleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MastersQualifications">
+          <Key>
+            <PropertyRef Name="qualifictionId" />
+          </Key>
+          <Property Name="qualifictionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeServiceId" Type="int" />
+        </EntityType>
+        <EntityType Name="MastersSkills">
+          <Key>
+            <PropertyRef Name="skillId" />
+          </Key>
+          <Property Name="skillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="rate" Type="int" />
         </EntityType>
         <EntityType Name="na_vsyakiy">
           <Key>
@@ -45,6 +81,46 @@
           <Property Name="phone" Type="nvarchar" MaxLength="12" />
           <Property Name="Preferences" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="productId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" />
+          <Property Name="price" Type="int" />
+          <Property Name="photo" Type="nvarchar" MaxLength="200" />
+          <Property Name="typeId" Type="int" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ServiceRunTime">
+          <Key>
+            <PropertyRef Name="runTimeId" />
+          </Key>
+          <Property Name="runTimeId" Type="int" Nullable="false" />
+          <Property Name="juniorRunTime" Type="int" />
+          <Property Name="middleRunTime" Type="int" />
+          <Property Name="SeniorRunTime" Type="int" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="serviceId" />
+          </Key>
+          <Property Name="serviceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serviceName" Type="nvarchar" MaxLength="100" />
+          <Property Name="typeServiceId" Type="int" />
+          <Property Name="juniorRunTime" Type="int" />
+          <Property Name="middleRunTime" Type="int" />
+          <Property Name="SeniorRunTime" Type="int" />
+          <Property Name="juniorPrice" Type="int" />
+          <Property Name="middlePrice" Type="int" />
+          <Property Name="seniorPrice" Type="int" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -55,11 +131,162 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="TypeProducts">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TypeServices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Admins_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="Admins">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Masters_MastersQualifications1">
+          <End Role="MastersQualifications" Type="Self.MastersQualifications" Multiplicity="0..1" />
+          <End Role="Masters" Type="Self.Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MastersQualifications">
+              <PropertyRef Name="qualifictionId" />
+            </Principal>
+            <Dependent Role="Masters">
+              <PropertyRef Name="qualificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Masters_MastersSkills">
+          <End Role="MastersSkills" Type="Self.MastersSkills" Multiplicity="0..1" />
+          <End Role="Masters" Type="Self.Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MastersSkills">
+              <PropertyRef Name="skillId" />
+            </Principal>
+            <Dependent Role="Masters">
+              <PropertyRef Name="skillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Masters_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Masters" Type="Self.Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="Masters">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MastersQualifications_BaseServices">
+          <End Role="TypeServices" Type="Self.TypeServices" Multiplicity="0..1" />
+          <End Role="MastersQualifications" Type="Self.MastersQualifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeServices">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MastersQualifications">
+              <PropertyRef Name="typeServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_TypeProducts">
+          <End Role="TypeProducts" Type="Self.TypeProducts" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProducts">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Services_BaseServices">
+          <End Role="TypeServices" Type="Self.TypeServices" Multiplicity="0..1" />
+          <End Role="Services" Type="Self.Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeServices">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Services">
+              <PropertyRef Name="typeServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище BeautySalonModelContainer">
           <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Masters" EntityType="Self.Masters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MastersQualifications" EntityType="Self.MastersQualifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MastersSkills" EntityType="Self.MastersSkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="na_vsyakiy" EntityType="Self.na_vsyakiy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceRunTime" EntityType="Self.ServiceRunTime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeProducts" EntityType="Self.TypeProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeServices" EntityType="Self.TypeServices" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Admins_Roles" Association="Self.FK_Admins_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Admins" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Roles" Association="Self.FK_Clients_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Masters_MastersQualifications1" Association="Self.FK_Masters_MastersQualifications1">
+            <End Role="MastersQualifications" EntitySet="MastersQualifications" />
+            <End Role="Masters" EntitySet="Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Masters_MastersSkills" Association="Self.FK_Masters_MastersSkills">
+            <End Role="MastersSkills" EntitySet="MastersSkills" />
+            <End Role="Masters" EntitySet="Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Masters_Roles" Association="Self.FK_Masters_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Masters" EntitySet="Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MastersQualifications_BaseServices" Association="Self.FK_MastersQualifications_BaseServices">
+            <End Role="TypeServices" EntitySet="TypeServices" />
+            <End Role="MastersQualifications" EntitySet="MastersQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_TypeProducts" Association="Self.FK_Products_TypeProducts">
+            <End Role="TypeProducts" EntitySet="TypeProducts" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Services_BaseServices" Association="Self.FK_Services_BaseServices">
+            <End Role="TypeServices" EntitySet="TypeServices" />
+            <End Role="Services" EntitySet="Services" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -68,8 +295,49 @@
         <EntityContainer Name="BeautySalonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="BeautySalonModel.Admins" />
           <EntitySet Name="Clients" EntityType="BeautySalonModel.Clients" />
+          <EntitySet Name="Masters" EntityType="BeautySalonModel.Masters" />
+          <EntitySet Name="MastersQualifications" EntityType="BeautySalonModel.MastersQualifications" />
+          <EntitySet Name="MastersSkills" EntityType="BeautySalonModel.MastersSkills" />
           <EntitySet Name="na_vsyakiy" EntityType="BeautySalonModel.na_vsyakiy" />
+          <EntitySet Name="Products" EntityType="BeautySalonModel.Products" />
+          <EntitySet Name="Roles" EntityType="BeautySalonModel.Roles" />
+          <EntitySet Name="ServiceRunTime" EntityType="BeautySalonModel.ServiceRunTime" />
+          <EntitySet Name="Services" EntityType="BeautySalonModel.Services" />
           <EntitySet Name="sysdiagrams" EntityType="BeautySalonModel.sysdiagrams" />
+          <EntitySet Name="TypeProducts" EntityType="BeautySalonModel.TypeProducts" />
+          <EntitySet Name="TypeServices" EntityType="BeautySalonModel.TypeServices" />
+          <AssociationSet Name="FK_Admins_Roles" Association="BeautySalonModel.FK_Admins_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Admins" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Roles" Association="BeautySalonModel.FK_Clients_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Masters_MastersQualifications1" Association="BeautySalonModel.FK_Masters_MastersQualifications1">
+            <End Role="MastersQualifications" EntitySet="MastersQualifications" />
+            <End Role="Masters" EntitySet="Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Masters_MastersSkills" Association="BeautySalonModel.FK_Masters_MastersSkills">
+            <End Role="MastersSkills" EntitySet="MastersSkills" />
+            <End Role="Masters" EntitySet="Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Masters_Roles" Association="BeautySalonModel.FK_Masters_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Masters" EntitySet="Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MastersQualifications_BaseServices" Association="BeautySalonModel.FK_MastersQualifications_BaseServices">
+            <End Role="TypeServices" EntitySet="TypeServices" />
+            <End Role="MastersQualifications" EntitySet="MastersQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_TypeProducts" Association="BeautySalonModel.FK_Products_TypeProducts">
+            <End Role="TypeProducts" EntitySet="TypeProducts" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Services_BaseServices" Association="BeautySalonModel.FK_Services_BaseServices">
+            <End Role="TypeServices" EntitySet="TypeServices" />
+            <End Role="Services" EntitySet="Services" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Admins">
           <Key>
@@ -85,6 +353,8 @@
           <Property Name="login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="roleId" Type="Int32" />
+          <NavigationProperty Name="Roles" Relationship="BeautySalonModel.FK_Admins_Roles" FromRole="Admins" ToRole="Roles" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -100,6 +370,48 @@
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Preferences" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="roleId" Type="Int32" Nullable="false" />
+          <Property Name="visitsCount" Type="Int32" />
+          <NavigationProperty Name="Roles" Relationship="BeautySalonModel.FK_Clients_Roles" FromRole="Clients" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Masters">
+          <Key>
+            <PropertyRef Name="masterId" />
+          </Key>
+          <Property Name="masterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Fname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dateBirth" Type="DateTime" Precision="0" />
+          <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="qualificationId" Type="Int32" />
+          <Property Name="skillId" Type="Int32" />
+          <Property Name="roleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MastersQualifications" Relationship="BeautySalonModel.FK_Masters_MastersQualifications1" FromRole="Masters" ToRole="MastersQualifications" />
+          <NavigationProperty Name="MastersSkills" Relationship="BeautySalonModel.FK_Masters_MastersSkills" FromRole="Masters" ToRole="MastersSkills" />
+          <NavigationProperty Name="Roles" Relationship="BeautySalonModel.FK_Masters_Roles" FromRole="Masters" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="MastersQualifications">
+          <Key>
+            <PropertyRef Name="qualifictionId" />
+          </Key>
+          <Property Name="qualifictionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typeServiceId" Type="Int32" />
+          <NavigationProperty Name="Masters" Relationship="BeautySalonModel.FK_Masters_MastersQualifications1" FromRole="MastersQualifications" ToRole="Masters" />
+          <NavigationProperty Name="TypeServices" Relationship="BeautySalonModel.FK_MastersQualifications_BaseServices" FromRole="MastersQualifications" ToRole="TypeServices" />
+        </EntityType>
+        <EntityType Name="MastersSkills">
+          <Key>
+            <PropertyRef Name="skillId" />
+          </Key>
+          <Property Name="skillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="rate" Type="Int32" />
+          <NavigationProperty Name="Masters" Relationship="BeautySalonModel.FK_Masters_MastersSkills" FromRole="MastersSkills" ToRole="Masters" />
         </EntityType>
         <EntityType Name="na_vsyakiy">
           <Key>
@@ -111,6 +423,51 @@
           <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="Preferences" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="productId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="typeId" Type="Int32" />
+          <NavigationProperty Name="TypeProducts" Relationship="BeautySalonModel.FK_Products_TypeProducts" FromRole="Products" ToRole="TypeProducts" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Admins" Relationship="BeautySalonModel.FK_Admins_Roles" FromRole="Roles" ToRole="Admins" />
+          <NavigationProperty Name="Clients" Relationship="BeautySalonModel.FK_Clients_Roles" FromRole="Roles" ToRole="Clients" />
+          <NavigationProperty Name="Masters" Relationship="BeautySalonModel.FK_Masters_Roles" FromRole="Roles" ToRole="Masters" />
+        </EntityType>
+        <EntityType Name="ServiceRunTime">
+          <Key>
+            <PropertyRef Name="runTimeId" />
+          </Key>
+          <Property Name="runTimeId" Type="Int32" Nullable="false" />
+          <Property Name="juniorRunTime" Type="Int32" />
+          <Property Name="middleRunTime" Type="Int32" />
+          <Property Name="SeniorRunTime" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="serviceId" />
+          </Key>
+          <Property Name="serviceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="typeServiceId" Type="Int32" />
+          <Property Name="juniorRunTime" Type="Int32" />
+          <Property Name="middleRunTime" Type="Int32" />
+          <Property Name="SeniorRunTime" Type="Int32" />
+          <Property Name="juniorPrice" Type="Int32" />
+          <Property Name="middlePrice" Type="Int32" />
+          <Property Name="seniorPrice" Type="Int32" />
+          <NavigationProperty Name="TypeServices" Relationship="BeautySalonModel.FK_Services_BaseServices" FromRole="Services" ToRole="TypeServices" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -121,6 +478,119 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="TypeProducts">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="BeautySalonModel.FK_Products_TypeProducts" FromRole="TypeProducts" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="TypeServices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MastersQualifications" Relationship="BeautySalonModel.FK_MastersQualifications_BaseServices" FromRole="TypeServices" ToRole="MastersQualifications" />
+          <NavigationProperty Name="Services" Relationship="BeautySalonModel.FK_Services_BaseServices" FromRole="TypeServices" ToRole="Services" />
+        </EntityType>
+        <Association Name="FK_Admins_Roles">
+          <End Type="BeautySalonModel.Roles" Role="Roles" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.Admins" Role="Admins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="Admins">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Roles">
+          <End Type="BeautySalonModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="BeautySalonModel.Clients" Role="Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Masters_MastersQualifications1">
+          <End Type="BeautySalonModel.MastersQualifications" Role="MastersQualifications" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.Masters" Role="Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MastersQualifications">
+              <PropertyRef Name="qualifictionId" />
+            </Principal>
+            <Dependent Role="Masters">
+              <PropertyRef Name="qualificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Masters_MastersSkills">
+          <End Type="BeautySalonModel.MastersSkills" Role="MastersSkills" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.Masters" Role="Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MastersSkills">
+              <PropertyRef Name="skillId" />
+            </Principal>
+            <Dependent Role="Masters">
+              <PropertyRef Name="skillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Masters_Roles">
+          <End Type="BeautySalonModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="BeautySalonModel.Masters" Role="Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="Masters">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MastersQualifications_BaseServices">
+          <End Type="BeautySalonModel.TypeServices" Role="TypeServices" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.MastersQualifications" Role="MastersQualifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeServices">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MastersQualifications">
+              <PropertyRef Name="typeServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_TypeProducts">
+          <End Type="BeautySalonModel.TypeProducts" Role="TypeProducts" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.Products" Role="Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProducts">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Services_BaseServices">
+          <End Type="BeautySalonModel.TypeServices" Role="TypeServices" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.Services" Role="Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeServices">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Services">
+              <PropertyRef Name="typeServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -130,6 +600,7 @@
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="BeautySalonModel.Admins">
               <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
                 <ScalarProperty Name="photo" ColumnName="photo" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="login" ColumnName="login" />
@@ -146,6 +617,8 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="BeautySalonModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="visitsCount" ColumnName="visitsCount" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
                 <ScalarProperty Name="Preferences" ColumnName="Preferences" />
                 <ScalarProperty Name="photo" ColumnName="photo" />
                 <ScalarProperty Name="email" ColumnName="email" />
@@ -156,6 +629,42 @@
                 <ScalarProperty Name="FName" ColumnName="FName" />
                 <ScalarProperty Name="Lname" ColumnName="Lname" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Masters">
+            <EntityTypeMapping TypeName="BeautySalonModel.Masters">
+              <MappingFragment StoreEntitySet="Masters">
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="skillId" ColumnName="skillId" />
+                <ScalarProperty Name="qualificationId" ColumnName="qualificationId" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="dateBirth" ColumnName="dateBirth" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="masterId" ColumnName="masterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MastersQualifications">
+            <EntityTypeMapping TypeName="BeautySalonModel.MastersQualifications">
+              <MappingFragment StoreEntitySet="MastersQualifications">
+                <ScalarProperty Name="typeServiceId" ColumnName="typeServiceId" />
+                <ScalarProperty Name="qualifictionId" ColumnName="qualifictionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MastersSkills">
+            <EntityTypeMapping TypeName="BeautySalonModel.MastersSkills">
+              <MappingFragment StoreEntitySet="MastersSkills">
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="skillId" ColumnName="skillId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -170,6 +679,50 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="BeautySalonModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="BeautySalonModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceRunTime">
+            <EntityTypeMapping TypeName="BeautySalonModel.ServiceRunTime">
+              <MappingFragment StoreEntitySet="ServiceRunTime">
+                <ScalarProperty Name="SeniorRunTime" ColumnName="SeniorRunTime" />
+                <ScalarProperty Name="middleRunTime" ColumnName="middleRunTime" />
+                <ScalarProperty Name="juniorRunTime" ColumnName="juniorRunTime" />
+                <ScalarProperty Name="runTimeId" ColumnName="runTimeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="BeautySalonModel.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="seniorPrice" ColumnName="seniorPrice" />
+                <ScalarProperty Name="middlePrice" ColumnName="middlePrice" />
+                <ScalarProperty Name="juniorPrice" ColumnName="juniorPrice" />
+                <ScalarProperty Name="SeniorRunTime" ColumnName="SeniorRunTime" />
+                <ScalarProperty Name="middleRunTime" ColumnName="middleRunTime" />
+                <ScalarProperty Name="juniorRunTime" ColumnName="juniorRunTime" />
+                <ScalarProperty Name="typeServiceId" ColumnName="typeServiceId" />
+                <ScalarProperty Name="serviceName" ColumnName="serviceName" />
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="BeautySalonModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -178,6 +731,22 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeProducts">
+            <EntityTypeMapping TypeName="BeautySalonModel.TypeProducts">
+              <MappingFragment StoreEntitySet="TypeProducts">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeServices">
+            <EntityTypeMapping TypeName="BeautySalonModel.TypeServices">
+              <MappingFragment StoreEntitySet="TypeServices">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

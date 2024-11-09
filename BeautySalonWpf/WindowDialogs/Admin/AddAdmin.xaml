@@ -30,10 +30,10 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Margin="40,40,0,0">
-                <hc:ImageSelector x:Name="PhotoPicker" Width="200" Height="200"/>
+                <Image x:Name="Photo" Width="200" Height="200"/>
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
-                <Button x:Name="deletePhoto" Content="Удалить" FontSize="14" Height="35"  Style="{StaticResource ButtonDashedDanger}"/>
-                <Button x:Name="addPhoto" Content="Добавить"   FontSize="14" Height="35" Style="{StaticResource ButtonDashedSuccess}" Margin="20,0,0,0"/>
+                <!--<Button x:Name="deletePhoto" Content="Удалить" FontSize="14" Height="35"  Style="{StaticResource ButtonDashedDanger}"/>-->
+                <Button x:Name="addPhoto" Content="Добавить"   FontSize="14" Height="35" Style="{StaticResource ButtonDashedSuccess}" Margin="0,0,0,0" Click="addPhoto_Click"/>
             </StackPanel>
 
             </StackPanel>

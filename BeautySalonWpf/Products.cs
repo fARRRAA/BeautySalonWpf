@@ -12,20 +12,14 @@ namespace BeautySalonWpf
     using System;
     using System.Collections.Generic;
     
-    public partial class Admins
+    public partial class Products
     {
-        public int adminId { get; set; }
-        public string Lname { get; set; }
-        public string Fname { get; set; }
-        public string Patronymic { get; set; }
-        public Nullable<System.DateTime> dateBirth { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
+        public int productId { get; set; }
+        public string name { get; set; }
+        public Nullable<int> price { get; set; }
         public string photo { get; set; }
-        public Nullable<int> roleId { get; set; }
+        public Nullable<int> typeId { get; set; }
     
-        public virtual Roles Roles { get; set; }
+        public virtual TypeProducts TypeProducts { get; set; }
     }
 }

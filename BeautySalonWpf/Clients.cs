@@ -24,5 +24,9 @@ namespace BeautySalonWpf
         public string email { get; set; }
         public string photo { get; set; }
         public string Preferences { get; set; }
+        public int roleId { get; set; }
+        public Nullable<int> visitsCount { get; set; }
+    
+        public virtual Roles Roles { get; set; }
     }
 }

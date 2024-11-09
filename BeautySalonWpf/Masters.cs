@@ -12,9 +12,9 @@ namespace BeautySalonWpf
     using System;
     using System.Collections.Generic;
     
-    public partial class Admins
+    public partial class Masters
     {
-        public int adminId { get; set; }
+        public int masterId { get; set; }
         public string Lname { get; set; }
         public string Fname { get; set; }
         public string Patronymic { get; set; }
@@ -24,8 +24,12 @@ namespace BeautySalonWpf
         public string login { get; set; }
         public string password { get; set; }
         public string photo { get; set; }
-        public Nullable<int> roleId { get; set; }
+        public Nullable<int> qualificationId { get; set; }
+        public Nullable<int> skillId { get; set; }
+        public int roleId { get; set; }
     
+        public virtual MastersQualifications MastersQualifications { get; set; }
+        public virtual MastersSkills MastersSkills { get; set; }
         public virtual Roles Roles { get; set; }
     }
 }

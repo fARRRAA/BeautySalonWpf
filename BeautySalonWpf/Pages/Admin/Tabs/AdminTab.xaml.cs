@@ -62,7 +62,13 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
                 return;
             }
             var selectedAdmin = AdminsList.SelectedItem as Admins;
-
+            if (selectedAdmin == null)
+            {
+                Growl.Error("Выберите админа!");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
+            }
             ConnectionDb.db.Admins.Remove(selectedAdmin);
             ConnectionDb.db.SaveChanges();
             var admins = ConnectionDb.db.Admins.ToList();
@@ -81,7 +87,9 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
                 Growl.Clear();
                 return;
             }
-            var adminRedact = new RedactAdmin(_admin, AdminsList);
+            var selectedAdmin = AdminsList.SelectedItem as Admins;
+
+            var adminRedact = new RedactAdmin(selectedAdmin, AdminsList);
             adminRedact.Show();
         }
 
@@ -99,8 +107,5 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             paginationElem.MaxPageCount = pageCount;
             AdminsCountText.Content = $"Всего администраторов: {_admins.Count}";
         }
-
-
-
     }
 }

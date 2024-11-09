@@ -1,7 +1,9 @@
 ﻿using HandyControl.Controls;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,8 @@ namespace BeautySalonWpf.WindowDialogs.Admin
     public partial class AddAdmin : System.Windows.Window
     {
         private ListView _adminsList;
+        private string adminProfilePhotoFolder = "C:\\Users\\Ильдар\\source\\repos\\BeautySalonWpf\\BeautySalonWpf\\imgs\\pfp\\admins\\".Replace("\\", "/");
+        private Admins tempAdmin=new Admins();
         public AddAdmin(ListView adminslist)
         {
             InitializeComponent();
@@ -61,23 +65,55 @@ namespace BeautySalonWpf.WindowDialogs.Admin
                 Growl.Clear();
                 return;
             }
-            var temp = new Admins()
-            {
-                Fname = FNameText.Text,
-                Lname = LNameText.Text,
-                email = EmailText.Text,
-                password = PasswordText.Password,
-                dateBirth = DateBirthText.SelectedDate,
-                phone = PhoneText.Text,
-                login = LoginText.Text
-            };
-            ConnectionDb.db.Admins.Add(temp);
+
+
+            tempAdmin.Fname = FNameText.Text;
+            tempAdmin.Lname = LNameText.Text;
+            tempAdmin.email = EmailText.Text;
+            tempAdmin.password = PasswordText.Password;
+            tempAdmin.dateBirth = DateBirthText.SelectedDate;
+            tempAdmin.phone = PhoneText.Text;
+            tempAdmin.login = LoginText.Text;
+            tempAdmin.roleId = 1;
+            ConnectionDb.db.Admins.Add(tempAdmin);
             ConnectionDb.db.SaveChanges();
             Growl.Success("Добавление прошло успешно");
             await Task.Delay(1000);
             Growl.Clear();
-            _adminsList.ItemsSource = await ConnectionDb.db.Admins.ToListAsync();
+            var admins = await ConnectionDb.db.Admins.ToListAsync();
+            _adminsList.ItemsSource = admins.Take(9);
             this.Close();
+        }
+
+        private async void addPhoto_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
+                Title = "Выберите фотографию"
+            };
+            if (!Directory.Exists(adminProfilePhotoFolder))
+            {
+                Directory.CreateDirectory(adminProfilePhotoFolder);
+            }
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string fileName = System.IO.Path.GetFileName(openFileDialog.FileName);
+                string destinationPath = System.IO.Path.Combine(adminProfilePhotoFolder, fileName);
+
+                try
+                {
+                    File.Copy(openFileDialog.FileName, destinationPath, overwrite: true);
+                    Photo.Source = new BitmapImage(new Uri(destinationPath, UriKind.RelativeOrAbsolute));
+                    tempAdmin.photo = $"/imgs/pfp/admins/{fileName}";
+                }
+                catch (Exception ex)
+                {
+                    Growl.Error($"Ошибка при добавлении фотографии: {ex.Message}");
+                    await Task.Delay(5500);
+                    Growl.Clear();
+                }
+            }
         }
     }
 }

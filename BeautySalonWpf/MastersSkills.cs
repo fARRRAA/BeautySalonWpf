@@ -12,20 +12,19 @@ namespace BeautySalonWpf
     using System;
     using System.Collections.Generic;
     
-    public partial class Admins
+    public partial class MastersSkills
     {
-        public int adminId { get; set; }
-        public string Lname { get; set; }
-        public string Fname { get; set; }
-        public string Patronymic { get; set; }
-        public Nullable<System.DateTime> dateBirth { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
-        public string photo { get; set; }
-        public Nullable<int> roleId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MastersSkills()
+        {
+            this.Masters = new HashSet<Masters>();
+        }
     
-        public virtual Roles Roles { get; set; }
+        public int skillId { get; set; }
+        public string name { get; set; }
+        public Nullable<int> rate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Masters> Masters { get; set; }
     }
 }
