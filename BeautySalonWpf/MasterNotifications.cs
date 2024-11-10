@@ -12,14 +12,13 @@ namespace BeautySalonWpf
     using System;
     using System.Collections.Generic;
     
-    public partial class Delivery
+    public partial class MasterNotifications
     {
-        public int deliveryId { get; set; }
-        public Nullable<int> productId { get; set; }
-        public Nullable<int> providerId { get; set; }
-        public Nullable<int> count { get; set; }
+        public int notificationId { get; set; }
+        public string message { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
+        public int masterReceiverId { get; set; }
     
-        public virtual Products Products { get; set; }
-        public virtual Provider Provider { get; set; }
+        public virtual Masters Masters { get; set; }
     }
 }

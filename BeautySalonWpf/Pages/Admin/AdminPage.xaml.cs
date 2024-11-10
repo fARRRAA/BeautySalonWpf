@@ -32,6 +32,7 @@ namespace BeautySalonWpf.Pages.Admin
         private MainWindow _mw;
         private Admins _admin;
         private List<Admins> _admins;
+        private List<string> choosedTypes=new List<string>();
         public AdminPage(MainWindow mw, Admins admin)
         {
             InitializeComponent();
@@ -41,6 +42,7 @@ namespace BeautySalonWpf.Pages.Admin
             AdminTabFrame.Navigate(new AdminTab(_admin));
             MastersTabFrame.Navigate(new MastersTab( _admin));
             ClientsTabFrame.Navigate(new ClientsTab( _admin));
+            ProductsFrame.Navigate(new ProductsTab( _admin));   
         }
 
         public void MasterStartSettings()

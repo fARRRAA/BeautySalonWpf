@@ -18,6 +18,7 @@ namespace BeautySalonWpf
         public Products()
         {
             this.Delivery = new HashSet<Delivery>();
+            this.ProductReceiveRequest = new HashSet<ProductReceiveRequest>();
         }
     
         public int productId { get; set; }
@@ -25,10 +26,13 @@ namespace BeautySalonWpf
         public Nullable<int> price { get; set; }
         public string photo { get; set; }
         public Nullable<int> typeId { get; set; }
-        public Nullable<int> Count { get; set; }
+        public Nullable<int> soldCount { get; set; }
+        public Nullable<int> inStock { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Delivery> Delivery { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductReceiveRequest> ProductReceiveRequest { get; set; }
         public virtual TypeProducts TypeProducts { get; set; }
     }
 }

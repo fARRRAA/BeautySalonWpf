@@ -67,7 +67,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminNotifications.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Admins.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientNotifications.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Clients.cs">
@@ -77,6 +83,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="History.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterNotifications.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Masters.cs">
@@ -108,10 +117,16 @@
     <Compile Include="Pages\Admin\Tabs\MastersTab.xaml.cs">
       <DependentUpon>MastersTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prodiver.cs">
+    <Compile Include="Pages\Admin\Tabs\ProductsTab.xaml.cs">
+      <DependentUpon>ProductsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProductReceiveRequest.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Products.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Provider.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs">
@@ -132,23 +147,29 @@
     <Compile Include="TypeServices.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="WindowDialogs\Admin\AddAdmin.xaml.cs">
+    <Compile Include="WindowDialogs\AdminPage\Admin\AddAdmin.xaml.cs">
       <DependentUpon>AddAdmin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowDialogs\Admin\RedactAdmin.xaml.cs">
+    <Compile Include="WindowDialogs\AdminPage\Admin\RedactAdmin.xaml.cs">
       <DependentUpon>RedactAdmin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowDialogs\Client\AddClient.xaml.cs">
+    <Compile Include="WindowDialogs\AdminPage\Client\AddClient.xaml.cs">
       <DependentUpon>AddClient.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowDialogs\Client\RedactClient.xaml.cs">
+    <Compile Include="WindowDialogs\AdminPage\Client\RedactClient.xaml.cs">
       <DependentUpon>RedactClient.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowDialogs\Master\AddMaster.xaml.cs">
+    <Compile Include="WindowDialogs\AdminPage\Master\AddMaster.xaml.cs">
       <DependentUpon>AddMaster.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowDialogs\Master\RedactMaster.xaml.cs">
+    <Compile Include="WindowDialogs\AdminPage\Master\RedactMaster.xaml.cs">
       <DependentUpon>RedactMaster.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowDialogs\AdminPage\ProductDialog\AddProduct.xaml.cs">
+      <DependentUpon>AddProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowDialogs\AdminPage\ProductDialog\RedactProduct.xaml.cs">
+      <DependentUpon>RedactProduct.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -178,6 +199,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Admin\Tabs\ProductsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\SignIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,27 +211,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowDialogs\Admin\AddAdmin.xaml">
+    <Page Include="WindowDialogs\AdminPage\Admin\AddAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowDialogs\Admin\RedactAdmin.xaml">
+    <Page Include="WindowDialogs\AdminPage\Admin\RedactAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowDialogs\Client\AddClient.xaml">
+    <Page Include="WindowDialogs\AdminPage\Client\AddClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowDialogs\Client\RedactClient.xaml">
+    <Page Include="WindowDialogs\AdminPage\Client\RedactClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowDialogs\Master\AddMaster.xaml">
+    <Page Include="WindowDialogs\AdminPage\Master\AddMaster.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowDialogs\Master\RedactMaster.xaml">
+    <Page Include="WindowDialogs\AdminPage\Master\RedactMaster.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\AdminPage\ProductDialog\AddProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\AdminPage\ProductDialog\RedactProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -274,6 +307,8 @@
     <Resource Include="imgs\pfp\admins\admin1.png" />
     <Resource Include="imgs\pfp\admins\admin2.png" />
     <Resource Include="imgs\pfp\admins\Снимок экрана 2023-10-05 203127.png" />
+    <Resource Include="imgs\media\icons\delivery-truck.png" />
+    <Resource Include="imgs\media\icons\supplier.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

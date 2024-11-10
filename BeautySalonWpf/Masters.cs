@@ -14,6 +14,13 @@ namespace BeautySalonWpf
     
     public partial class Masters
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Masters()
+        {
+            this.MasterNotifications = new HashSet<MasterNotifications>();
+            this.ProductReceiveRequest = new HashSet<ProductReceiveRequest>();
+        }
+    
         public int masterId { get; set; }
         public string Lname { get; set; }
         public string Fname { get; set; }
@@ -28,8 +35,12 @@ namespace BeautySalonWpf
         public Nullable<int> skillId { get; set; }
         public int roleId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MasterNotifications> MasterNotifications { get; set; }
         public virtual MastersQualifications MastersQualifications { get; set; }
         public virtual MastersSkills MastersSkills { get; set; }
         public virtual Roles Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductReceiveRequest> ProductReceiveRequest { get; set; }
     }
 }
