@@ -14,6 +14,12 @@ namespace BeautySalonWpf
     
     public partial class Services
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Services()
+        {
+            this.History = new HashSet<History>();
+        }
+    
         public int serviceId { get; set; }
         public string serviceName { get; set; }
         public Nullable<int> typeServiceId { get; set; }
@@ -24,6 +30,8 @@ namespace BeautySalonWpf
         public Nullable<int> middlePrice { get; set; }
         public Nullable<int> seniorPrice { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<History> History { get; set; }
         public virtual TypeServices TypeServices { get; set; }
     }
 }

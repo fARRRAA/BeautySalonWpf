@@ -94,6 +94,7 @@
                         <TextBlock Text="Клиенты" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16"/>
                     </StackPanel>
                 </TabItem.Header>
+                <Frame x:Name="ClientsTabFrame"></Frame>
             </TabItem>
             <TabItem>
                 <TabItem.Header>

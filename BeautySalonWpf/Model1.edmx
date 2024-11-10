@@ -35,8 +35,26 @@
           <Property Name="email" Type="nvarchar" MaxLength="100" />
           <Property Name="photo" Type="nvarchar" MaxLength="200" />
           <Property Name="Preferences" Type="nvarchar(max)" />
-          <Property Name="roleId" Type="int" Nullable="false" />
+          <Property Name="roleId" Type="int" />
           <Property Name="visitsCount" Type="int" />
+        </EntityType>
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="deliveryId" />
+          </Key>
+          <Property Name="deliveryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productId" Type="int" />
+          <Property Name="productCount" Type="int" />
+          <Property Name="providerId" Type="int" />
+        </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="historyId" />
+          </Key>
+          <Property Name="historyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clientId" Type="int" />
+          <Property Name="serviceId" Type="int" />
+          <Property Name="date" Type="date" />
         </EntityType>
         <EntityType Name="Masters">
           <Key>
@@ -81,6 +99,15 @@
           <Property Name="phone" Type="nvarchar" MaxLength="12" />
           <Property Name="Preferences" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Prodiver">
+          <Key>
+            <PropertyRef Name="providerId" />
+          </Key>
+          <Property Name="providerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="phone" Type="nvarchar" MaxLength="12" />
+          <Property Name="INN" Type="int" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="productId" />
@@ -90,6 +117,7 @@
           <Property Name="price" Type="int" />
           <Property Name="photo" Type="nvarchar" MaxLength="200" />
           <Property Name="typeId" Type="int" />
+          <Property Name="Count" Type="int" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -158,7 +186,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Clients_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -166,6 +194,54 @@
             </Principal>
             <Dependent Role="Clients">
               <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delivery_Prodiver">
+          <End Role="Prodiver" Type="Self.Prodiver" Multiplicity="0..1" />
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prodiver">
+              <PropertyRef Name="providerId" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="providerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delivery_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="serviceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -244,10 +320,13 @@
         <EntityContainer Name="Хранилище BeautySalonModelContainer">
           <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Masters" EntityType="Self.Masters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MastersQualifications" EntityType="Self.MastersQualifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MastersSkills" EntityType="Self.MastersSkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="na_vsyakiy" EntityType="Self.na_vsyakiy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prodiver" EntityType="Self.Prodiver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceRunTime" EntityType="Self.ServiceRunTime" Schema="dbo" store:Type="Tables" />
@@ -262,6 +341,22 @@
           <AssociationSet Name="FK_Clients_Roles" Association="Self.FK_Clients_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Prodiver" Association="Self.FK_Delivery_Prodiver">
+            <End Role="Prodiver" EntitySet="Prodiver" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Products" Association="Self.FK_Delivery_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Clients" Association="Self.FK_History_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Services" Association="Self.FK_History_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="History" EntitySet="History" />
           </AssociationSet>
           <AssociationSet Name="FK_Masters_MastersQualifications1" Association="Self.FK_Masters_MastersQualifications1">
             <End Role="MastersQualifications" EntitySet="MastersQualifications" />
@@ -295,10 +390,13 @@
         <EntityContainer Name="BeautySalonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="BeautySalonModel.Admins" />
           <EntitySet Name="Clients" EntityType="BeautySalonModel.Clients" />
+          <EntitySet Name="Delivery" EntityType="BeautySalonModel.Delivery" />
+          <EntitySet Name="History" EntityType="BeautySalonModel.History" />
           <EntitySet Name="Masters" EntityType="BeautySalonModel.Masters" />
           <EntitySet Name="MastersQualifications" EntityType="BeautySalonModel.MastersQualifications" />
           <EntitySet Name="MastersSkills" EntityType="BeautySalonModel.MastersSkills" />
           <EntitySet Name="na_vsyakiy" EntityType="BeautySalonModel.na_vsyakiy" />
+          <EntitySet Name="Prodiver" EntityType="BeautySalonModel.Prodiver" />
           <EntitySet Name="Products" EntityType="BeautySalonModel.Products" />
           <EntitySet Name="Roles" EntityType="BeautySalonModel.Roles" />
           <EntitySet Name="ServiceRunTime" EntityType="BeautySalonModel.ServiceRunTime" />
@@ -313,6 +411,22 @@
           <AssociationSet Name="FK_Clients_Roles" Association="BeautySalonModel.FK_Clients_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Clients" Association="BeautySalonModel.FK_History_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Prodiver" Association="BeautySalonModel.FK_Delivery_Prodiver">
+            <End Role="Prodiver" EntitySet="Prodiver" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Products" Association="BeautySalonModel.FK_Delivery_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Services" Association="BeautySalonModel.FK_History_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="History" EntitySet="History" />
           </AssociationSet>
           <AssociationSet Name="FK_Masters_MastersQualifications1" Association="BeautySalonModel.FK_Masters_MastersQualifications1">
             <End Role="MastersQualifications" EntitySet="MastersQualifications" />
@@ -370,9 +484,32 @@
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Preferences" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="roleId" Type="Int32" Nullable="false" />
+          <Property Name="roleId" Type="Int32" />
           <Property Name="visitsCount" Type="Int32" />
           <NavigationProperty Name="Roles" Relationship="BeautySalonModel.FK_Clients_Roles" FromRole="Clients" ToRole="Roles" />
+          <NavigationProperty Name="History" Relationship="BeautySalonModel.FK_History_Clients" FromRole="Clients" ToRole="History" />
+        </EntityType>
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="deliveryId" />
+          </Key>
+          <Property Name="deliveryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productId" Type="Int32" />
+          <Property Name="productCount" Type="Int32" />
+          <Property Name="providerId" Type="Int32" />
+          <NavigationProperty Name="Prodiver" Relationship="BeautySalonModel.FK_Delivery_Prodiver" FromRole="Delivery" ToRole="Prodiver" />
+          <NavigationProperty Name="Products" Relationship="BeautySalonModel.FK_Delivery_Products" FromRole="Delivery" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="historyId" />
+          </Key>
+          <Property Name="historyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientId" Type="Int32" />
+          <Property Name="serviceId" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="BeautySalonModel.FK_History_Clients" FromRole="History" ToRole="Clients" />
+          <NavigationProperty Name="Services" Relationship="BeautySalonModel.FK_History_Services" FromRole="History" ToRole="Services" />
         </EntityType>
         <EntityType Name="Masters">
           <Key>
@@ -423,6 +560,16 @@
           <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="Preferences" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Prodiver">
+          <Key>
+            <PropertyRef Name="providerId" />
+          </Key>
+          <Property Name="providerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="INN" Type="Int32" />
+          <NavigationProperty Name="Delivery" Relationship="BeautySalonModel.FK_Delivery_Prodiver" FromRole="Prodiver" ToRole="Delivery" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="productId" />
@@ -432,6 +579,8 @@
           <Property Name="price" Type="Int32" />
           <Property Name="photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="typeId" Type="Int32" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="Delivery" Relationship="BeautySalonModel.FK_Delivery_Products" FromRole="Products" ToRole="Delivery" />
           <NavigationProperty Name="TypeProducts" Relationship="BeautySalonModel.FK_Products_TypeProducts" FromRole="Products" ToRole="TypeProducts" />
         </EntityType>
         <EntityType Name="Roles">
@@ -466,6 +615,7 @@
           <Property Name="juniorPrice" Type="Int32" />
           <Property Name="middlePrice" Type="Int32" />
           <Property Name="seniorPrice" Type="Int32" />
+          <NavigationProperty Name="History" Relationship="BeautySalonModel.FK_History_Services" FromRole="Services" ToRole="History" />
           <NavigationProperty Name="TypeServices" Relationship="BeautySalonModel.FK_Services_BaseServices" FromRole="Services" ToRole="TypeServices" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -508,7 +658,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Clients_Roles">
-          <End Type="BeautySalonModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="BeautySalonModel.Roles" Role="Roles" Multiplicity="0..1" />
           <End Type="BeautySalonModel.Clients" Role="Clients" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -516,6 +666,54 @@
             </Principal>
             <Dependent Role="Clients">
               <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Clients">
+          <End Type="BeautySalonModel.Clients" Role="Clients" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.History" Role="History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delivery_Prodiver">
+          <End Type="BeautySalonModel.Prodiver" Role="Prodiver" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.Delivery" Role="Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prodiver">
+              <PropertyRef Name="providerId" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="providerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delivery_Products">
+          <End Type="BeautySalonModel.Products" Role="Products" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.Delivery" Role="Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Services">
+          <End Type="BeautySalonModel.Services" Role="Services" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.History" Role="History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="serviceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -632,6 +830,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Delivery">
+            <EntityTypeMapping TypeName="BeautySalonModel.Delivery">
+              <MappingFragment StoreEntitySet="Delivery">
+                <ScalarProperty Name="providerId" ColumnName="providerId" />
+                <ScalarProperty Name="productCount" ColumnName="productCount" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="deliveryId" ColumnName="deliveryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="History">
+            <EntityTypeMapping TypeName="BeautySalonModel.History">
+              <MappingFragment StoreEntitySet="History">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+                <ScalarProperty Name="clientId" ColumnName="clientId" />
+                <ScalarProperty Name="historyId" ColumnName="historyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Masters">
             <EntityTypeMapping TypeName="BeautySalonModel.Masters">
               <MappingFragment StoreEntitySet="Masters">
@@ -679,9 +897,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Prodiver">
+            <EntityTypeMapping TypeName="BeautySalonModel.Prodiver">
+              <MappingFragment StoreEntitySet="Prodiver">
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="providerId" ColumnName="providerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="BeautySalonModel.Products">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="typeId" ColumnName="typeId" />
                 <ScalarProperty Name="photo" ColumnName="photo" />
                 <ScalarProperty Name="price" ColumnName="price" />

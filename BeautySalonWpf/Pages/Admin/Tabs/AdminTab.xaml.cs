@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BeautySalonWpf.WindowDialogs;
 using BeautySalonWpf.WindowDialogs.Admin;
+using System.Data.Entity;
 namespace BeautySalonWpf.Pages.Admin.Tabs
 {
     /// <summary>
@@ -23,16 +24,13 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
     /// </summary>
     public partial class AdminTab : Page
     {
-        private MainWindow _mw;
         private Admins _admin;
         private List<Admins> _admins;
         private int pageCount;
         private int pageSize = 9;
-        public AdminTab(MainWindow mw, Admins admin)
+        public AdminTab(Admins admin)
         {
             InitializeComponent();
-            _mw = mw;
-            _mw.ChangeWindowSize(900, width: 1400);
             _admin = admin;
             AdminStartSettings();
         }
@@ -71,8 +69,7 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             }
             ConnectionDb.db.Admins.Remove(selectedAdmin);
             ConnectionDb.db.SaveChanges();
-            var admins = ConnectionDb.db.Admins.ToList();
-            AdminsList.ItemsSource = admins.Take(9);
+            UpdateAdminsList();
             Growl.Success("Удаление прошло успешно");
             await Task.Delay(1500);
             Growl.Clear();
@@ -89,13 +86,13 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             }
             var selectedAdmin = AdminsList.SelectedItem as Admins;
 
-            var adminRedact = new RedactAdmin(selectedAdmin, AdminsList);
+            var adminRedact = new RedactAdmin(selectedAdmin,this);
             adminRedact.Show();
         }
 
         private void addAdmin_Click(object sender, RoutedEventArgs e)
         {
-            AddAdmin addAdminDialog = new AddAdmin(AdminsList);
+            AddAdmin addAdminDialog = new AddAdmin(this);
             addAdminDialog.Show();
         }
         public void AdminStartSettings()
@@ -106,6 +103,13 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             pageCount = (int)Math.Round(Convert.ToDouble(_admins.Count / 9)) + 1;
             paginationElem.MaxPageCount = pageCount;
             AdminsCountText.Content = $"Всего администраторов: {_admins.Count}";
+        }
+        public async void UpdateAdminsList()
+        {
+            var newItems = await ConnectionDb.db.Admins.ToListAsync();
+            AdminsList.ItemsSource = newItems.Take(9);
+            _admins = newItems;
+            AdminsCountText.Content = $"Всего администраторов: {newItems.Count}";
         }
     }
 }

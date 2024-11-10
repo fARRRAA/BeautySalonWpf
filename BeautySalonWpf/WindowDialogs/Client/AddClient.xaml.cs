@@ -16,38 +16,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BeautySalonWpf.WindowDialogs.Master
+namespace BeautySalonWpf.WindowDialogs.Client
 {
     /// <summary>
-    /// Логика взаимодействия для AddMaster.xaml
+    /// Логика взаимодействия для AddClient.xaml
     /// </summary>
-    public partial class AddMaster : System.Windows.Window
+    public partial class AddClient : System.Windows.Window
     {
-        private Masters tempMaster = new Masters();
-        private List<MastersQualifications> _qualifications = ConnectionDb.db.MastersQualifications.ToList();
-        private List<MastersSkills> _skills = ConnectionDb.db.MastersSkills.ToList();
-        private MastersTab _owner;
-        public AddMaster(MastersTab owner)
+        private ClientsTab _owner;
+        private Clients _client = new Clients();
+        public AddClient(ClientsTab owner)
         {
             InitializeComponent();
-            QualificationText.ItemsSource = _qualifications.Select(p => p.TypeServices.name);
-            SkillText.ItemsSource = _skills.Select(p => p.name);
             _owner = owner;
         }
 
         private async void ConfirmAddBtn_Click(object sender, RoutedEventArgs e)
         {
+
             var inputs = new[]
               {
         LoginText.Text,
         FNameText.Text,
         LNameText.Text,
-        PatronymicText.Text,
         PhoneText.Text,
         EmailText.Text,
-        PasswordText.Password,
-        QualificationText.SelectedItem.ToString(),
-        SkillText.SelectedItem.ToString()
+        PasswordText.Password
                 };
 
             if (inputs.Any(string.IsNullOrWhiteSpace) || !DateBirthText.SelectedDate.HasValue)
@@ -58,34 +52,33 @@ namespace BeautySalonWpf.WindowDialogs.Master
                 return;
             }
 
-            var master = await ConnectionDb.db.Masters.FirstOrDefaultAsync(a => a.login == LoginText.Text);
-            if (master != null)
+            var client = await ConnectionDb.db.Clients.FirstOrDefaultAsync(a => a.login == LoginText.Text);
+            if (client != null)
             {
-                Growl.Error("Мастер с таким логином существует.");
+                Growl.Error("Клиент с таким логином существует.");
                 await Task.Delay(1500);
                 Growl.Clear();
                 return;
             }
             try
             {
-                tempMaster.Fname = FNameText.Text;
-                tempMaster.Lname = LNameText.Text;
-                tempMaster.email = EmailText.Text;
-                tempMaster.Patronymic = PatronymicText.Text;
-                tempMaster.password = PasswordText.Password;
-                tempMaster.dateBirth = DateBirthText.SelectedDate;
-                tempMaster.phone = PhoneText.Text;
-                tempMaster.login = LoginText.Text;
-                tempMaster.MastersQualifications = _qualifications.FirstOrDefault(q => q.TypeServices.name == QualificationText.SelectedItem.ToString());
-                tempMaster.MastersSkills = _skills.FirstOrDefault(s => s.name == SkillText.SelectedItem.ToString());
-                tempMaster.roleId = 2;
-                ConnectionDb.db.Masters.Add(tempMaster);
+                _client.FName = FNameText.Text;
+                _client.Lname = LNameText.Text;
+                _client.email = EmailText.Text;
+                _client.password = PasswordText.Password;
+                _client.dateBirth = DateBirthText.SelectedDate;
+                _client.phone = PhoneText.Text;
+                _client.login = LoginText.Text;
+                _client.Preferences = PreferencesText.Text;
+
+                _client.roleId = 3;
+                ConnectionDb.db.Clients.Add(_client);
                 ConnectionDb.db.SaveChanges();
                 Growl.Success("Добавление прошло успешно");
                 await Task.Delay(1000);
                 Growl.Clear();
-                _owner.UpdateMastersList();
-                this.DialogResult=true;
+                _owner.UpdateClientsList();
+                this.Close();
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -101,9 +94,7 @@ namespace BeautySalonWpf.WindowDialogs.Master
             {
                 Growl.Error($"Произошла ошибка: {ex.Message}");
             }
-
         }
-
         private void CloseAddBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

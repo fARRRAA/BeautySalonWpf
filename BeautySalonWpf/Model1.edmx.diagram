@@ -5,21 +5,28 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ee2183eab40f45e79ba5c0565736c9c1" Name="Diagram1" ZoomLevel="52">
-        <EntityTypeShape EntityType="BeautySalonModel.Admins" Width="1.5" PointX="3" PointY="13.625" />
-        <EntityTypeShape EntityType="BeautySalonModel.Clients" Width="1.5" PointX="3" PointY="4" />
-        <EntityTypeShape EntityType="BeautySalonModel.Masters" Width="1.5" PointX="6" PointY="5.875" />
-        <EntityTypeShape EntityType="BeautySalonModel.MastersQualifications" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BeautySalonModel.MastersSkills" Width="1.5" PointX="3.75" PointY="9.375" />
-        <EntityTypeShape EntityType="BeautySalonModel.na_vsyakiy" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.Admins" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="BeautySalonModel.Clients" Width="1.5" PointX="3" PointY="13.5" />
+        <EntityTypeShape EntityType="BeautySalonModel.Delivery" Width="1.5" PointX="10.25" PointY="1.125" />
+        <EntityTypeShape EntityType="BeautySalonModel.History" Width="1.5" PointX="5.25" PointY="14.25" />
+        <EntityTypeShape EntityType="BeautySalonModel.Masters" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="BeautySalonModel.MastersQualifications" Width="1.5" PointX="0.75" PointY="10.5" />
+        <EntityTypeShape EntityType="BeautySalonModel.MastersSkills" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="BeautySalonModel.na_vsyakiy" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.Prodiver" Width="1.5" PointX="8" PointY="5.25" />
         <EntityTypeShape EntityType="BeautySalonModel.Products" Width="1.5" PointX="8" PointY="1" />
-        <EntityTypeShape EntityType="BeautySalonModel.Roles" Width="1.5" PointX="0.75" PointY="7" />
-        <EntityTypeShape EntityType="BeautySalonModel.ServiceRunTime" Width="1.5" PointX="8.75" PointY="7.75" />
-        <EntityTypeShape EntityType="BeautySalonModel.Services" Width="1.5" PointX="3.75" PointY="18.375" />
-        <EntityTypeShape EntityType="BeautySalonModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BeautySalonModel.TypeProducts" Width="1.5" PointX="5.75" PointY="1.25" />
-        <EntityTypeShape EntityType="BeautySalonModel.TypeServices" Width="1.5" PointX="1.5" PointY="0.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.Roles" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="BeautySalonModel.ServiceRunTime" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.Services" Width="1.5" PointX="3" PointY="21.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.TypeProducts" Width="1.5" PointX="5.75" PointY="1.5" />
+        <EntityTypeShape EntityType="BeautySalonModel.TypeServices" Width="1.5" PointX="1.5" PointY="18.5" />
         <AssociationConnector Association="BeautySalonModel.FK_Admins_Roles" />
         <AssociationConnector Association="BeautySalonModel.FK_Clients_Roles" />
+        <AssociationConnector Association="BeautySalonModel.FK_History_Clients" />
+        <AssociationConnector Association="BeautySalonModel.FK_Delivery_Prodiver" />
+        <AssociationConnector Association="BeautySalonModel.FK_Delivery_Products" />
+        <AssociationConnector Association="BeautySalonModel.FK_History_Services" />
         <AssociationConnector Association="BeautySalonModel.FK_Masters_MastersQualifications1" />
         <AssociationConnector Association="BeautySalonModel.FK_Masters_MastersSkills" />
         <AssociationConnector Association="BeautySalonModel.FK_Masters_Roles" />

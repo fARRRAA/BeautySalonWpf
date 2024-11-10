@@ -14,12 +14,21 @@ namespace BeautySalonWpf
     
     public partial class Products
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Products()
+        {
+            this.Delivery = new HashSet<Delivery>();
+        }
+    
         public int productId { get; set; }
         public string name { get; set; }
         public Nullable<int> price { get; set; }
         public string photo { get; set; }
         public Nullable<int> typeId { get; set; }
+        public Nullable<int> Count { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Delivery> Delivery { get; set; }
         public virtual TypeProducts TypeProducts { get; set; }
     }
 }

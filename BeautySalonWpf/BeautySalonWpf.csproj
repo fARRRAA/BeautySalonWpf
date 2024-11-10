@@ -73,6 +73,12 @@
     <Compile Include="Clients.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Delivery.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="History.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Masters.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -96,8 +102,14 @@
     <Compile Include="Pages\Admin\Tabs\AdminTab.xaml.cs">
       <DependentUpon>AdminTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Admin\Tabs\ClientsTab.xaml.cs">
+      <DependentUpon>ClientsTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Admin\Tabs\MastersTab.xaml.cs">
       <DependentUpon>MastersTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prodiver.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Products.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -126,8 +138,17 @@
     <Compile Include="WindowDialogs\Admin\RedactAdmin.xaml.cs">
       <DependentUpon>RedactAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowDialogs\Client\AddClient.xaml.cs">
+      <DependentUpon>AddClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowDialogs\Client\RedactClient.xaml.cs">
+      <DependentUpon>RedactClient.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowDialogs\Master\AddMaster.xaml.cs">
       <DependentUpon>AddMaster.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowDialogs\Master\RedactMaster.xaml.cs">
+      <DependentUpon>RedactMaster.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -147,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Admin\Tabs\AdminTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Admin\Tabs\ClientsTab.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Admin\Tabs\MastersTab.xaml">
@@ -169,7 +194,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WindowDialogs\Client\AddClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\Client\RedactClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WindowDialogs\Master\AddMaster.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\Master\RedactMaster.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,10 +291,10 @@
   <ItemGroup>
     <Folder Include="imgs\media\default\" />
     <Folder Include="imgs\pfp\clients\" />
+    <Folder Include="imgs\pfp\masters\" />
     <Folder Include="imgs\pfp\products\" />
     <Folder Include="Pages\Client\" />
     <Folder Include="Pages\Master\" />
-    <Folder Include="WindowDialogs\Client\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

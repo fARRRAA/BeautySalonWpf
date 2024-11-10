@@ -40,7 +40,7 @@
             </StackPanel>
             <StackPanel Margin="0,20,0,0" VerticalAlignment="Bottom" Orientation="Horizontal">
                 <Label x:Name="MastersCountText" Content="Всего мастеров: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="500,0,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="520,0,0,0">
                     <Button x:Name="deleteMaster" Content="Удалить мастера" Margin="5" Style="{StaticResource ButtonDanger}" Click="deleteMaster_Click"/>
                     <Button x:Name="redactMaster" Content="Отредактировать мастера" Margin="5" Style="{StaticResource ButtonWarning}" Click="redactMaster_Click"/>
                     <Button x:Name="addMaster" Content="Добавить мастера" Margin="5" Style="{StaticResource ButtonInfo}" Click="addMaster_Click"/>

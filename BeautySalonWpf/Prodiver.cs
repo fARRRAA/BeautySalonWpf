@@ -12,29 +12,20 @@ namespace BeautySalonWpf
     using System;
     using System.Collections.Generic;
     
-    public partial class Clients
+    public partial class Prodiver
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Clients()
+        public Prodiver()
         {
-            this.History = new HashSet<History>();
+            this.Delivery = new HashSet<Delivery>();
         }
     
-        public int userID { get; set; }
-        public string Lname { get; set; }
-        public string FName { get; set; }
-        public Nullable<System.DateTime> dateBirth { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
+        public int providerId { get; set; }
+        public string Name { get; set; }
         public string phone { get; set; }
-        public string email { get; set; }
-        public string photo { get; set; }
-        public string Preferences { get; set; }
-        public Nullable<int> roleId { get; set; }
-        public Nullable<int> visitsCount { get; set; }
+        public Nullable<int> INN { get; set; }
     
-        public virtual Roles Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<History> History { get; set; }
+        public virtual ICollection<Delivery> Delivery { get; set; }
     }
 }

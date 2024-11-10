@@ -1,4 +1,5 @@
-﻿using HandyControl.Controls;
+﻿using BeautySalonWpf.Pages.Admin.Tabs;
+using HandyControl.Controls;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -23,13 +24,13 @@ namespace BeautySalonWpf.WindowDialogs.Admin
     /// </summary>
     public partial class AddAdmin : System.Windows.Window
     {
-        private ListView _adminsList;
         private string adminProfilePhotoFolder = "C:\\Users\\Ильдар\\source\\repos\\BeautySalonWpf\\BeautySalonWpf\\imgs\\pfp\\admins\\".Replace("\\", "/");
         private Admins tempAdmin=new Admins();
-        public AddAdmin(ListView adminslist)
+        private AdminTab _owner;
+        public AddAdmin(AdminTab owner)
         {
             InitializeComponent();
-            _adminsList = adminslist;
+            _owner = owner;
         }
 
         private void CloseAddBtn_Click(object sender, RoutedEventArgs e)
@@ -44,6 +45,7 @@ namespace BeautySalonWpf.WindowDialogs.Admin
         LoginText.Text,
         FNameText.Text,
         LNameText.Text,
+       PatronymicText.Text,
         PhoneText.Text,
         EmailText.Text,
         PasswordText.Password
@@ -66,10 +68,10 @@ namespace BeautySalonWpf.WindowDialogs.Admin
                 return;
             }
 
-
             tempAdmin.Fname = FNameText.Text;
             tempAdmin.Lname = LNameText.Text;
             tempAdmin.email = EmailText.Text;
+            tempAdmin.Patronymic = PatronymicText.Text;
             tempAdmin.password = PasswordText.Password;
             tempAdmin.dateBirth = DateBirthText.SelectedDate;
             tempAdmin.phone = PhoneText.Text;
@@ -80,8 +82,7 @@ namespace BeautySalonWpf.WindowDialogs.Admin
             Growl.Success("Добавление прошло успешно");
             await Task.Delay(1000);
             Growl.Clear();
-            var admins = await ConnectionDb.db.Admins.ToListAsync();
-            _adminsList.ItemsSource = admins.Take(9);
+            _owner.UpdateAdminsList();
             this.Close();
         }
 

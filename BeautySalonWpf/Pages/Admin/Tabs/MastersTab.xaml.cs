@@ -1,5 +1,8 @@
-﻿using System;
+﻿using BeautySalonWpf.WindowDialogs.Master;
+using HandyControl.Controls;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,21 +23,19 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
     /// </summary>
     public partial class MastersTab : Page
     {
-        private MainWindow _mw;
         private Admins _admin;
         private List<Masters> _masters;
         private int pageCount;
         private int pageSize = 9;
-        public MastersTab(MainWindow mw,Admins admin)
+        public MastersTab(Admins admin)
         {
             InitializeComponent();
-            _mw = mw;
             _admin = admin;
             _masters = ConnectionDb.db.Masters.ToList();
-            MastersList.ItemsSource = _masters;
-            pageCount = (int)Math.Round(Convert.ToDouble(_masters.Count / 9)) + 1;
+            MastersList.ItemsSource = _masters.Take(pageSize);
+            pageCount = (int)Math.Round(Convert.ToDouble(_masters.Count / pageSize)) + 1;
             paginationElem.MaxPageCount = pageCount;
-            MastersCountText.Content = $"Всего администраторов: {_masters.Count}";
+            MastersCountText.Content = $"Всего мастеров: {_masters.Count}";
         }
 
         private void MastersSearchText_TextChanged(object sender, TextChangedEventArgs e)
@@ -50,23 +51,60 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             MastersList.ItemsSource = filtered;
         }
 
-        private void deleteMaster_Click(object sender, RoutedEventArgs e)
+        private async void deleteMaster_Click(object sender, RoutedEventArgs e)
         {
-
+            if (MastersList.SelectedItem == null)
+            {
+                Growl.Error("Выберите админа!");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
+            }
+            var selectedMasters = MastersList.SelectedItem as Masters;
+            if (selectedMasters == null)
+            {
+                Growl.Error("Выберите админа!");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
+            }
+            ConnectionDb.db.Masters.Remove(selectedMasters);
+            ConnectionDb.db.SaveChanges();
+            UpdateMastersList();
+            Growl.Success("Удаление прошло успешно");
+            await Task.Delay(1500);
+            Growl.Clear();
         }
 
-        private void redactMaster_Click(object sender, RoutedEventArgs e)
+        private async void redactMaster_Click(object sender, RoutedEventArgs e)
         {
-
+            if (MastersList.SelectedItem == null)
+            {
+                Growl.Error("Выберите админа!");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
+            }
+            var selectedMaster = MastersList.SelectedItem as Masters;
+            var RedactMasterDialog = new RedactMaster(selectedMaster,this);
+            RedactMasterDialog.Show();
         }
 
         private void addMaster_Click(object sender, RoutedEventArgs e)
         {
-
+            var AddMasterDialog = new AddMaster(this);
+            AddMasterDialog.ShowDialog();
         }
         private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
         {
             MastersList.ItemsSource = _masters.Skip((e.Info - 1) * pageSize).Take(pageSize).ToList();
+        }
+        public async void UpdateMastersList()
+        {
+            var newItems = await ConnectionDb.db.Masters.ToListAsync();
+            MastersList.ItemsSource = newItems.Take(9);
+            _masters = newItems;
+            MastersCountText.Content = $"Всего мастеров: {newItems.Count}";
         }
     }
 }

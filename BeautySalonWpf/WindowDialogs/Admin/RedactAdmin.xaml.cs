@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using BeautySalonWpf.Pages.Admin.Tabs;
 namespace BeautySalonWpf.WindowDialogs
 {
     /// <summary>
@@ -25,15 +26,15 @@ namespace BeautySalonWpf.WindowDialogs
     public partial class RedactAdmin : System.Windows.Window
     {
         private Admins _admin;
-        private ListView _adminsList;
         private string adminProfilePhotoFolder = "C:\\Users\\Ильдар\\source\\repos\\BeautySalonWpf\\BeautySalonWpf\\imgs\\pfp\\admins\\".Replace("\\", "/");
         string removePath = "/imgs/pfp/admins/";
-        public RedactAdmin(Admins admin, ListView adminsList)
+        private AdminTab _owner;
+        public RedactAdmin(Admins admin,AdminTab owner)
         {
             InitializeComponent();
             _admin = admin;
-            _adminsList = adminsList;
             FillFieldsWInfo();
+            _owner = owner;
         }
 
         private void CloseRedactBtn_Click(object sender, RoutedEventArgs e)
@@ -59,7 +60,14 @@ namespace BeautySalonWpf.WindowDialogs
                 Growl.Clear();
                 return;
             }
-
+            var check = await ConnectionDb.db.Admins.FirstOrDefaultAsync(a => a.login == LoginText.Text&&a.adminId!=_admin.adminId);
+            if (check != null)
+            {
+                Growl.Error("Администратор с таким логином уже есть.");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
+            }
             var admin = await ConnectionDb.db.Admins.FirstOrDefaultAsync(a => a.login == _admin.login);
             if (admin == null)
             {
@@ -82,8 +90,7 @@ namespace BeautySalonWpf.WindowDialogs
             Growl.Success("Редактирование прошло успешно");
             await Task.Delay(1000);
             Growl.Clear();
-            var admins = await ConnectionDb.db.Admins.ToListAsync();
-            _adminsList.ItemsSource = admins.Take(9); 
+            _owner.UpdateAdminsList();
             this.Close();
         }
         private void FillFieldsWInfo()
