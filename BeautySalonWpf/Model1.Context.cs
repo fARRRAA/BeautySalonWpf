@@ -43,6 +43,7 @@ namespace BeautySalonWpf
         public virtual DbSet<ServiceRunTime> ServiceRunTime { get; set; }
         public virtual DbSet<Services> Services { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TwilioInfo> TwilioInfo { get; set; }
         public virtual DbSet<TypeProducts> TypeProducts { get; set; }
         public virtual DbSet<TypeServices> TypeServices { get; set; }
     }

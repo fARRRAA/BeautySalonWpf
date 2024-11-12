@@ -20,12 +20,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Http;
+using System.Threading.Tasks;
+
 
 namespace BeautySalonWpf.Pages.Admin
 {
-    /// <summary>
-    /// Логика взаимодействия для AdminPage.xaml
-    /// </summary>
+
 
     public partial class AdminPage : Page
     {
@@ -33,6 +34,8 @@ namespace BeautySalonWpf.Pages.Admin
         private Admins _admin;
         private List<Admins> _admins;
         private List<string> choosedTypes=new List<string>();
+        private static readonly HttpClient httpClient = new HttpClient();
+        private const string ApiKey = "CF3044CE-B265-C317-6797-EF5C86BAC6BD"; // Укажите ваш API-ключ
         public AdminPage(MainWindow mw, Admins admin)
         {
             InitializeComponent();
@@ -42,12 +45,32 @@ namespace BeautySalonWpf.Pages.Admin
             AdminTabFrame.Navigate(new AdminTab(_admin));
             MastersTabFrame.Navigate(new MastersTab( _admin));
             ClientsTabFrame.Navigate(new ClientsTab( _admin));
-            ProductsFrame.Navigate(new ProductsTab( _admin));   
+            ProductsFrame.Navigate(new ProductsTab( _admin));
+            DeliveryTabFrame.Navigate(new DeliveryTab());
         }
 
         public void MasterStartSettings()
         {
 
         }
+
+        //private async void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    string phoneNumber = "79393844323"; 
+        //    string message = "Миша лох"; 
+
+        //    await SendSmsAsync(phoneNumber, message);
+
+        //}
+        //static async Task SendSmsAsync(string phone, string message)
+        //{
+        //    string url = $"https://sms.ru/sms/send?api_id={ApiKey}&to={phone}&msg={Uri.EscapeDataString(message)}&json=1";
+
+        //    var response = await httpClient.GetAsync(url);
+        //        response.EnsureSuccessStatusCode();
+
+        //        var responseBody = await response.Content.ReadAsStringAsync();
+        //    Growl.Success($"{responseBody}");
+        //}
     }
 }

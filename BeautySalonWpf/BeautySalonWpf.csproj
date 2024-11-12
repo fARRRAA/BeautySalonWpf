@@ -114,6 +114,9 @@
     <Compile Include="Pages\Admin\Tabs\ClientsTab.xaml.cs">
       <DependentUpon>ClientsTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Admin\Tabs\DeliveryTab.xaml.cs">
+      <DependentUpon>DeliveryTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Admin\Tabs\MastersTab.xaml.cs">
       <DependentUpon>MastersTab.xaml</DependentUpon>
     </Compile>
@@ -141,6 +144,9 @@
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="TwilioInfo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="TypeProducts.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -158,6 +164,9 @@
     </Compile>
     <Compile Include="WindowDialogs\AdminPage\Client\RedactClient.xaml.cs">
       <DependentUpon>RedactClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowDialogs\AdminPage\DeliveryDialogs\AddDelivery.xaml.cs">
+      <DependentUpon>AddDelivery.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowDialogs\AdminPage\Master\AddMaster.xaml.cs">
       <DependentUpon>AddMaster.xaml</DependentUpon>
@@ -195,6 +204,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Admin\Tabs\DeliveryTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Admin\Tabs\MastersTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowDialogs\AdminPage\Client\RedactClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\AdminPage\DeliveryDialogs\AddDelivery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
