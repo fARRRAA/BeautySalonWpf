@@ -44,17 +44,38 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             DeliveryList.ItemsSource = filtered;
         }
 
-        private void deleteDelivery_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void redactDelivery_Click(object sender, RoutedEventArgs e)
+        private async void deleteDelivery_Click(object sender, RoutedEventArgs e)
         {
             if (DeliveryList.SelectedItems == null)
             {
                 Growl.Error("выберите поставку");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
             }
+            var selectedDelivery = DeliveryList.SelectedItem as Delivery;
+            var product = await ConnectionDb.db.Products.FirstOrDefaultAsync(p => p.productId == selectedDelivery.productId);
+            product.inStock -= selectedDelivery.count;
+            ConnectionDb.db.Delivery.Remove(selectedDelivery);
+            ConnectionDb.db.SaveChanges();
+            UpdateDeliveryList();
+            Growl.Success("Удаление прошло успешно");
+            await Task.Delay(1500);
+            Growl.Clear();
+        }
+
+        private async void redactDelivery_Click(object sender, RoutedEventArgs e)
+        {
+            if (DeliveryList.SelectedItems == null)
+            {
+                Growl.Error("выберите поставку");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
+            }
+            var selectedDelivery = DeliveryList.SelectedItem as Delivery;
+            var redactDeliveryDialog = new RedactDelivery(this, selectedDelivery);
+            redactDeliveryDialog.Show();
         }
 
         private void addDelivery_Click(object sender, RoutedEventArgs e)

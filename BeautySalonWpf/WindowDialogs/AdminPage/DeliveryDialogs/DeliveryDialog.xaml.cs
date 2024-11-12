@@ -18,26 +18,27 @@ using System.Windows.Shapes;
 namespace BeautySalonWpf.WindowDialogs.AdminPage.DeliveryDialogs
 {
     /// <summary>
-    /// Логика взаимодействия для AddDelivery.xaml
+    /// Логика взаимодействия для DeliveryDialog.xaml
     /// </summary>
-    public partial class AddDelivery : System.Windows.Window
+    public partial class RedactDelivery : System.Windows.Window
     {
         private DeliveryTab _owner;
+        private Delivery _delivery;
         private List<BeautySalonWpf.Products> _products;
         private List<Provider> _providers;
-        public AddDelivery(DeliveryTab owner)
+        public RedactDelivery(DeliveryTab owner,Delivery delivery)
         {
             InitializeComponent();
             _owner = owner;
-            _products= ConnectionDb.db.Products.ToList();
-            _providers=ConnectionDb.db.Provider.ToList();
-            ProviderText.ItemsSource = _providers.Select(p=>p.name);
+            _delivery = delivery;
+            _products = ConnectionDb.db.Products.ToList();
+            _providers = ConnectionDb.db.Provider.ToList();
+            ProviderText.ItemsSource = _providers.Select(p => p.name);
             ProductText.ItemsSource = _products.Select(p => p.name);
-        }
-
-        private void CloseAddBtn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            CountText.Value = (double)_delivery.count;
+            DateText.SelectedDate = _delivery.date;
+            ProductText.SelectedItem = _delivery.Products.name;
+            ProviderText.SelectedItem=_delivery.Provider.name;
         }
 
         private async void ConfirmAddBtn_Click(object sender, RoutedEventArgs e)
@@ -63,21 +64,26 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.DeliveryDialogs
                 Growl.Clear();
                 return;
             }
-            var delivery = new Delivery()
-            {
-                date= DateText.SelectedDate,
-                count= (int?)CountText.Value,
-                Products = _products.FirstOrDefault(p=>p.name == ProductText.SelectedItem.ToString()),
-                Provider = _providers.FirstOrDefault(p=>p.name == ProviderText.SelectedItem.ToString())
-            };
-            ConnectionDb.db.Delivery.Add(delivery);
-            var product = await ConnectionDb.db.Products.FirstOrDefaultAsync(p=>p.name == ProductText.SelectedItem.ToString());
-            product.inStock += delivery.count;
+            var prevCount = _delivery.count;
+            var delivery = await ConnectionDb.db.Delivery.FirstOrDefaultAsync(d=>d.deliveryId==_delivery.deliveryId);
+            delivery.count -= _delivery.count;
+            delivery.count +=(int) CountText.Value;
+            delivery.Products =  _products.FirstOrDefault(p => p.name == ProductText.SelectedItem.ToString());
+            delivery.Provider = _providers.FirstOrDefault(p => p.name == ProviderText.SelectedItem.ToString());
+
+            var product = await ConnectionDb.db.Products.FirstOrDefaultAsync(p => p.productId == delivery.productId);
+            product.inStock -= prevCount;
+            product.inStock += (int)CountText.Value;
             ConnectionDb.db.SaveChanges();
             Growl.Success("Редактирование прошло успешно");
             await Task.Delay(1000);
             Growl.Clear();
             _owner.UpdateDeliveryList();
+            this.Close();
+        }
+
+        private void CloseAddBtn_Click(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }

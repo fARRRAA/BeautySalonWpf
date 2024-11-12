@@ -115,5 +115,10 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             var filtered = _products.Where(p => selectedTypes.Contains(p.TypeProducts.name)).ToList();
             ProductsList.ItemsSource = filtered;
         }
+
+        private void updateProducts_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateProductsList();
+        }
     }
 }

@@ -40,8 +40,12 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
+        <Button x:Name="updateProducts" Background="#FF676767" Click="updateProducts_Click" HorizontalAlignment="Left" Margin="20,10,0,0">
+            <Image Source="/imgs/media/icons/refresh.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </Button>
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right">
             <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Top" Margin="0,10,10,10"/>
         </ScrollViewer>
     </StackPanel>
+    
 </Page>
