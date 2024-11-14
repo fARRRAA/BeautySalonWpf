@@ -88,7 +88,7 @@ namespace BeautySalonWpf.Pages
                 Growl.Clear();
                 return;
             }
-            var check = await ConnectionDb.db.Admins.FirstOrDefaultAsync(x => x.login == login && x.password == password);
+            var check =  ConnectionDb.db.Admins.FirstOrDefault(x => x.login == login && x.password == password);
             if (check == null)
             {
                 Growl.Error("Неправильный логин или пароль");

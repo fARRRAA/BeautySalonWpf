@@ -22,7 +22,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net.Http;
 using System.Threading.Tasks;
-
+using System.Net;
+using System.Net.Mail;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace BeautySalonWpf.Pages.Admin
 {
@@ -47,10 +50,47 @@ namespace BeautySalonWpf.Pages.Admin
             ClientsTabFrame.Navigate(new ClientsTab( _admin));
             ProductsFrame.Navigate(new ProductsTab( _admin));
             DeliveryTabFrame.Navigate(new DeliveryTab());
+            ProvidersTabFrame.Navigate(new ProviderTab());
+            ServicesTabFrame.Navigate(new ServicesTab());
         }
 
         public void MasterStartSettings()
         {
+            
+        }
+        //ot salonwpf gZwrWpzVeyS15wEy0x3v
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var json = File.ReadAllText("C:\\Users\\Ильдар\\source\\repos\\BeautySalonWpf\\BeautySalonWpf\\secrets.json").Replace("\\", "/");
+            var secrets = JObject.Parse(json);
+            string smtpPassword = secrets["SmtpPassword"].ToString();
+
+            string smtpServer = "smtp.mail.ru";
+            int smtpPort = 587; 
+            string smtpUsername = "farrahovildar1112@mail.ru";
+
+            using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
+            {
+                smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+                smtpClient.EnableSsl = true;
+
+                using (MailMessage mailMessage = new MailMessage())
+                {
+                    mailMessage.From = new MailAddress(smtpUsername);
+                    mailMessage.To.Add("farrahovildar1112@gmail.ru"); 
+                    mailMessage.Subject = "Данные от входа в ИС мероприятий";
+                    mailMessage.Body = $"Логин: dsdsd \r\nПароль: sdsdd";
+                    try
+                    {
+                        smtpClient.Send(mailMessage);
+                        Console.WriteLine("Сообщение успешно отправлено.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Ошибка отправки сообщения: {ex.Message}");
+                    }
+                }
+            }
 
         }
 

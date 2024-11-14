@@ -90,9 +90,13 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         public async void UpdateDeliveryList()
         {
             var newItems = await ConnectionDb.db.Delivery.ToListAsync();
-            DeliveryList.ItemsSource = newItems.Take(9);
+            DeliveryList.ItemsSource = newItems.Skip((paginationElem.PageIndex-1) * pageSize).Take(pageSize).ToList();
             _deliveries = newItems;
             DeliveriesCountText.Content = $"Всего поставок: {newItems.Count}";
+            pageCount = (int)Math.Round(Convert.ToDouble(_deliveries.Count / pageSize)) + 1;
+            paginationElem.MaxPageCount = pageCount;
+            paginationElem.PageIndex = pageCount;
+
         }
 
         private void DeliverySearchText_TextChanged_1(object sender, TextChangedEventArgs e)

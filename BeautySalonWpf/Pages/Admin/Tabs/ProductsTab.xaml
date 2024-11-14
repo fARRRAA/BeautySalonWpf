@@ -21,9 +21,9 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding productId}" Width="60" Header="id"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding name}" Width="220" Header="Название"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding name}" Width="280" Header="Название"/>
                             <GridViewColumn DisplayMemberBinding="{Binding price}" Width="155" Header="Цена"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding TypeProducts.name}" Width="130" Header="Категория"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding TypeProducts.name}" Width="170" Header="Категория"/>
                             <GridViewColumn DisplayMemberBinding="{Binding soldCount}" Width="150" Header="Продано"/>
                             <GridViewColumn DisplayMemberBinding="{Binding inStock}" Width="150" Header="В наличии"/>
                         </GridView>

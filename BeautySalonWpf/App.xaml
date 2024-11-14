@@ -11,6 +11,8 @@
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
                 <hc:Theme SyncWithSystem="true"/>
             </ResourceDictionary.MergedDictionaries>
+            <local:TimeConverter x:Key="TimeConverter"/>
+            <local:PriceConverter x:Key="PriceConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
