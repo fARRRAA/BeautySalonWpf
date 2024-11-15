@@ -20,13 +20,13 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding userID}" Width="60" Header="id"/>
-                            <GridViewColumn Header="Фото" Width="100">
+                            <!--<GridViewColumn Header="Фото" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Image Source="{Binding photo}" Width="50" Height="50" Stretch="Uniform"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                            </GridViewColumn>-->
                             <GridViewColumn DisplayMemberBinding="{Binding Lname}" Width="220" Header="Фамилия"/>
                             <GridViewColumn DisplayMemberBinding="{Binding FName}" Width="155" Header="Имя"/>
                             <GridViewColumn DisplayMemberBinding="{Binding phone}" Width="130" Header="Телефон"/>

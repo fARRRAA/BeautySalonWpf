@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using BeautySalonWpf.WindowDialogs;
 using BeautySalonWpf.WindowDialogs.Admin;
 using System.Data.Entity;
+using System.Windows.Media.Media3D;
 namespace BeautySalonWpf.Pages.Admin.Tabs
 {
     /// <summary>
@@ -27,12 +28,14 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         private Admins _admin;
         private List<Admins> _admins;
         private int pageCount;
-        private int pageSize = 9;
+        private int pageSize = 12;
+
         public AdminTab(Admins admin)
         {
             InitializeComponent();
             _admin = admin;
             AdminStartSettings();
+
         }
         private void AdminsSearchText_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -98,16 +101,16 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         public void AdminStartSettings()
         {
             var admins = ConnectionDb.db.Admins.ToList();
-            AdminsList.ItemsSource = admins.Take(9);
+            AdminsList.ItemsSource = admins.Take(pageSize);
             _admins = admins;
-            pageCount = (int)Math.Round(Convert.ToDouble(_admins.Count / 9)) + 1;
+            pageCount = (int)Math.Round(Convert.ToDouble(_admins.Count / pageSize)) + 1;
             paginationElem.MaxPageCount = pageCount;
             AdminsCountText.Content = $"Всего администраторов: {_admins.Count}";
         }
         public async void UpdateAdminsList()
         {
             var newItems = await ConnectionDb.db.Admins.ToListAsync();
-            AdminsList.ItemsSource = newItems.Take(9);
+            AdminsList.ItemsSource = newItems.Take(pageSize);
             _admins = newItems;
             AdminsCountText.Content = $"Всего администраторов: {newItems.Count}";
         }

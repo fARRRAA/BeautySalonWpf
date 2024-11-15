@@ -18,15 +18,9 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding masterId}" Width="60" Header="id"/>
-                            <GridViewColumn Header="Фото" Width="100">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Image Source="{Binding photo}" Width="50" Height="50" Stretch="Uniform"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Lname}" Width="220" Header="Фамилия"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Lname}" Width="170" Header="Фамилия"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Fname}" Width="155" Header="Имя"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding email}" Width="160" Header="Почта"/>
                             <GridViewColumn DisplayMemberBinding="{Binding phone}" Width="130" Header="Телефон"/>
                             <GridViewColumn DisplayMemberBinding="{Binding login}" Width="150" Header="Логин"/>
                             <GridViewColumn DisplayMemberBinding="{Binding MastersQualifications.TypeServices.name}" Width="160" Header="Специализация"/>

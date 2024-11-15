@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BeautySalonWpf.WindowDialogs.AdminPage.Service;
+using HandyControl.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -35,18 +37,43 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
 
         }
        
-        private void deleteService_Click(object sender, RoutedEventArgs e)
+        private async void deleteService_Click(object sender, RoutedEventArgs e)
         {
+            if (ServicesList.SelectedItem == null)
+            {
+                Growl.Error("Выберите услугу!");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
+            }
+            var selectedService = ServicesList.SelectedItem as Services;
+            ConnectionDb.db.Services.Remove(selectedService);
+            ConnectionDb.db.SaveChanges();
+            UpdateServicesList();
+            Growl.Success("Удаление прошло успешно");
+            await Task.Delay(1500);
+            Growl.Clear();
+
         }
 
-        private void redactService_Click(object sender, RoutedEventArgs e)
+        private async void redactService_Click(object sender, RoutedEventArgs e)
         {
-
+            if (ServicesList.SelectedItem == null)
+            {
+                Growl.Error("Выберите услугу!");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
+            }
+            var selectedService = ServicesList.SelectedItem as Services;
+            var redactServiceDialog = new RedactService(this,selectedService);
+            redactServiceDialog.Show();
         }
 
         private void addService_Click(object sender, RoutedEventArgs e)
         {
-
+            var addServiceDialog = new AddService(this);
+            addServiceDialog.Show();
         }
 
         private void ServiceSearchText_TextChanged(object sender, TextChangedEventArgs e)
@@ -60,7 +87,7 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         {
             ServicesList.ItemsSource = _services.Skip((e.Info - 1) * pageSize).Take(pageSize).ToList();
         }
-        public async void UpdateMastersList()
+        public async void UpdateServicesList()
         {
             var newItems = await ConnectionDb.db.Services.ToListAsync();
             ServicesList.ItemsSource = newItems.Skip((paginationElem.PageIndex - 1) * pageSize).Take(pageSize).ToList();

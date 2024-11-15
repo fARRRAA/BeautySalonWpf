@@ -20,7 +20,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding serviceId}" Width="60" Header="id"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding serviceName}" Width="300" Header="Название"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding serviceName}" Width="220" Header="Название"/>
                             <GridViewColumn Header="Младший мастер" Width="200">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>

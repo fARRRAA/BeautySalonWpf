@@ -26,7 +26,7 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         private Admins _admin;
         private List<Masters> _masters;
         private int pageCount;
-        private int pageSize = 9;
+        private int pageSize = 12;
         public MastersTab(Admins admin)
         {
             InitializeComponent();
@@ -102,7 +102,7 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         public async void UpdateMastersList()
         {
             var newItems = await ConnectionDb.db.Masters.ToListAsync();
-            MastersList.ItemsSource = newItems.Take(9);
+            MastersList.ItemsSource = newItems.Take(pageSize);
             _masters = newItems;
             MastersCountText.Content = $"Всего мастеров: {newItems.Count}";
         }

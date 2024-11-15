@@ -15,22 +15,16 @@
 			<hc:SearchBar x:Name="AdminsSearchText" Height="35" FontSize="16" hc:InfoElement.ShowClearButton="True"  Width="600"  hc:InfoElement.Placeholder="Введите данные о администраторе" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="" Style="{StaticResource SearchBarPlus}" hc:InfoElement.Necessary="True" TextChanged="AdminsSearchText_TextChanged" Margin="0,25,0,0" />
 		</StackPanel>
 		<StackPanel >
-			<ListView Margin="0,25,0,0" x:Name="AdminsList" ItemsSource="{Binding admins}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="624" Width="1088" HorizontalAlignment="Left">
+			<ListView Margin="0,25,0,0" x:Name="AdminsList" ItemsSource="{Binding admins}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="624" Width="1130" HorizontalAlignment="Left">
 				<ListView.View>
 					<GridView>
-						<GridViewColumn DisplayMemberBinding="{Binding adminId}" Width="60" Header="id"/>
-						<GridViewColumn Header="Фото" Width="100">
-							<GridViewColumn.CellTemplate>
-								<DataTemplate>
-									<Image Source="{Binding photo}" Width="50" Height="50" Stretch="Uniform"/>
-								</DataTemplate>
-							</GridViewColumn.CellTemplate>
-						</GridViewColumn>
-						<GridViewColumn DisplayMemberBinding="{Binding Lname}" Width="220" Header="Фамилия"/>
-						<GridViewColumn DisplayMemberBinding="{Binding Fname}" Width="155" Header="Имя"/>
-						<GridViewColumn DisplayMemberBinding="{Binding phone}" Width="130" Header="Телефон"/>
-						<GridViewColumn DisplayMemberBinding="{Binding login}" Width="180" Header="Логин"/>
-						<GridViewColumn DisplayMemberBinding="{Binding email}" Width="160" Header="Почта"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding adminId}" Width="60" Header="id"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Lname}" Width="170" Header="Фамилия"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Fname}" Width="155" Header="Имя"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Patronymic}" Width="210" Header="Отчество"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding phone}" Width="130" Header="Телефон"/>
+							<GridViewColumn DisplayMemberBinding="{Binding login}" Width="180" Header="Логин"/>
+							<GridViewColumn DisplayMemberBinding="{Binding email}" Width="160" Header="Почта"/>
 					</GridView>
 				</ListView.View>
 			</ListView>

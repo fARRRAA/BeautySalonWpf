@@ -24,15 +24,15 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
     public partial class ClientsTab : Page
     {
         private int pageCount;
-        private int pageSize = 9;
+        private int pageSize = 12;
         private List<Clients> _clients;
         public ClientsTab(Admins admin)
         {
             InitializeComponent();
             var clients = ConnectionDb.db.Clients.ToList();
-            ClientsList.ItemsSource = clients.Take(9);
+            ClientsList.ItemsSource = clients.Take(pageSize);
             _clients = clients;
-            pageCount = (int)Math.Round(Convert.ToDouble(_clients.Count / 9)) + 1;
+            pageCount = (int)Math.Round(Convert.ToDouble(_clients.Count / pageSize)) + 1;
             paginationElem.MaxPageCount = pageCount;
             ClientsCountText.Content = $"Всего клиентов: {_clients.Count}";
         }
@@ -114,7 +114,7 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         public async void UpdateClientsList()
         {
             var newItems = await ConnectionDb.db.Clients.ToListAsync();
-            ClientsList.ItemsSource = newItems.Take(9);
+            ClientsList.ItemsSource = newItems.Take(pageSize);
             _clients = newItems;
             ClientsCountText.Content = $"Всего клиентов: {newItems.Count}";
         }
