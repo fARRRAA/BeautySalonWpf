@@ -20,6 +20,5 @@ namespace BeautySalonWpf
         public Nullable<System.DateTime> date { get; set; }
     
         public virtual Clients Clients { get; set; }
-        public virtual Services Services { get; set; }
     }
 }

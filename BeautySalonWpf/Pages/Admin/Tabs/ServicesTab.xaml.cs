@@ -34,7 +34,6 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             pageCount = (int)Math.Round(Convert.ToDouble(_services.Count / pageSize)) + 1;
             paginationElem.MaxPageCount = pageCount;
             ServiceCountText.Content = $"Всего услуг: {_services.Count}";
-
         }
        
         private async void deleteService_Click(object sender, RoutedEventArgs e)

@@ -27,6 +27,9 @@ namespace BeautySalonWpf
     
         public virtual DbSet<AdminNotifications> AdminNotifications { get; set; }
         public virtual DbSet<Admins> Admins { get; set; }
+        public virtual DbSet<Appointments> Appointments { get; set; }
+        public virtual DbSet<AppointmentsServices> AppointmentsServices { get; set; }
+        public virtual DbSet<AppointmentStatus> AppointmentStatus { get; set; }
         public virtual DbSet<ClientNotifications> ClientNotifications { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Delivery> Delivery { get; set; }

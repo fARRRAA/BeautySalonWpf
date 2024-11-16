@@ -12,15 +12,18 @@ namespace BeautySalonWpf
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductReceiveRequest
+    public partial class AppointmentStatus
     {
-        public int requestId { get; set; }
-        public Nullable<int> masterId { get; set; }
-        public Nullable<int> productId { get; set; }
-        public Nullable<int> count { get; set; }
-        public Nullable<System.DateTime> date { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AppointmentStatus()
+        {
+            this.Appointments = new HashSet<Appointments>();
+        }
     
-        public virtual Masters Masters { get; set; }
-        public virtual Products Products { get; set; }
+        public int statusId { get; set; }
+        public string name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Appointments> Appointments { get; set; }
     }
 }

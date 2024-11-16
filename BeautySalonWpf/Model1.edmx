@@ -30,6 +30,33 @@
           <Property Name="photo" Type="nvarchar" MaxLength="100" />
           <Property Name="roleId" Type="int" />
         </EntityType>
+        <EntityType Name="Appointments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="masterId" Type="int" />
+          <Property Name="dateStart" Type="date" />
+          <Property Name="dateEnd" Type="date" />
+          <Property Name="totalSum" Type="int" />
+          <Property Name="totalDuration" Type="int" />
+          <Property Name="statusId" Type="int" />
+        </EntityType>
+        <EntityType Name="AppointmentsServices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appointmentId" Type="int" />
+          <Property Name="serviceId" Type="int" />
+        </EntityType>
+        <EntityType Name="AppointmentStatus">
+          <Key>
+            <PropertyRef Name="statusId" />
+          </Key>
+          <Property Name="statusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="ClientNotifications">
           <Key>
             <PropertyRef Name="notificationId" />
@@ -135,6 +162,7 @@
           <Property Name="masterId" Type="int" />
           <Property Name="productId" Type="int" />
           <Property Name="count" Type="int" />
+          <Property Name="date" Type="date" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -243,6 +271,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Appointments_AppointmentStatus">
+          <End Role="AppointmentStatus" Type="Self.AppointmentStatus" Multiplicity="0..1" />
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppointmentStatus">
+              <PropertyRef Name="statusId" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointments_Masters">
+          <End Role="Masters" Type="Self.Masters" Multiplicity="0..1" />
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masters">
+              <PropertyRef Name="masterId" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="masterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentsServices_Appointments">
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="0..1" />
+          <End Role="AppointmentsServices" Type="Self.AppointmentsServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AppointmentsServices">
+              <PropertyRef Name="appointmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentsServices_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <End Role="AppointmentsServices" Type="Self.AppointmentsServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="AppointmentsServices">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ClientNotifications_Clients">
           <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
           <End Role="ClientNotifications" Type="Self.ClientNotifications" Multiplicity="*" />
@@ -300,18 +376,6 @@
             </Principal>
             <Dependent Role="History">
               <PropertyRef Name="clientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_History_Services">
-          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
-          <End Role="History" Type="Self.History" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Services">
-              <PropertyRef Name="serviceId" />
-            </Principal>
-            <Dependent Role="History">
-              <PropertyRef Name="serviceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -426,6 +490,9 @@
         <EntityContainer Name="Хранилище BeautySalonModelContainer">
           <EntitySet Name="AdminNotifications" EntityType="Self.AdminNotifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppointmentsServices" EntityType="Self.AppointmentsServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppointmentStatus" EntityType="Self.AppointmentStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientNotifications" EntityType="Self.ClientNotifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
@@ -453,6 +520,22 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Admins" EntitySet="Admins" />
           </AssociationSet>
+          <AssociationSet Name="FK_Appointments_AppointmentStatus" Association="Self.FK_Appointments_AppointmentStatus">
+            <End Role="AppointmentStatus" EntitySet="AppointmentStatus" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointments_Masters" Association="Self.FK_Appointments_Masters">
+            <End Role="Masters" EntitySet="Masters" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentsServices_Appointments" Association="Self.FK_AppointmentsServices_Appointments">
+            <End Role="Appointments" EntitySet="Appointments" />
+            <End Role="AppointmentsServices" EntitySet="AppointmentsServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentsServices_Services" Association="Self.FK_AppointmentsServices_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="AppointmentsServices" EntitySet="AppointmentsServices" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClientNotifications_Clients" Association="Self.FK_ClientNotifications_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="ClientNotifications" EntitySet="ClientNotifications" />
@@ -471,10 +554,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_History_Clients" Association="Self.FK_History_Clients">
             <End Role="Clients" EntitySet="Clients" />
-            <End Role="History" EntitySet="History" />
-          </AssociationSet>
-          <AssociationSet Name="FK_History_Services" Association="Self.FK_History_Services">
-            <End Role="Services" EntitySet="Services" />
             <End Role="History" EntitySet="History" />
           </AssociationSet>
           <AssociationSet Name="FK_MasterNotifications_Masters" Association="Self.FK_MasterNotifications_Masters">
@@ -521,6 +600,9 @@
         <EntityContainer Name="BeautySalonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminNotifications" EntityType="BeautySalonModel.AdminNotifications" />
           <EntitySet Name="Admins" EntityType="BeautySalonModel.Admins" />
+          <EntitySet Name="Appointments" EntityType="BeautySalonModel.Appointments" />
+          <EntitySet Name="AppointmentsServices" EntityType="BeautySalonModel.AppointmentsServices" />
+          <EntitySet Name="AppointmentStatus" EntityType="BeautySalonModel.AppointmentStatus" />
           <EntitySet Name="ClientNotifications" EntityType="BeautySalonModel.ClientNotifications" />
           <EntitySet Name="Clients" EntityType="BeautySalonModel.Clients" />
           <EntitySet Name="Delivery" EntityType="BeautySalonModel.Delivery" />
@@ -548,6 +630,22 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Admins" EntitySet="Admins" />
           </AssociationSet>
+          <AssociationSet Name="FK_Appointments_AppointmentStatus" Association="BeautySalonModel.FK_Appointments_AppointmentStatus">
+            <End Role="AppointmentStatus" EntitySet="AppointmentStatus" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointments_Masters" Association="BeautySalonModel.FK_Appointments_Masters">
+            <End Role="Masters" EntitySet="Masters" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentsServices_Appointments" Association="BeautySalonModel.FK_AppointmentsServices_Appointments">
+            <End Role="Appointments" EntitySet="Appointments" />
+            <End Role="AppointmentsServices" EntitySet="AppointmentsServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentsServices_Services" Association="BeautySalonModel.FK_AppointmentsServices_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="AppointmentsServices" EntitySet="AppointmentsServices" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClientNotifications_Clients" Association="BeautySalonModel.FK_ClientNotifications_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="ClientNotifications" EntitySet="ClientNotifications" />
@@ -567,10 +665,6 @@
           <AssociationSet Name="FK_Delivery_Provider" Association="BeautySalonModel.FK_Delivery_Provider">
             <End Role="Provider" EntitySet="Provider" />
             <End Role="Delivery" EntitySet="Delivery" />
-          </AssociationSet>
-          <AssociationSet Name="FK_History_Services" Association="BeautySalonModel.FK_History_Services">
-            <End Role="Services" EntitySet="Services" />
-            <End Role="History" EntitySet="History" />
           </AssociationSet>
           <AssociationSet Name="FK_MasterNotifications_Masters" Association="BeautySalonModel.FK_MasterNotifications_Masters">
             <End Role="Masters" EntitySet="Masters" />
@@ -637,6 +731,39 @@
           <NavigationProperty Name="AdminNotifications" Relationship="BeautySalonModel.FK_AdminNotifications_Admins" FromRole="Admins" ToRole="AdminNotifications" />
           <NavigationProperty Name="Roles" Relationship="BeautySalonModel.FK_Admins_Roles" FromRole="Admins" ToRole="Roles" />
         </EntityType>
+        <EntityType Name="Appointments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="masterId" Type="Int32" />
+          <Property Name="dateStart" Type="DateTime" Precision="0" />
+          <Property Name="dateEnd" Type="DateTime" Precision="0" />
+          <Property Name="totalSum" Type="Int32" />
+          <Property Name="totalDuration" Type="Int32" />
+          <Property Name="statusId" Type="Int32" />
+          <NavigationProperty Name="AppointmentStatus" Relationship="BeautySalonModel.FK_Appointments_AppointmentStatus" FromRole="Appointments" ToRole="AppointmentStatus" />
+          <NavigationProperty Name="Masters" Relationship="BeautySalonModel.FK_Appointments_Masters" FromRole="Appointments" ToRole="Masters" />
+          <NavigationProperty Name="AppointmentsServices" Relationship="BeautySalonModel.FK_AppointmentsServices_Appointments" FromRole="Appointments" ToRole="AppointmentsServices" />
+        </EntityType>
+        <EntityType Name="AppointmentsServices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appointmentId" Type="Int32" />
+          <Property Name="serviceId" Type="Int32" />
+          <NavigationProperty Name="Appointments" Relationship="BeautySalonModel.FK_AppointmentsServices_Appointments" FromRole="AppointmentsServices" ToRole="Appointments" />
+          <NavigationProperty Name="Services" Relationship="BeautySalonModel.FK_AppointmentsServices_Services" FromRole="AppointmentsServices" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="AppointmentStatus">
+          <Key>
+            <PropertyRef Name="statusId" />
+          </Key>
+          <Property Name="statusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Appointments" Relationship="BeautySalonModel.FK_Appointments_AppointmentStatus" FromRole="AppointmentStatus" ToRole="Appointments" />
+        </EntityType>
         <EntityType Name="ClientNotifications">
           <Key>
             <PropertyRef Name="notificationId" />
@@ -688,7 +815,6 @@
           <Property Name="serviceId" Type="Int32" />
           <Property Name="date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Clients" Relationship="BeautySalonModel.FK_History_Clients" FromRole="History" ToRole="Clients" />
-          <NavigationProperty Name="Services" Relationship="BeautySalonModel.FK_History_Services" FromRole="History" ToRole="Services" />
         </EntityType>
         <EntityType Name="MasterNotifications">
           <Key>
@@ -717,6 +843,7 @@
           <Property Name="qualificationId" Type="Int32" />
           <Property Name="skillId" Type="Int32" />
           <Property Name="roleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Appointments" Relationship="BeautySalonModel.FK_Appointments_Masters" FromRole="Masters" ToRole="Appointments" />
           <NavigationProperty Name="MasterNotifications" Relationship="BeautySalonModel.FK_MasterNotifications_Masters" FromRole="Masters" ToRole="MasterNotifications" />
           <NavigationProperty Name="MastersQualifications" Relationship="BeautySalonModel.FK_Masters_MastersQualifications1" FromRole="Masters" ToRole="MastersQualifications" />
           <NavigationProperty Name="MastersSkills" Relationship="BeautySalonModel.FK_Masters_MastersSkills" FromRole="Masters" ToRole="MastersSkills" />
@@ -759,6 +886,7 @@
           <Property Name="masterId" Type="Int32" />
           <Property Name="productId" Type="Int32" />
           <Property Name="count" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Masters" Relationship="BeautySalonModel.FK_ProductReceiveRequest_Masters" FromRole="ProductReceiveRequest" ToRole="Masters" />
           <NavigationProperty Name="Products" Relationship="BeautySalonModel.FK_ProductReceiveRequest_Products" FromRole="ProductReceiveRequest" ToRole="Products" />
         </EntityType>
@@ -819,7 +947,7 @@
           <Property Name="juniorPrice" Type="Int32" />
           <Property Name="middlePrice" Type="Int32" />
           <Property Name="seniorPrice" Type="Int32" />
-          <NavigationProperty Name="History" Relationship="BeautySalonModel.FK_History_Services" FromRole="Services" ToRole="History" />
+          <NavigationProperty Name="AppointmentsServices" Relationship="BeautySalonModel.FK_AppointmentsServices_Services" FromRole="Services" ToRole="AppointmentsServices" />
           <NavigationProperty Name="TypeServices" Relationship="BeautySalonModel.FK_Services_BaseServices" FromRole="Services" ToRole="TypeServices" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -881,6 +1009,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Appointments_AppointmentStatus">
+          <End Type="BeautySalonModel.AppointmentStatus" Role="AppointmentStatus" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.Appointments" Role="Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppointmentStatus">
+              <PropertyRef Name="statusId" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointments_Masters">
+          <End Type="BeautySalonModel.Masters" Role="Masters" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.Appointments" Role="Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masters">
+              <PropertyRef Name="masterId" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="masterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentsServices_Appointments">
+          <End Type="BeautySalonModel.Appointments" Role="Appointments" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.AppointmentsServices" Role="AppointmentsServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AppointmentsServices">
+              <PropertyRef Name="appointmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentsServices_Services">
+          <End Type="BeautySalonModel.Services" Role="Services" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.AppointmentsServices" Role="AppointmentsServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="AppointmentsServices">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ClientNotifications_Clients">
           <End Type="BeautySalonModel.Clients" Role="Clients" Multiplicity="0..1" />
           <End Type="BeautySalonModel.ClientNotifications" Role="ClientNotifications" Multiplicity="*" />
@@ -938,18 +1114,6 @@
             </Principal>
             <Dependent Role="Delivery">
               <PropertyRef Name="providerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_History_Services">
-          <End Type="BeautySalonModel.Services" Role="Services" Multiplicity="0..1" />
-          <End Type="BeautySalonModel.History" Role="History" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Services">
-              <PropertyRef Name="serviceId" />
-            </Principal>
-            <Dependent Role="History">
-              <PropertyRef Name="serviceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1094,6 +1258,36 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="BeautySalonModel.Appointments">
+              <MappingFragment StoreEntitySet="Appointments">
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="totalDuration" ColumnName="totalDuration" />
+                <ScalarProperty Name="totalSum" ColumnName="totalSum" />
+                <ScalarProperty Name="dateEnd" ColumnName="dateEnd" />
+                <ScalarProperty Name="dateStart" ColumnName="dateStart" />
+                <ScalarProperty Name="masterId" ColumnName="masterId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppointmentsServices">
+            <EntityTypeMapping TypeName="BeautySalonModel.AppointmentsServices">
+              <MappingFragment StoreEntitySet="AppointmentsServices">
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+                <ScalarProperty Name="appointmentId" ColumnName="appointmentId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppointmentStatus">
+            <EntityTypeMapping TypeName="BeautySalonModel.AppointmentStatus">
+              <MappingFragment StoreEntitySet="AppointmentStatus">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ClientNotifications">
             <EntityTypeMapping TypeName="BeautySalonModel.ClientNotifications">
               <MappingFragment StoreEntitySet="ClientNotifications">
@@ -1203,6 +1397,7 @@
           <EntitySetMapping Name="ProductReceiveRequest">
             <EntityTypeMapping TypeName="BeautySalonModel.ProductReceiveRequest">
               <MappingFragment StoreEntitySet="ProductReceiveRequest">
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="count" ColumnName="count" />
                 <ScalarProperty Name="productId" ColumnName="productId" />
                 <ScalarProperty Name="masterId" ColumnName="masterId" />

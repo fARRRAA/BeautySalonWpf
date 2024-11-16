@@ -17,6 +17,7 @@ namespace BeautySalonWpf
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Masters()
         {
+            this.Appointments = new HashSet<Appointments>();
             this.MasterNotifications = new HashSet<MasterNotifications>();
             this.ProductReceiveRequest = new HashSet<ProductReceiveRequest>();
         }
@@ -35,6 +36,8 @@ namespace BeautySalonWpf
         public Nullable<int> skillId { get; set; }
         public int roleId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Appointments> Appointments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MasterNotifications> MasterNotifications { get; set; }
         public virtual MastersQualifications MastersQualifications { get; set; }

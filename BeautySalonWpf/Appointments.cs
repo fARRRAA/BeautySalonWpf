@@ -12,26 +12,25 @@ namespace BeautySalonWpf
     using System;
     using System.Collections.Generic;
     
-    public partial class Services
+    public partial class Appointments
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Services()
+        public Appointments()
         {
             this.AppointmentsServices = new HashSet<AppointmentsServices>();
         }
     
-        public int serviceId { get; set; }
-        public string serviceName { get; set; }
-        public Nullable<int> typeServiceId { get; set; }
-        public Nullable<int> juniorRunTime { get; set; }
-        public Nullable<int> middleRunTime { get; set; }
-        public Nullable<int> SeniorRunTime { get; set; }
-        public Nullable<int> juniorPrice { get; set; }
-        public Nullable<int> middlePrice { get; set; }
-        public Nullable<int> seniorPrice { get; set; }
+        public int id { get; set; }
+        public Nullable<int> masterId { get; set; }
+        public Nullable<System.DateTime> dateStart { get; set; }
+        public Nullable<System.DateTime> dateEnd { get; set; }
+        public Nullable<int> totalSum { get; set; }
+        public Nullable<int> totalDuration { get; set; }
+        public Nullable<int> statusId { get; set; }
     
+        public virtual AppointmentStatus AppointmentStatus { get; set; }
+        public virtual Masters Masters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppointmentsServices> AppointmentsServices { get; set; }
-        public virtual TypeServices TypeServices { get; set; }
     }
 }

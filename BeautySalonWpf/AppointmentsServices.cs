@@ -12,15 +12,13 @@ namespace BeautySalonWpf
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductReceiveRequest
+    public partial class AppointmentsServices
     {
-        public int requestId { get; set; }
-        public Nullable<int> masterId { get; set; }
-        public Nullable<int> productId { get; set; }
-        public Nullable<int> count { get; set; }
-        public Nullable<System.DateTime> date { get; set; }
+        public int id { get; set; }
+        public Nullable<int> appointmentId { get; set; }
+        public Nullable<int> serviceId { get; set; }
     
-        public virtual Masters Masters { get; set; }
-        public virtual Products Products { get; set; }
+        public virtual Appointments Appointments { get; set; }
+        public virtual Services Services { get; set; }
     }
 }

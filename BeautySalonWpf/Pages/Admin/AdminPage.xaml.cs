@@ -52,6 +52,7 @@ namespace BeautySalonWpf.Pages.Admin
             DeliveryTabFrame.Navigate(new DeliveryTab());
             ProvidersTabFrame.Navigate(new ProviderTab());
             ServicesTabFrame.Navigate(new ServicesTab());
+            AppointmentsFrame.Navigate(new AppointmentsTab());
         }
 
         public void MasterStartSettings()
