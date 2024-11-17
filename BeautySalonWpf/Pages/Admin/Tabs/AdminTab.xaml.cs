@@ -109,10 +109,14 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         }
         public async void UpdateAdminsList()
         {
+            var index = paginationElem.PageIndex;
             var newItems = await ConnectionDb.db.Admins.ToListAsync();
-            AdminsList.ItemsSource = newItems.Take(pageSize);
+            AdminsList.ItemsSource = newItems.Skip((paginationElem.PageIndex - 1) * pageSize).Take(pageSize).ToList();
             _admins = newItems;
             AdminsCountText.Content = $"Всего администраторов: {newItems.Count}";
+            pageCount = (int)Math.Round(Convert.ToDouble(_admins.Count / pageSize)) + 1;
+            paginationElem.MaxPageCount = pageCount;
+            paginationElem.PageIndex = index;
         }
     }
 }

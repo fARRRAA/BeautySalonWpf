@@ -28,7 +28,7 @@
                         </Grid.RowDefinitions>
                         <Image Source="/imgs/media/icons/hairdresser.png" Width="400" Height="300" Grid.Row="0" HorizontalAlignment="Center" />
                         <TextBlock Text="Добро пожаловать в Салон Красоты Зимняя Вишня"  TextWrapping="Wrap"  Margin="0,30,0,0" FontWeight="DemiBold"   Foreground="#FF99BE29" FontSize="30" HorizontalAlignment="Center" Grid.Row="1" TextAlignment="Center"/>
-                        <Button Content="Отправить" Margin="0,146,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click" Height="28"/>
+                        <!--<Button Content="Отправить" Margin="0,146,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click" Height="28"/>-->
                     </Grid>
                 </StackPanel>
 

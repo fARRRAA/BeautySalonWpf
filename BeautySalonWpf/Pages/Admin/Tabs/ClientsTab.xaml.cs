@@ -113,10 +113,15 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         }
         public async void UpdateClientsList()
         {
+
+            var index = paginationElem.PageIndex;
             var newItems = await ConnectionDb.db.Clients.ToListAsync();
-            ClientsList.ItemsSource = newItems.Take(pageSize);
+            ClientsList.ItemsSource = newItems.Skip((paginationElem.PageIndex - 1) * pageSize).Take(pageSize).ToList();
             _clients = newItems;
             ClientsCountText.Content = $"Всего клиентов: {newItems.Count}";
+            pageCount = (int)Math.Round(Convert.ToDouble(_clients.Count / pageSize)) + 1;
+            paginationElem.MaxPageCount = pageCount;
+            paginationElem.PageIndex = index;
         }
     }
 }

@@ -93,10 +93,14 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         }
         public async void UpdateProductsList()
         {
-            var newItems = await ConnectionDb.db.Products.ToListAsync();
-            ProductsList.ItemsSource = newItems.Take(pageSize);
+            var index = paginationElem.PageIndex;
+            List<Products> newItems = await ConnectionDb.db.Products.ToListAsync();
+            ProductsList.ItemsSource = newItems.Skip((paginationElem.PageIndex - 1) * pageSize).Take(pageSize).ToList();
             _products = newItems;
             ProductsCountText.Content = $"Всего товаров: {newItems.Count}";
+            pageCount = (int)Math.Round(Convert.ToDouble(_products.Count / pageSize)) + 1;
+            paginationElem.MaxPageCount = pageCount;
+            paginationElem.PageIndex = index;
         }
 
         private void productTypes_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

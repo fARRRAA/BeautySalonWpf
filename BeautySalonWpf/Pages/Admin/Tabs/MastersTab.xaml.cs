@@ -101,10 +101,15 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         }
         public async void UpdateMastersList()
         {
+            var index = paginationElem.PageIndex;
             var newItems = await ConnectionDb.db.Masters.ToListAsync();
-            MastersList.ItemsSource = newItems.Take(pageSize);
+            MastersList.ItemsSource = newItems.Skip((paginationElem.PageIndex - 1) * pageSize).Take(pageSize).ToList();
             _masters = newItems;
             MastersCountText.Content = $"Всего мастеров: {newItems.Count}";
+            pageCount = (int)Math.Round(Convert.ToDouble(_masters.Count / pageSize)) + 1;
+            paginationElem.MaxPageCount = pageCount;
+            paginationElem.PageIndex = index;
+
         }
     }
 }
