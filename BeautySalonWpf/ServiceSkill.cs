@@ -12,10 +12,15 @@ namespace BeautySalonWpf
     using System;
     using System.Collections.Generic;
     
-    public partial class TwilioInfo
+    public partial class ServiceSkill
     {
         public int id { get; set; }
-        public string sId { get; set; }
-        public string token { get; set; }
+        public Nullable<int> serviceId { get; set; }
+        public Nullable<int> skillId { get; set; }
+        public Nullable<int> runTime { get; set; }
+        public Nullable<int> price { get; set; }
+    
+        public virtual MastersSkills MastersSkills { get; set; }
+        public virtual Services Services { get; set; }
     }
 }

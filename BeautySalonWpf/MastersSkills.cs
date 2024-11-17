@@ -18,6 +18,7 @@ namespace BeautySalonWpf
         public MastersSkills()
         {
             this.Masters = new HashSet<Masters>();
+            this.ServiceSkill = new HashSet<ServiceSkill>();
         }
     
         public int skillId { get; set; }
@@ -26,5 +27,7 @@ namespace BeautySalonWpf
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Masters> Masters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ServiceSkill> ServiceSkill { get; set; }
     }
 }

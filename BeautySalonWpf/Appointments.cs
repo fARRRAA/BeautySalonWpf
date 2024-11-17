@@ -22,13 +22,16 @@ namespace BeautySalonWpf
     
         public int id { get; set; }
         public Nullable<int> masterId { get; set; }
-        public Nullable<System.DateTime> dateStart { get; set; }
-        public Nullable<System.DateTime> dateEnd { get; set; }
+        public Nullable<System.TimeSpan> timeStart { get; set; }
+        public Nullable<System.TimeSpan> timeEnd { get; set; }
         public Nullable<int> totalSum { get; set; }
         public Nullable<int> totalDuration { get; set; }
         public Nullable<int> statusId { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
+        public Nullable<int> clientId { get; set; }
     
         public virtual AppointmentStatus AppointmentStatus { get; set; }
+        public virtual Clients Clients { get; set; }
         public virtual Masters Masters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppointmentsServices> AppointmentsServices { get; set; }

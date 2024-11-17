@@ -13,6 +13,8 @@
             </ResourceDictionary.MergedDictionaries>
             <local:TimeConverter x:Key="TimeConverter"/>
             <local:PriceConverter x:Key="PriceConverter"/>
+            <local:TimeSpanConverter x:Key="TimeSpanConverter"/>
+            <local:DateConverter x:Key="DateConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -91,7 +91,9 @@
     <Compile Include="Clients.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Converters\PriceConverter.cs" />
+    <Compile Include="Converters\TimeSpanConverter.cs" />
     <Compile Include="Delivery.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -105,6 +107,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="MastersQualifications.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MastersSalaries.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="MastersSkills.cs">
@@ -163,13 +168,13 @@
     <Compile Include="Services.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ServiceSkill.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Converters\TimeConverter.cs" />
-    <Compile Include="TwilioInfo.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="TypeProducts.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -182,8 +187,8 @@
     <Compile Include="WindowDialogs\AdminPage\Admin\RedactAdmin.xaml.cs">
       <DependentUpon>RedactAdmin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowDialogs\AdminPage\Appointments\AddAppointment.xaml.cs">
-      <DependentUpon>AddAppointment.xaml</DependentUpon>
+    <Compile Include="WindowDialogs\AdminPage\Appointmentdialogs\AddAppointmentDialog.xaml.cs">
+      <DependentUpon>AddAppointmentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowDialogs\AdminPage\Client\AddClient.xaml.cs">
       <DependentUpon>AddClient.xaml</DependentUpon>
@@ -279,7 +284,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowDialogs\AdminPage\Appointments\AddAppointment.xaml">
+    <Page Include="WindowDialogs\AdminPage\Appointmentdialogs\AddAppointmentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -394,6 +399,14 @@
     <Resource Include="imgs\media\icons\alarm-clock.png" />
     <Resource Include="imgs\media\icons\coins.png" />
     <Resource Include="imgs\media\icons\coins-sec.png" />
+    <Resource Include="imgs\media\icons\arrow-right.png" />
+    <Resource Include="imgs\media\icons\arrow-left.png" />
+    <Resource Include="imgs\media\icons\barber-pole.png" />
+    <Resource Include="imgs\media\icons\barber.png" />
+    <Resource Include="imgs\media\icons\barber-chair.png" />
+    <Resource Include="imgs\media\icons\barber-shop.png" />
+    <Resource Include="imgs\media\icons\barber-chair %281%29.png" />
+    <Resource Include="imgs\media\icons\barber-chair %282%29.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

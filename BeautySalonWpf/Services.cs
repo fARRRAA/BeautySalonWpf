@@ -18,6 +18,7 @@ namespace BeautySalonWpf
         public Services()
         {
             this.AppointmentsServices = new HashSet<AppointmentsServices>();
+            this.ServiceSkill = new HashSet<ServiceSkill>();
         }
     
         public int serviceId { get; set; }
@@ -33,5 +34,7 @@ namespace BeautySalonWpf
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppointmentsServices> AppointmentsServices { get; set; }
         public virtual TypeServices TypeServices { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ServiceSkill> ServiceSkill { get; set; }
     }
 }
