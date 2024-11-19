@@ -101,6 +101,9 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             }
             var appointment = await ConnectionDb.db.Appointments.FirstOrDefaultAsync(a=>a.id==selectedAppointment.id);
             appointment.statusId = 1;
+            var salary = await ConnectionDb.db.MastersSalaries.FirstOrDefaultAsync(s => s.masterId == selectedAppointment.masterId && s.month == DateTime.Now.Month && s.year == DateTime.Now.Year);
+            var mastersGain = appointment.totalSum * ((double)selectedAppointment.Masters.MastersSkills.rate / 100);
+            salary.salary += (int)mastersGain;
             await ConnectionDb.db.SaveChangesAsync();
             Growl.Success("Изменение прошло успешно!");
             await Task.Delay(1500);

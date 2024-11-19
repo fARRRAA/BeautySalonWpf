@@ -13,7 +13,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0" Height="549">
             <Label Content="Салон Красоты Зимняя вишня" Margin="0,0,0,0" Background="{x:Null}" FontWeight="DemiBold" BorderBrush="{x:Null}" Foreground="#FF99BE29" FontSize="22" Height="60" Width="388"/>
             <Label Content="Вход" Margin="0,0,0,0" Background="{x:Null}" FontWeight="Medium" BorderBrush="{x:Null}" Foreground="#FF99BE29" FontSize="20" Height="39" Width="296"/>
-            <TabControl  Margin="0,20,0,20" SelectedIndex="3" Style="{StaticResource TabControlSliding}" Background="#FF353434" BorderBrush="{x:Null}" >
+            <TabControl x:Name="TabControl" Margin="0,20,0,20" SelectedIndex="3" Style="{StaticResource TabControlSliding}" Background="#FF353434" BorderBrush="{x:Null}" >
                 <TabItem Header="Админ" Foreground="#FF99BE29" FontSize="16" BorderBrush="{x:Null}" Width="100">
                     <StackPanel Margin="0,20,0,0">
                         <hc:TextBox x:Name="LoginTextAdmin" hc:InfoElement.ShowClearButton="True" Width="380" Height="42" FontSize="18" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Введите логин" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Necessary="True" Margin="0,16,0,0"/>

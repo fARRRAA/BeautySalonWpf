@@ -261,9 +261,6 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.Appointmentdialogs
                 };
                 ConnectionDb.db.AppointmentsServices.Add(temp);
             }
-            var salary = await ConnectionDb.db.MastersSalaries.FirstOrDefaultAsync(s => s.masterId == _selectedMaster.masterId && s.month == DateTime.Now.Month && s.year == DateTime.Now.Year);
-            var mastersGain = appointment.totalSum * ((double)_selectedMaster.MastersSkills.rate / 100);
-            salary.salary += (int)mastersGain;
             ConnectionDb.db.SaveChanges();
             _owner.UpdateAppoinmentsList();
             Growl.Success("Запись создана");

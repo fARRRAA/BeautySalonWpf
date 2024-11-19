@@ -1,4 +1,5 @@
 ﻿using BeautySalonWpf.Pages.Admin;
+using BeautySalonWpf.Pages.Master;
 using HandyControl.Controls;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,9 @@ namespace BeautySalonWpf.Pages
             _mw.ChangeWindowSize(600, 700);
             LoginTextAdmin.Text = "farra";
             PasswordTextAdmin.Password = "123";
+            LoginTextMaster.Text = "fara";
+            PasswordTextMaster.Password = "123";
+            TabControl.SelectedIndex = 2;
         }
 
 
@@ -103,9 +107,34 @@ namespace BeautySalonWpf.Pages
             _mw.MainFrame.NavigationService.Navigate(new AdminPage(_mw,check));
         }
 
-        private void LoginBtnMaster_Click(object sender, RoutedEventArgs e)
+        private async void LoginBtnMaster_Click(object sender, RoutedEventArgs e)
         {
-
+            var login = LoginTextMaster.Text;
+            var password = PasswordTextMaster.Password;
+            var temp = new Masters()
+            {
+                login = login,
+                password = password,
+            };
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
+            {
+                Growl.Error("Заполните все поля");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
+            }
+            var check = ConnectionDb.db.Masters.FirstOrDefault(x => x.login == login && x.password == password);
+            if (check == null)
+            {
+                Growl.Error("Неправильный логин или пароль");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
+            }
+            Growl.Success("Вы успешно вошли в систему");
+            await Task.Delay(1500);
+            Growl.Clear();
+            _mw.MainFrame.NavigationService.Navigate(new MasterPage(_mw,check));
         }
     }
 }
