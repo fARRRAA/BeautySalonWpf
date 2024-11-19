@@ -150,8 +150,17 @@
     <Compile Include="Pages\Admin\Tabs\ServicesTab.xaml.cs">
       <DependentUpon>ServicesTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Master\ClientPage.xaml.cs">
+      <DependentUpon>ClientPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Master\MasterPage.xaml.cs">
       <DependentUpon>MasterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Master\MasterServicesTab.xaml.cs">
+      <DependentUpon>MasterServicesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Master\MaterialsTab.xaml.cs">
+      <DependentUpon>MaterialsTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProductReceiveRequest.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -223,6 +232,18 @@
     <Compile Include="WindowDialogs\AdminPage\Service\RedactService.xaml.cs">
       <DependentUpon>RedactService.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowDialogs\MasterPage\AddMaterialReceive.xaml.cs">
+      <DependentUpon>AddMaterialReceive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowDialogs\MasterPage\MasterRedactClient.xaml.cs">
+      <DependentUpon>MasterRedactClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowDialogs\MasterPage\Service\AddService.xaml.cs">
+      <DependentUpon>AddService.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowDialogs\MasterPage\Service\RedactService.xaml.cs">
+      <DependentUpon>RedactService.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -271,7 +292,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Master\ClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Master\MasterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Master\MasterServicesTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Master\MaterialsTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -334,6 +367,22 @@
     <Page Include="WindowDialogs\AdminPage\Service\RedactService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\MasterPage\AddMaterialReceive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\MasterPage\MasterRedactClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\MasterPage\Service\AddService.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WindowDialogs\MasterPage\Service\RedactService.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -414,6 +463,7 @@
     <Resource Include="imgs\media\icons\barber-shop.png" />
     <Resource Include="imgs\media\icons\barber-chair %281%29.png" />
     <Resource Include="imgs\media\icons\barber-chair %282%29.png" />
+    <Resource Include="imgs\media\icons\logout.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

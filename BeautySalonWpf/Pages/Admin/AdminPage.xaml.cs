@@ -95,6 +95,12 @@ namespace BeautySalonWpf.Pages.Admin
 
         }
 
+        private async void QuitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            await Task.Delay(250);
+            _mw.MainFrame.Navigate(new SignIn(_mw));
+        }
+
         //private async void Button_Click(object sender, RoutedEventArgs e)
         //{
         //    string phoneNumber = "79393844323"; 
