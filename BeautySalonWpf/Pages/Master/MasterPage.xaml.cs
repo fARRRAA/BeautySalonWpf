@@ -34,6 +34,8 @@ namespace BeautySalonWpf.Pages.Master
             ClientsTabFrame.Navigate(new ClientPage());
             ServicesTabFrame.Navigate(new MasterServicesTab(master));
             ProductsFrame.Navigate(new MaterialsTab(master));
+            AppointmentsFrame.Navigate(new MasterAppointments(master));
+
 
             MasterFnameText.Text = master.Fname;
             MasterLnameText.Text = master.Lname;

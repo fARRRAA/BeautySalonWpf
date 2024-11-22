@@ -97,9 +97,10 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="199" >
                         <Image Source="/imgs/media/icons/orders.png" Width="30" Height="30" />
-                        <TextBlock Text="Заказы" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16"/>
+                        <TextBlock Text="Зарплата" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16"/>
                     </StackPanel>
                 </TabItem.Header>
+                <Frame x:Name="SalaryFrame"></Frame>
             </TabItem>
         </TabControl>
         <Button x:Name="QuitBtn" HorizontalAlignment="Left" Margin="14,799,0,0" VerticalAlignment="Top" Width="58" Height="50" Click="QuitBtn_Click">

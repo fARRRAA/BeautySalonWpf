@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -8,15 +9,15 @@ using System.Windows.Data;
 
 namespace BeautySalonWpf
 {
-    public class PriceConverter : IValueConverter
+    public class DefaultPriceConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is int priceValue) // предполагается, что juniorRunTime - это int
+            if (value is int priceValue) 
             {
                 return $"{priceValue} ₽";
             }
-            return "0 мин"; // или любое другое значение по умолчанию
+            return "0 мин"; 
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
