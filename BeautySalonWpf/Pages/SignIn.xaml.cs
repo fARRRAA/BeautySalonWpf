@@ -37,7 +37,9 @@ namespace BeautySalonWpf.Pages
             PasswordTextAdmin.Password = "123";
             LoginTextMaster.Text = "fara";
             PasswordTextMaster.Password = "123";
-            TabControl.SelectedIndex = 2;
+            TabControl.SelectedIndex = 1;
+            LoginTextUser.Text = "fara";
+            PasswordTextUser.Password = "123";
         }
 
 
@@ -67,7 +69,7 @@ namespace BeautySalonWpf.Pages
             Growl.Success("Вы успешно вошли в систему");
             await Task.Delay(1500);
             Growl.Clear();
-            _mw.MainFrame.NavigationService.Navigate(new SignUp(_mw));
+            _mw.MainFrame.NavigationService.Navigate(new Pages.Client.ClientPage(_mw,check));
         }
 
         private void notRegistered_Click(object sender, RoutedEventArgs e)

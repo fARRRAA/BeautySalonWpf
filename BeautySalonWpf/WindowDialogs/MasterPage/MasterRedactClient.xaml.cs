@@ -23,11 +23,11 @@ namespace BeautySalonWpf.WindowDialogs.MasterPage
     /// </summary>
     public partial class MasterRedactClient : System.Windows.Window
     {
-        private ClientPage _owner;
+        private Pages.Master.ClientPage _owner;
 
         private Clients _client;
 
-        public MasterRedactClient(ClientPage owner, Clients client)
+        public MasterRedactClient(Pages.Master.ClientPage owner, Clients client)
         {
             InitializeComponent();
             _owner = owner;

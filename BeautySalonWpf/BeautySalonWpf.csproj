@@ -92,8 +92,8 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Converters\DateConverter.cs" />
-    <Compile Include="Converters\DefaultPriceConverter.cs" />
     <Compile Include="Converters\PriceConverter.cs" />
+    <Compile Include="Converters\DefaultPriceConverter.cs" />
     <Compile Include="Converters\TimeSpanConverter.cs" />
     <Compile Include="Delivery.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -150,6 +150,12 @@
     </Compile>
     <Compile Include="Pages\Admin\Tabs\ServicesTab.xaml.cs">
       <DependentUpon>ServicesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Client\ClientPage.xaml.cs">
+      <DependentUpon>ClientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Client\Tabs\ClientAppointments.xaml.cs">
+      <DependentUpon>ClientAppointments.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Master\ClientPage.xaml.cs">
       <DependentUpon>ClientPage.xaml</DependentUpon>
@@ -236,6 +242,9 @@
     <Compile Include="WindowDialogs\AdminPage\Service\RedactService.xaml.cs">
       <DependentUpon>RedactService.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowDialogs\ClientPage\RegisterAppointment.xaml.cs">
+      <DependentUpon>RegisterAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowDialogs\MasterPage\AddMaterialReceive.xaml.cs">
       <DependentUpon>AddMaterialReceive.xaml</DependentUpon>
     </Compile>
@@ -293,6 +302,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Admin\Tabs\ServicesTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Client\ClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Client\Tabs\ClientAppointments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -373,6 +390,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowDialogs\AdminPage\Service\RedactService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\ClientPage\RegisterAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -491,7 +512,6 @@
     <Folder Include="imgs\pfp\clients\" />
     <Folder Include="imgs\pfp\masters\" />
     <Folder Include="imgs\pfp\products\" />
-    <Folder Include="Pages\Client\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
