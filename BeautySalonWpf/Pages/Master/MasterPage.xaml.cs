@@ -53,7 +53,7 @@ namespace BeautySalonWpf.Pages.Master
             var appointmentsInMonth = allAppointments.Count(a => a.date.Value.Month == DateTime.Now.Month && a.masterId == master.masterId);
             MonthAppoinmentsText.Content = appointmentsInMonth;
             var salary = ConnectionDb.db.MastersSalaries.FirstOrDefault(a => a.masterId == _master.masterId && a.year == DateTime.Now.Year && a.month == DateTime.Now.Month);
-            SalatyText.Content = $"{salary.salary} ₽";
+            //SalatyText.Content = $"{salary.salary} ₽";
         }
 
         private async void QuitBtn_Click(object sender, RoutedEventArgs e)

@@ -26,6 +26,9 @@ using System.Net;
 using System.Net.Mail;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using LiveCharts;
+using LiveCharts.Wpf;
+using Microsoft.Win32;
 
 namespace BeautySalonWpf.Pages.Admin
 {
@@ -36,7 +39,7 @@ namespace BeautySalonWpf.Pages.Admin
         private MainWindow _mw;
         private Admins _admin;
         private List<Admins> _admins;
-        private List<string> choosedTypes=new List<string>();
+        private List<string> choosedTypes = new List<string>();
         private static readonly HttpClient httpClient = new HttpClient();
         private const string ApiKey = "CF3044CE-B265-C317-6797-EF5C86BAC6BD"; // Укажите ваш API-ключ
         public AdminPage(MainWindow mw, Admins admin)
@@ -46,52 +49,120 @@ namespace BeautySalonWpf.Pages.Admin
             _mw.ChangeWindowSize(900, 1400);
             _admin = admin;
             AdminTabFrame.Navigate(new AdminTab(_admin));
-            MastersTabFrame.Navigate(new MastersTab( _admin));
-            ClientsTabFrame.Navigate(new ClientsTab( _admin));
-            ProductsFrame.Navigate(new ProductsTab( _admin));
+            MastersTabFrame.Navigate(new MastersTab(_admin));
+            ClientsTabFrame.Navigate(new ClientsTab(_admin));
+            ProductsFrame.Navigate(new ProductsTab(_admin));
             DeliveryTabFrame.Navigate(new DeliveryTab());
             ProvidersTabFrame.Navigate(new ProviderTab());
             ServicesTabFrame.Navigate(new ServicesTab());
             AppointmentsFrame.Navigate(new AppointmentsTab());
+            var SeriesCollection = new SeriesCollection
+                {
+                    new LineSeries
+                    {
+                        Values = new ChartValues<double> { 3, 5, 7, 4 }
+                    },
+                    new ColumnSeries
+                    {
+                        Values = new ChartValues<decimal> { 5, 6, 2, 7 }
+                    }
+                };
         }
 
         public void MasterStartSettings()
         {
-            
+
         }
-        //ot salonwpf gZwrWpzVeyS15wEy0x3v
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void addPhoto_Click(object sender, RoutedEventArgs e)
         {
-            var json = File.ReadAllText("C:\\Users\\Ильдар\\source\\repos\\BeautySalonWpf\\BeautySalonWpf\\secrets.json").Replace("\\", "/");
-            var secrets = JObject.Parse(json);
-            string smtpPassword = secrets["SmtpPassword"].ToString();
+            string fileFolder = "C:\\Users\\Ильдар\\source\\repos\\BeautySalonWpf\\BeautySalonWpf\\docs\\".Replace("\\", "/");
 
-            string smtpServer = "smtp.mail.ru";
-            int smtpPort = 587; 
-            string smtpUsername = "farrahovildar1112@mail.ru";
-
-            using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
+            var fileDialog = new OpenFileDialog
             {
-                smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
-                smtpClient.EnableSsl = true;
+                Filter="Image Files|*jpeg;*img;*jpg;*png"
+            };
+            if(!Directory.Exists(fileFolder)){
+                Directory.CreateDirectory(fileFolder);
+            }
+            if (fileDialog.ShowDialog() == true)
+            {
+                var filename = System.IO.Path.GetFileName(fileDialog.FileName);
+                var path  = System.IO.Path.Combine(fileFolder, filename); 
+                File.Copy(fileDialog.FileName, path,overwrite:true);
+                Photo.Source=new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
+            }
+        }
+        void createreport()
+        {
 
-                using (MailMessage mailMessage = new MailMessage())
+            string fileFolder = "C:\\Users\\Ильдар\\source\\repos\\BeautySalonWpf\\BeautySalonWpf\\docs\\".Replace("\\", "/");
+            string text = "Привет, это пример текста для записи в файл!";
+
+            if (!Directory.Exists(fileFolder))
+            {
+                Directory.CreateDirectory(fileFolder);
+            }
+            var filepath = System.IO.Path.Combine(fileFolder, "report1.txt");
+            File.WriteAllText(filepath, text);
+
+
+        }
+        //ot salonwpf gZwrWpzVeyS15wEy0x3v 
+        void Send()
+        {
+            var server = "smtp.gmail.com";
+            var port = 587;
+            var user = "farrahovi2006@gmail.com";
+
+            using (SmtpClient client = new SmtpClient(server, port))
+            {
+                client.Credentials = new NetworkCredential(user, "tmaq iswu pwov lpdi");
+                client.EnableSsl = true;
+                using (MailMessage mail = new MailMessage())
                 {
-                    mailMessage.From = new MailAddress(smtpUsername);
-                    mailMessage.To.Add("farrahovildar1112@gmail.ru"); 
-                    mailMessage.Subject = "Данные от входа в ИС мероприятий";
-                    mailMessage.Body = $"Логин: dsdsd \r\nПароль: sdsdd";
-                    try
-                    {
-                        smtpClient.Send(mailMessage);
-                        Console.WriteLine("Сообщение успешно отправлено.");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Ошибка отправки сообщения: {ex.Message}");
-                    }
+                    mail.From = new MailAddress(user);
+                    mail.To.Add("farrahovildar1112@mail.ru");
+                    mail.Subject = "dsds";
+                    mail.Body = "sdsd";
+                    client.Send(mail);
                 }
             }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            createreport();
+            //var json = File.ReadAllText("C:\\Users\\Ильдар\\source\\repos\\BeautySalonWpf\\BeautySalonWpf\\secrets.json").Replace("\\", "/");
+            //var secrets = JObject.Parse(json);
+            //string smtpPassword = secrets["SmtpPassword"].ToString();
+
+            //string smtpServer = "smtp.gmail.com";
+            //int smtpPort = 587;
+            //string smtpUsername = "farrahovi2006@gmail.com";
+
+            //using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
+            //{
+            //    smtpClient.Credentials = new NetworkCredential(smtpUsername, "tmaq iswu pwov lpdi");
+            //    smtpClient.EnableSsl = true;
+
+            //    using (MailMessage mailMessage = new MailMessage())
+            //    {
+            //        mailMessage.From = new MailAddress(smtpUsername);
+            //        mailMessage.To.Add("farrahovildar1112@mail.ru");
+            //        mailMessage.Subject = "Данные от входа в ИС мероприятий";
+            //        mailMessage.Body = $"Логин: dsdsd \r\nПароль: sdsdd";
+            //        try
+            //        {
+            //            smtpClient.Send(mailMessage);
+            //            Growl.Success("Сообщение успешно отправлено.");
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            Growl.Error($"Ошибка отправки сообщения: {ex.Message}");
+            //        }
+            //    }
+            //}
 
         }
 
@@ -99,7 +170,12 @@ namespace BeautySalonWpf.Pages.Admin
         {
             await Task.Delay(250);
             _mw.MainFrame.Navigate(new SignIn(_mw));
+
+
+
+
         }
+
 
         //private async void Button_Click(object sender, RoutedEventArgs e)
         //{

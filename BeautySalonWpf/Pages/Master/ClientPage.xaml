@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BeautySalonWpf.Pages.Master"
-                        xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d" 
       d:DesignHeight="950" d:DesignWidth="1180"
       Title="ClientPage">
@@ -14,6 +14,7 @@
                 <hc:SearchBar x:Name="ClientsSearchText" Height="35" FontSize="16" hc:InfoElement.ShowClearButton="True"  Width="600"  hc:InfoElement.Placeholder="Введите данные о клиенте" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="" Style="{StaticResource SearchBarPlus}" hc:InfoElement.Necessary="True" TextChanged="ClientsSearchText_TextChanged" Margin="0,25,0,0" />
             </StackPanel>
             <StackPanel >
+                 
                 <ListView Margin="0,25,0,0" x:Name="ClientsList" ItemsSource="{Binding clients}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="624" Width="1000" HorizontalAlignment="Left">
                     <ListView.View>
                         <GridView>

@@ -15,6 +15,7 @@
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                 <hc:SearchBar x:Name="ProductsSearchText" Height="35" FontSize="16" hc:InfoElement.ShowClearButton="True"  Width="600"  hc:InfoElement.Placeholder="Введите данные о мастере" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="" Style="{StaticResource SearchBarPlus}" hc:InfoElement.Necessary="True" TextChanged="ProductsSearchText_TextChanged" Margin="0,25,0,0" />
                 <hc:CheckComboBox x:Name="SelectProductTypes" hc:InfoElement.ShowClearButton="True" SelectionChanged="SelectProductTypes_SelectionChanged" FontSize="16" MaxWidth="380" ItemsSource="{Binding productTypes}" Style="{StaticResource CheckComboBoxPlus}" hc:InfoElement.Placeholder="Выберите категории" DataContextChanged="productTypes_DataContextChanged" Width="380" Height="35" VerticalAlignment="Bottom" Margin="50,0,0,0" />
+            
             </StackPanel>
             <StackPanel >
                 <ListView Margin="0,25,0,0" x:Name="ProductsList" ItemsSource="{Binding products}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="624" Width="1068" HorizontalAlignment="Left">

@@ -9,13 +9,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
-                <hc:Theme SyncWithSystem="true"/>
+                <hc:Theme SyncWithSystem="True"/>
             </ResourceDictionary.MergedDictionaries>
-            <local:TimeConverter x:Key="TimeConverter"/>
-            <local:PriceConverter x:Key="PriceConverter"/>
-            <local:DefaultPriceConverter x:Key="DefaultPriceConverter"/>
-            <local:TimeSpanConverter x:Key="TimeSpanConverter"/>
-            <local:DateConverter x:Key="DateConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

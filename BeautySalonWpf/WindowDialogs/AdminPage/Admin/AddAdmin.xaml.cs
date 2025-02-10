@@ -115,6 +115,30 @@ namespace BeautySalonWpf.WindowDialogs.Admin
                     Growl.Clear();
                 }
             }
+            void createreport()
+            {
+                try
+                {
+                    string folderPath = @"C:\Users\Ильдар\source\repos\BeautySalonWpf\BeautySalonWpf\docs\";
+
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    string filePath = System.IO.Path.Combine(folderPath, "example.txt");
+
+                    string textToWrite = "Привет, это пример текста для записи в файл!";
+
+                    File.WriteAllText(filePath, textToWrite);
+
+                    Console.WriteLine($"Файл успешно создан и сохранён по пути: {filePath}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Произошла ошибка: {ex.Message}");
+                }
+            }
         }
     }
 }

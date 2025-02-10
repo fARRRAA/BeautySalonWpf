@@ -6,6 +6,7 @@
                                 xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:BeautySalonWpf.WindowDialogs.MasterPage.Service"
         mc:Ignorable="d"
+        
             Title="Редактирование услуги" Height="500" Width="900">
     <Grid Background="#FF2C2C2E">
         <StackPanel Orientation="Vertical" >
