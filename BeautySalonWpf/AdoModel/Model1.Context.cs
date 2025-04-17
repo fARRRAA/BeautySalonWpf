@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BeautySalonWpf
+namespace BeautySalonWpf.AdoModel
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BeautySalonEntities1 : DbContext
+    public partial class BeautySalonEntities : DbContext
     {
-        public BeautySalonEntities1()
-            : base("name=BeautySalonEntities1")
+        public BeautySalonEntities()
+            : base("name=BeautySalonEntities")
         {
         }
     
@@ -37,7 +37,6 @@ namespace BeautySalonWpf
         public virtual DbSet<MasterNotifications> MasterNotifications { get; set; }
         public virtual DbSet<Masters> Masters { get; set; }
         public virtual DbSet<MastersQualifications> MastersQualifications { get; set; }
-        public virtual DbSet<MastersSalaries> MastersSalaries { get; set; }
         public virtual DbSet<MastersSkills> MastersSkills { get; set; }
         public virtual DbSet<na_vsyakiy> na_vsyakiy { get; set; }
         public virtual DbSet<ProductReceiveRequest> ProductReceiveRequest { get; set; }
@@ -50,6 +49,6 @@ namespace BeautySalonWpf
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeProducts> TypeProducts { get; set; }
         public virtual DbSet<TypeServices> TypeServices { get; set; }
-        public virtual DbSet<CancelledAppointments> CancelledAppointments { get; set; }
+        public virtual DbSet<MastersSalaries> MastersSalaries { get; set; }
     }
 }

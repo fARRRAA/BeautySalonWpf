@@ -1,8 +1,10 @@
 ﻿using BeautySalonWpf.Pages.Admin.Tabs;
 using HandyControl.Controls;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -110,9 +112,37 @@ namespace BeautySalonWpf.WindowDialogs.Master
             }
         }
 
-        private void addPhoto_Click(object sender, RoutedEventArgs e)
+        private async void addPhoto_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
+                Title = "Выберите фотографию"
+            };
+            if (!Directory.Exists(adminProfilePhotoFolder))
+            {
+                Directory.CreateDirectory(adminProfilePhotoFolder);
+            }
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string fileName = System.IO.Path.GetFileName(openFileDialog.FileName);
+                string destinationPath = System.IO.Path.Combine(adminProfilePhotoFolder, fileName);
 
+                try
+                {
+                    File.Copy(openFileDialog.FileName, destinationPath, overwrite: true);
+                    Photo.Source = new BitmapImage(new Uri(destinationPath, UriKind.RelativeOrAbsolute));
+                    var master = await ConnectionDb.db.Masters.FirstOrDefaultAsync(a => a.login == _master.login);
+                    master.photo = $"/imgs/pfp/admins/{fileName}";
+                    ConnectionDb.db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Growl.Error($"Ошибка при добавлении фотографии: {ex.Message}");
+                    await Task.Delay(5500);
+                    Growl.Clear();
+                }
+            }
         }
     }
 }

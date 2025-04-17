@@ -65,7 +65,7 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
                 return;
             }
             var selectedService = ServicesList.SelectedItem as Services;
-            var redactServiceDialog = new RedactService(this,selectedService);
+            var redactServiceDialog = new RedactService(this,selectedService); 
             redactServiceDialog.Show();
         }
 

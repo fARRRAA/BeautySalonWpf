@@ -1,9 +1,11 @@
 ﻿using BeautySalonWpf.Pages.Admin.Tabs;
 using HandyControl.Controls;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,8 @@ namespace BeautySalonWpf.WindowDialogs.Master
     /// </summary>
     public partial class AddMaster : System.Windows.Window
     {
+        private string adminProfilePhotoFolder = "C:\\Users\\Ильдар\\source\\repos\\BeautySalonWpf\\BeautySalonWpf\\imgs\\pfp\\admins\\".Replace("\\", "/");
+
         private Masters tempMaster = new Masters();
         private List<MastersQualifications> _qualifications = ConnectionDb.db.MastersQualifications.ToList();
         private List<MastersSkills> _skills = ConnectionDb.db.MastersSkills.ToList();
@@ -109,9 +113,59 @@ namespace BeautySalonWpf.WindowDialogs.Master
             this.Close();
         }
 
-        private void addPhoto_Click(object sender, RoutedEventArgs e)
+        private async void addPhoto_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
+                Title = "Выберите фотографию"
+            };
+            if (!Directory.Exists(adminProfilePhotoFolder))
+            {
+                Directory.CreateDirectory(adminProfilePhotoFolder);
+            }
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string fileName = System.IO.Path.GetFileName(openFileDialog.FileName);
+                string destinationPath = System.IO.Path.Combine(adminProfilePhotoFolder, fileName);
 
+                try
+                {
+                    File.Copy(openFileDialog.FileName, destinationPath, overwrite: true);
+                    Photo.Source = new BitmapImage(new Uri(destinationPath, UriKind.RelativeOrAbsolute));
+                    tempMaster.photo = $"/imgs/pfp/admins/{fileName}";
+                }
+                catch (Exception ex)
+                {
+                    Growl.Error($"Ошибка при добавлении фотографии: {ex.Message}");
+                    await Task.Delay(5500);
+                    Growl.Clear();
+                }
+            }
+            void createreport()
+            {
+                try
+                {
+                    string folderPath = @"C:\Users\Ильдар\source\repos\BeautySalonWpf\BeautySalonWpf\docs\";
+
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    string filePath = System.IO.Path.Combine(folderPath, "example.txt");
+
+                    string textToWrite = "Привет, это пример текста для записи в файл!";
+
+                    File.WriteAllText(filePath, textToWrite);
+
+                    Console.WriteLine($"Файл успешно создан и сохранён по пути: {filePath}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Произошла ошибка: {ex.Message}");
+                }
+            }
         }
     }
 }

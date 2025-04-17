@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BeautySalonWpf
+namespace BeautySalonWpf.AdoModel
 {
     using System;
     using System.Collections.Generic;
@@ -19,8 +19,8 @@ namespace BeautySalonWpf
         {
             this.Appointments = new HashSet<Appointments>();
             this.MasterNotifications = new HashSet<MasterNotifications>();
-            this.MastersSalaries = new HashSet<MastersSalaries>();
             this.ProductReceiveRequest = new HashSet<ProductReceiveRequest>();
+            this.MastersSalaries = new HashSet<MastersSalaries>();
         }
     
         public int masterId { get; set; }
@@ -45,8 +45,8 @@ namespace BeautySalonWpf
         public virtual MastersSkills MastersSkills { get; set; }
         public virtual Roles Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MastersSalaries> MastersSalaries { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductReceiveRequest> ProductReceiveRequest { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MastersSalaries> MastersSalaries { get; set; }
     }
 }

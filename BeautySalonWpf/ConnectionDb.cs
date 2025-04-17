@@ -8,6 +8,6 @@ namespace BeautySalonWpf
 {
     internal class ConnectionDb
     {
-        public static BeautySalonEntities db = new BeautySalonEntities();
+        public static BeautySalonEntities1 db = new BeautySalonEntities1();
     }
 }

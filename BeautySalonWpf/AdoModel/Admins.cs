@@ -7,23 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BeautySalonWpf
+namespace BeautySalonWpf.AdoModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Masters
+    public partial class Admins
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Masters()
+        public Admins()
         {
-            this.Appointments = new HashSet<Appointments>();
-            this.MasterNotifications = new HashSet<MasterNotifications>();
-            this.MastersSalaries = new HashSet<MastersSalaries>();
-            this.ProductReceiveRequest = new HashSet<ProductReceiveRequest>();
+            this.AdminNotifications = new HashSet<AdminNotifications>();
         }
     
-        public int masterId { get; set; }
+        public int adminId { get; set; }
         public string Lname { get; set; }
         public string Fname { get; set; }
         public string Patronymic { get; set; }
@@ -33,20 +30,10 @@ namespace BeautySalonWpf
         public string login { get; set; }
         public string password { get; set; }
         public string photo { get; set; }
-        public Nullable<int> qualificationId { get; set; }
-        public Nullable<int> skillId { get; set; }
-        public int roleId { get; set; }
+        public Nullable<int> roleId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Appointments> Appointments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MasterNotifications> MasterNotifications { get; set; }
-        public virtual MastersQualifications MastersQualifications { get; set; }
-        public virtual MastersSkills MastersSkills { get; set; }
+        public virtual ICollection<AdminNotifications> AdminNotifications { get; set; }
         public virtual Roles Roles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MastersSalaries> MastersSalaries { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductReceiveRequest> ProductReceiveRequest { get; set; }
     }
 }

@@ -1,34 +1,18 @@
 ﻿using BeautySalonWpf.Pages.Admin.Tabs;
-using BeautySalonWpf.WindowDialogs;
-using BeautySalonWpf.WindowDialogs.Admin;
-using HandyControl.Controls;
-using HandyControl.Properties.Langs;
-using HandyControl.Tools;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
-using Newtonsoft.Json.Linq;
 using System.IO;
 using LiveCharts;
 using LiveCharts.Wpf;
 using Microsoft.Win32;
+using System.Drawing;
 
 namespace BeautySalonWpf.Pages.Admin
 {
@@ -68,7 +52,7 @@ namespace BeautySalonWpf.Pages.Admin
                     }
                 };
         }
-
+       
         public void MasterStartSettings()
         {
 
@@ -79,17 +63,18 @@ namespace BeautySalonWpf.Pages.Admin
 
             var fileDialog = new OpenFileDialog
             {
-                Filter="Image Files|*jpeg;*img;*jpg;*png"
+                Filter = "Image Files|*jpeg;*img;*jpg;*png"
             };
-            if(!Directory.Exists(fileFolder)){
+            if (!Directory.Exists(fileFolder))
+            {
                 Directory.CreateDirectory(fileFolder);
             }
             if (fileDialog.ShowDialog() == true)
             {
                 var filename = System.IO.Path.GetFileName(fileDialog.FileName);
-                var path  = System.IO.Path.Combine(fileFolder, filename); 
-                File.Copy(fileDialog.FileName, path,overwrite:true);
-                Photo.Source=new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
+                var path = System.IO.Path.Combine(fileFolder, filename);
+                File.Copy(fileDialog.FileName, path, overwrite: true);
+                Photo.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
             }
         }
         void createreport()
