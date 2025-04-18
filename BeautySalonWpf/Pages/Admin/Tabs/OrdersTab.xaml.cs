@@ -1,4 +1,5 @@
 ﻿using BeautySalonWpf.WindowDialogs.AdminPage.Order;
+using HandyControl.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -111,9 +112,27 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             OrdersList.ItemsSource = all;
         }
 
-        private void DeleteOrder_Click(object sender, RoutedEventArgs e)
+        private async void DeleteOrder_Click(object sender, RoutedEventArgs e)
         {
-
+            var selected = OrdersList.SelectedItem as Orders;
+           
+            if (selected != null)
+            {
+                var order = ConnectionDb.db.Orders.FirstOrDefault(x => x.id == selected.id);
+                var orderProducts =ConnectionDb.db.OrderProducts.Where(x=>x.orderId==order.id);
+                foreach(var item in orderProducts)
+                {
+                    //var product=ConnectionDb.db.Products.FirstOrDefault(x=>x.productId==item.productId);
+                    item.Products.inStock += item.count;
+                    ConnectionDb.db.OrderProducts.Remove(item);
+                }
+                ConnectionDb.db.Orders.Remove(order);
+                ConnectionDb.db.SaveChanges();
+                UpdateOrdersList();
+                Growl.Success("Заказ был удален");
+                await Task.Delay(2000);
+                Growl.Clear();
+            }
         }
 
         private void RedactOrder_Click(object sender, RoutedEventArgs e)

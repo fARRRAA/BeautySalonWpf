@@ -43,7 +43,7 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.Order
         {
             InitializeComponent();
             _owner = owner;
-            var productList = ConnectionDb.db.Products.ToList();
+            var productList = ConnectionDb.db.Products.Where(x=>x.inStock>0).ToList();
 
             availableProducts = new ObservableCollection<BeautySalonWpf.Products>(productList);
             selectedProducts = new ObservableCollection<OrderProductItem>();
@@ -181,7 +181,8 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.Order
                     count = selectedProducts[i].Quantity
                 };
                 ConnectionDb.db.OrderProducts.Add(orderItem);
-
+                var product = ConnectionDb.db.Products.FirstOrDefault(x=>x.productId==orderItem.Products.productId);
+                product.inStock -= orderItem.count;
             }
             ConnectionDb.db.SaveChanges();
             Growl.Success("Заказ успешно создан");
