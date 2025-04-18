@@ -23,7 +23,7 @@ namespace BeautySalonWpf.Pages.Master
         private int pageCount;
         private int pageSize = 9;
         private Masters _master;
-        public SalaryPage(Masters master)
+        public SalaryPage(Masters master)      
         {
             InitializeComponent();
             _appointments = ConnectionDb.db.Appointments.Where(x => x.masterId == master.masterId&&x.statusId==1).OrderByDescending(a => a.date).ToList();
@@ -52,7 +52,7 @@ namespace BeautySalonWpf.Pages.Master
             pageCount = (int)Math.Round(Convert.ToDouble(_appointments.Count / pageSize)) + 1;
             paginationElem.MaxPageCount = pageCount;
             paginationElem.PageIndex = index;
-        }
+        }  
         private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
         {
             AppointmentsList.ItemsSource = _appointments.Skip((e.Info - 1) * pageSize).Take(pageSize).ToList();

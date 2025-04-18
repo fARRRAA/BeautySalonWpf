@@ -55,6 +55,13 @@
         <AssociationConnector Association="BeautySalonModel.FK_Products_TypeProducts" ManuallyRouted="false" />
         <AssociationConnector Association="BeautySalonModel.FK_Services_BaseServices" ManuallyRouted="false" />
         <AssociationConnector Association="BeautySalonModel.FK_ServiceSkill_Services" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BeautySalonModel.OrderProducts" Width="1.5" PointX="13.25" PointY="15.625" />
+        <EntityTypeShape EntityType="BeautySalonModel.Orders" Width="1.5" PointX="10.25" PointY="17.25" />
+        <EntityTypeShape EntityType="BeautySalonModel.OrderStatus" Width="1.5" PointX="8" PointY="21.125" />
+        <AssociationConnector Association="BeautySalonModel.FK_Orders_Clients" />
+        <AssociationConnector Association="BeautySalonModel.FK_OrderProducts_Orders" />
+        <AssociationConnector Association="BeautySalonModel.FK_OrderProducts_Products" />
+        <AssociationConnector Association="BeautySalonModel.FK_Orders_OrderStatus" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

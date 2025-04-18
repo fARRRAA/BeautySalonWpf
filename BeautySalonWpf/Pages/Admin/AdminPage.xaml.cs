@@ -40,6 +40,7 @@ namespace BeautySalonWpf.Pages.Admin
             ProvidersTabFrame.Navigate(new ProviderTab());
             ServicesTabFrame.Navigate(new ServicesTab());
             AppointmentsFrame.Navigate(new AppointmentsTab());
+            OrdersFrame.Navigate(new OrdersTab());
             var SeriesCollection = new SeriesCollection
                 {
                     new LineSeries

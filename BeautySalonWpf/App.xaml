@@ -16,6 +16,7 @@
             <local:DefaultPriceConverter x:Key="DefaultPriceConverter"/>
             <local:TimeSpanConverter x:Key="TimeSpanConverter"/>
             <local:DateConverter x:Key="DateConverter"/>
+            <!--<local:PercentConverter x:Key="PercentConverter"/>-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

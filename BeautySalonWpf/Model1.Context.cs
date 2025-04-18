@@ -51,5 +51,8 @@ namespace BeautySalonWpf
         public virtual DbSet<TypeProducts> TypeProducts { get; set; }
         public virtual DbSet<TypeServices> TypeServices { get; set; }
         public virtual DbSet<CancelledAppointments> CancelledAppointments { get; set; }
+        public virtual DbSet<OrderProducts> OrderProducts { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<OrderStatus> OrderStatus { get; set; }
     }
 }

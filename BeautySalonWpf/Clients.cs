@@ -20,6 +20,7 @@ namespace BeautySalonWpf
             this.Appointments = new HashSet<Appointments>();
             this.ClientNotifications = new HashSet<ClientNotifications>();
             this.History = new HashSet<History>();
+            this.Orders = new HashSet<Orders>();
         }
     
         public int userID { get; set; }
@@ -42,5 +43,7 @@ namespace BeautySalonWpf
         public virtual Roles Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<History> History { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

@@ -17,6 +17,10 @@ namespace BeautySalonWpf
             {
                 return $"{priceValue} ₽";
             }
+            if (value is decimal decimalPriceValue)
+            {
+                return $"{decimalPriceValue} ₽";
+            }
             return "0 мин"; 
         }
 

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище BeautySalonModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище BeautySalonModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminNotifications">
           <Key>
             <PropertyRef Name="notificationId" />
@@ -181,6 +181,35 @@
           <Property Name="FName" Type="nvarchar" MaxLength="100" />
           <Property Name="phone" Type="nvarchar" MaxLength="12" />
           <Property Name="Preferences" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="OrderProducts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderId" Type="int" />
+          <Property Name="productId" Type="int" />
+          <Property Name="count" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="clientId" Type="int" />
+          <Property Name="sum" Type="int" />
+          <Property Name="count" Type="int" />
+          <Property Name="statusId" Type="int" />
+          <Property Name="discount" Type="int" />
+          <Property Name="discountSum" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="ProductReceiveRequest">
           <Key>
@@ -493,6 +522,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderProducts_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrderProducts" Type="Self.OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProducts_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="OrderProducts" Type="Self.OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductReceiveRequest_Masters">
           <End Role="Masters" Type="Self.Masters" Multiplicity="0..1" />
           <End Role="ProductReceiveRequest" Type="Self.ProductReceiveRequest" Multiplicity="*" />
@@ -581,6 +658,9 @@
           <EntitySet Name="MastersSalaries" EntityType="Self.MastersSalaries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MastersSkills" EntityType="Self.MastersSkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="na_vsyakiy" EntityType="Self.na_vsyakiy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderProducts" EntityType="Self.OrderProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductReceiveRequest" EntityType="Self.ProductReceiveRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
@@ -676,6 +756,22 @@
             <End Role="Masters" EntitySet="Masters" />
             <End Role="MastersSalaries" EntitySet="MastersSalaries" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderProducts_Orders" Association="Self.FK_OrderProducts_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProducts_Products" Association="Self.FK_OrderProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Clients" Association="Self.FK_Orders_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderStatus" Association="Self.FK_Orders_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductReceiveRequest_Masters" Association="Self.FK_ProductReceiveRequest_Masters">
             <End Role="Masters" EntitySet="Masters" />
             <End Role="ProductReceiveRequest" EntitySet="ProductReceiveRequest" />
@@ -701,8 +797,7 @@
             <End Role="ServiceSkill" EntitySet="ServiceSkill" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BeautySalonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -800,6 +895,7 @@
           <NavigationProperty Name="ClientNotifications" Relationship="Self.FK_ClientNotifications_Clients" FromRole="Clients" ToRole="ClientNotifications" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Clients_Roles" FromRole="Clients" ToRole="Roles" />
           <NavigationProperty Name="History" Relationship="Self.FK_History_Clients" FromRole="Clients" ToRole="History" />
+          <NavigationProperty Name="Orders" Relationship="BeautySalonModel.FK_Orders_Clients" FromRole="Clients" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Delivery">
           <Key>
@@ -924,6 +1020,7 @@
           <NavigationProperty Name="Delivery" Relationship="Self.FK_Delivery_Products" FromRole="Products" ToRole="Delivery" />
           <NavigationProperty Name="ProductReceiveRequest" Relationship="Self.FK_ProductReceiveRequest_Products" FromRole="Products" ToRole="ProductReceiveRequest" />
           <NavigationProperty Name="TypeProducts" Relationship="Self.FK_Products_TypeProducts" FromRole="Products" ToRole="TypeProducts" />
+          <NavigationProperty Name="OrderProducts" Relationship="BeautySalonModel.FK_OrderProducts_Products" FromRole="Products" ToRole="OrderProducts" />
         </EntityType>
         <EntityType Name="Provider">
           <Key>
@@ -1435,7 +1532,109 @@
             <End Role="Services" EntitySet="Services" />
             <End Role="ServiceSkill" EntitySet="ServiceSkill" />
           </AssociationSet>
+          <EntitySet Name="OrderProducts" EntityType="BeautySalonModel.OrderProducts" />
+          <EntitySet Name="Orders" EntityType="BeautySalonModel.Orders" />
+          <EntitySet Name="OrderStatus" EntityType="BeautySalonModel.OrderStatus" />
+          <AssociationSet Name="FK_Orders_Clients" Association="BeautySalonModel.FK_Orders_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProducts_Orders" Association="BeautySalonModel.FK_OrderProducts_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProducts_Products" Association="BeautySalonModel.FK_OrderProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderProducts" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderStatus" Association="BeautySalonModel.FK_Orders_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="OrderProducts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderId" Type="Int32" />
+          <Property Name="productId" Type="Int32" />
+          <Property Name="count" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="BeautySalonModel.FK_OrderProducts_Orders" FromRole="OrderProducts" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="BeautySalonModel.FK_OrderProducts_Products" FromRole="OrderProducts" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="clientId" Type="Int32" />
+          <Property Name="sum" Type="Int32" />
+          <Property Name="count" Type="Int32" />
+          <Property Name="statusId" Type="Int32" />
+          <Property Name="discount" Type="Int32" />
+          <Property Name="discountSum" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Clients" Relationship="BeautySalonModel.FK_Orders_Clients" FromRole="Orders" ToRole="Clients" />
+          <NavigationProperty Name="OrderProducts" Relationship="BeautySalonModel.FK_OrderProducts_Orders" FromRole="Orders" ToRole="OrderProducts" />
+          <NavigationProperty Name="OrderStatus" Relationship="BeautySalonModel.FK_Orders_OrderStatus" FromRole="Orders" ToRole="OrderStatus" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="BeautySalonModel.FK_Orders_OrderStatus" FromRole="OrderStatus" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK_Orders_Clients">
+          <End Type="BeautySalonModel.Clients" Role="Clients" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProducts_Orders">
+          <End Type="BeautySalonModel.Orders" Role="Orders" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.OrderProducts" Role="OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProducts_Products">
+          <End Type="BeautySalonModel.Products" Role="Products" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.OrderProducts" Role="OrderProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="OrderProducts">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderStatus">
+          <End Type="BeautySalonModel.OrderStatus" Role="OrderStatus" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1735,6 +1934,38 @@
                 <ScalarProperty Name="statusId" ColumnName="statusId" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="clientId" ColumnName="clientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderProducts">
+            <EntityTypeMapping TypeName="BeautySalonModel.OrderProducts">
+              <MappingFragment StoreEntitySet="OrderProducts">
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="BeautySalonModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="discountSum" ColumnName="discountSum" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+                <ScalarProperty Name="clientId" ColumnName="clientId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="BeautySalonModel.OrderStatus">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
