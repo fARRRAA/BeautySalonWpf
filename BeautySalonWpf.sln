@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeautySalonWpf", "BeautySalonWpf\BeautySalonWpf.csproj", "{997863EE-D573-4BFB-B166-DE79E1C0486F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeautySalonApi", "BeautySalonApi\BeautySalonApi.csproj", "{3065FC7E-B8BA-48B0-B618-116020F8AB5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{997863EE-D573-4BFB-B166-DE79E1C0486F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{997863EE-D573-4BFB-B166-DE79E1C0486F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{997863EE-D573-4BFB-B166-DE79E1C0486F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3065FC7E-B8BA-48B0-B618-116020F8AB5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3065FC7E-B8BA-48B0-B618-116020F8AB5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3065FC7E-B8BA-48B0-B618-116020F8AB5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3065FC7E-B8BA-48B0-B618-116020F8AB5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

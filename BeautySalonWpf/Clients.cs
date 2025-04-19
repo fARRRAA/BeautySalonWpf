@@ -35,6 +35,9 @@ namespace BeautySalonWpf
         public string Preferences { get; set; }
         public Nullable<int> roleId { get; set; }
         public Nullable<int> visitsCount { get; set; }
+        public Nullable<bool> isEmailConfirmed { get; set; }
+        public Nullable<int> loginCode { get; set; }
+        public Nullable<System.DateTime> codeExpiration { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Appointments> Appointments { get; set; }

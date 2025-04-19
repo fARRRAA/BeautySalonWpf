@@ -100,6 +100,9 @@
           <Property Name="Preferences" Type="nvarchar(max)" />
           <Property Name="roleId" Type="int" />
           <Property Name="visitsCount" Type="int" />
+          <Property Name="isEmailConfirmed" Type="bit" />
+          <Property Name="loginCode" Type="int" />
+          <Property Name="codeExpiration" Type="datetime" />
         </EntityType>
         <EntityType Name="Delivery">
           <Key>
@@ -523,7 +526,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderProducts_Orders">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="OrderProducts" Type="Self.OrderProducts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
@@ -896,6 +901,9 @@
           <NavigationProperty Name="Roles" Relationship="Self.FK_Clients_Roles" FromRole="Clients" ToRole="Roles" />
           <NavigationProperty Name="History" Relationship="Self.FK_History_Clients" FromRole="Clients" ToRole="History" />
           <NavigationProperty Name="Orders" Relationship="BeautySalonModel.FK_Orders_Clients" FromRole="Clients" ToRole="Orders" />
+          <Property Name="isEmailConfirmed" Type="Boolean" />
+          <Property Name="loginCode" Type="Int32" />
+          <Property Name="codeExpiration" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Delivery">
           <Key>
@@ -1713,6 +1721,9 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="BeautySalonModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="codeExpiration" ColumnName="codeExpiration" />
+                <ScalarProperty Name="loginCode" ColumnName="loginCode" />
+                <ScalarProperty Name="isEmailConfirmed" ColumnName="isEmailConfirmed" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="Lname" ColumnName="Lname" />
                 <ScalarProperty Name="FName" ColumnName="FName" />
