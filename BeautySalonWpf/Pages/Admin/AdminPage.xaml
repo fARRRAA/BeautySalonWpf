@@ -137,6 +137,15 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="199" >
+                        <Image Source="/imgs/media/icons/salary.png" Width="30" Height="30" />
+                        <TextBlock Text="Зарплаты" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame x:Name="SalariesFrame"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="199" >
                         <Image Source="/imgs/media/icons/delivery-truck.png" Width="30" Height="30" />
                         <TextBlock Text="Доставки" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16"/>
                     </StackPanel>

@@ -183,6 +183,9 @@
     <Compile Include="Pages\Admin\Tabs\ProviderTab.xaml.cs">
       <DependentUpon>ProviderTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Admin\Tabs\SalariesTab.xaml.cs">
+      <DependentUpon>SalariesTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Admin\Tabs\ServicesTab.xaml.cs">
       <DependentUpon>ServicesTab.xaml</DependentUpon>
     </Compile>
@@ -271,6 +274,9 @@
     <Compile Include="WindowDialogs\AdminPage\Order\AddOrder.xaml.cs">
       <DependentUpon>AddOrder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowDialogs\AdminPage\Order\ViewOrder.xaml.cs">
+      <DependentUpon>ViewOrder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowDialogs\AdminPage\ProductDialog\AddProduct.xaml.cs">
       <DependentUpon>AddProduct.xaml</DependentUpon>
     </Compile>
@@ -339,6 +345,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Admin\Tabs\ProviderTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Admin\Tabs\SalariesTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -423,6 +433,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowDialogs\AdminPage\Order\AddOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\AdminPage\Order\ViewOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -544,6 +558,10 @@
     <Folder Include="imgs\pfp\products\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="imgs\media\icons\discount.png" />
+    <Resource Include="imgs\media\icons\boxes.png" />
+    <Resource Include="imgs\media\icons\reduce-cost.png" />
+    <Resource Include="imgs\media\icons\salary.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

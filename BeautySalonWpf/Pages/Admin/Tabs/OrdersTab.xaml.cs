@@ -35,6 +35,7 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             pageCount = (int)Math.Round(Convert.ToDouble(_orders.Count / pageSize)) + 1;
             paginationElem.MaxPageCount = pageCount;
             AllTImeRadioBtn.IsChecked = true;
+            
          
         }
         public async void UpdateOrdersList()
@@ -145,6 +146,13 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             var addOrderWindow = new AddOrder(this
                 );
             addOrderWindow.Show();
+        }
+
+        private void OrdersList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selected = OrdersList.SelectedItem as Orders;
+            var viewOrderDialog = new ViewOrder(selected,this);
+            viewOrderDialog.Show();
         }
     }
 }
