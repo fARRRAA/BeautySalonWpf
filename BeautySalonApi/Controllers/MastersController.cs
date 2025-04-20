@@ -1,15 +1,14 @@
-﻿using BeautySalonApi.Services.ClientsService;
-using BeautySalonApi.Services.ProductsService;
+﻿using BeautySalonApi.Services.MastersService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeautySalonApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductsController : Controller
+    public class MastersController : Controller
     {
-        public readonly IProductsService _service;
-        public ProductsController(IProductsService service)
+        private readonly IMastersService _service;
+        public MastersController(IMastersService service)
         {
             _service = service;
         }

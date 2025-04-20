@@ -1,0 +1,29 @@
+.header {
+    flex-direction: column;
+
+}
+
+.bottomheader {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+
+}
+.header_social {
+    display: flex;
+    justify-content: start;
+    gap: 12px;
+}
+.header_nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.nav_item {
+
+}
+.header_btns {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}

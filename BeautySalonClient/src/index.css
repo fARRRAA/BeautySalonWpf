@@ -1,0 +1,76 @@
+:root {
+  --clr-primary: #6B0606;
+  --clr-secondary:rgba(0, 0, 0, 0.5);
+  --clr-lightbg:#F3E2D5;
+  --clr-darkbg: #dfbfa8;
+  --inter-font: "Inter", sans-serif;
+  --abhaya-font: "Abhaya Libre";
+  --abhayaSem-font: "Abhaya Libre SemiBold";
+  --imperial-font: "Imperial Script", sans-serif;
+  --abhayaMed-font: "Abhaya Libre Medium";
+  --poppins-font: "Poppins", sans-serif;
+  --greatVibes-font: "Great Vibes", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: normal;
+    font-family: var(--inter-font);
+}
+
+header,
+nav,
+footer,
+aside {
+    display: block;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: inherit;
+    font-weight: 400;
+}
+
+img {
+    vertical-align: top;
+}
+
+button {
+    cursor: pointer;
+    background: inherit;
+    color: inherit;
+    font-family: inherit;
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+}
+
+.container {
+    max-width: 1296px;
+    margin: 0 auto;
+}

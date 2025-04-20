@@ -1,6 +1,7 @@
 
 using BeautySalonApi.DataBase;
 using BeautySalonApi.Services.ClientsService;
+using BeautySalonApi.Services.MastersService;
 using BeautySalonApi.Services.ProductsService;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,7 @@ namespace BeautySalonApi
     options.UseSqlServer(builder.Configuration.GetConnectionString("TestDbString")), ServiceLifetime.Scoped);
             builder.Services.AddScoped<IClientsService, ClientService>();
             builder.Services.AddScoped<IProductsService,ProductsService>();
+            builder.Services.AddScoped<IMastersService, MastersService>();
 
 
             builder.Services.AddCors(options =>

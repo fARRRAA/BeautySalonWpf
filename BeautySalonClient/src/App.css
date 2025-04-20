@@ -1,0 +1,96 @@
+@font-face {
+  font-family: "Abhaya Libre";
+  src: url('./assets/fonts/AbhayaLibre-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Abhaya Libre";
+  src: url('./assets/fonts/AbhayaLibre-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Abhaya Libre";
+  src: url('./assets/fonts/AbhayaLibre-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Abhaya Libre";
+  src: url('./assets/fonts/AbhayaLibre-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/* @font-face {
+  font-family: "Abhaya Libre";
+  src: url('./assets/fonts/TNRSB.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Abhaya Libre";
+  src: url('./assets/fonts/times-new-roman.ttf.otf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Abhaya Libre";
+  src: url('./assets/fonts/roman-new-times-medium.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Abhaya Libre";
+  src: url('./assets/fonts/TNRSB.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Abhaya Libre";
+  src: url('./assets/fonts/AbhayaLibre-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+} */
+@font-face {
+  font-family: "Inter";
+  src: url('./assets/fonts/inter-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url('./assets/fonts/Inter-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url('./assets/fonts/Inter-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url('./assets/fonts/Inter-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Imperial Script";
+  src: url('./assets/fonts/ofont.ru_Lastochka.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.topheader {
+  background-color: var(--clr-primary);
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 10.5px 0;
+}
+.topheader>p {
+  color:white;
+}

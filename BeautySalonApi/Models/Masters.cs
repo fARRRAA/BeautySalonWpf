@@ -31,6 +31,12 @@ namespace BeautySalonApi.Models
         public MastersSkills MastersSkills { get; set; }
 
     }
+    public class MastersFull
+    {
+        public Masters master { get; set; }
+        public TypeServices typeServices { get; set; }
+
+    }
     public partial class MastersQualifications
     {
 

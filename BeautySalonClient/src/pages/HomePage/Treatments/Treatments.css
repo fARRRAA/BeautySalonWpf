@@ -1,0 +1,70 @@
+.treatments {
+    margin-top: 60px;
+}
+.treatments_inner{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.treatments_list {
+    flex-direction: column;
+
+}
+.treatments_title {
+    color: var(--clr-primary);
+    font-family: var(--abhaya-font);
+    font-weight: 500;
+    font-size: 40px;
+}
+.treatments_subtitle {
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: var(--inter-font);
+    color:var(--clr-secondary);
+    font-weight:400;
+    margin-bottom: 28px;
+}
+
+.services_wrapper {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 15px;
+    display:grid;
+}
+.services_wrapper li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.services_wrapper li::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 70px;
+    right: 70px;
+    transform: translateY(-50%);
+    border-top: 1px dotted #ccc;
+}
+
+.services_wrapper span {
+    font-size: 1rem;
+}
+
+.price {
+    font-size: 1rem;
+    color: #8b0000; /* Цвет цены */
+}
+
+/* Ссылка "View all" */
+.view-all {
+    display: inline-block;
+    font-size: 1rem;
+    color: var(--clr-primary);
+    text-decoration: underline;
+    margin-top: 20px;
+}
