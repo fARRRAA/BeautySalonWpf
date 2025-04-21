@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BeautySalonApi.Models
 {
-    public  class Services
+    public class Services
     {
         [Key]
         public int serviceId { get; set; }
@@ -18,7 +18,14 @@ namespace BeautySalonApi.Models
         public int middlePrice { get; set; }
         public int seniorPrice { get; set; }
         [JsonPropertyName("typeServices")]
-        public  TypeServices TypeServices { get; set; }
+        public TypeServices TypeServices { get; set; }
 
+    }
+    public class ServicesGroup
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        [JsonPropertyName("services")]
+        public List<Services> Services { get; set; }
     }
 }

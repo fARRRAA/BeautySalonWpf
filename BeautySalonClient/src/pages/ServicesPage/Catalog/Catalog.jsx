@@ -19,6 +19,7 @@ export function Catalog() {
         const fetchServices = async () => {
             try {
                 const result = await api.getServices();
+
                 setData(result);
             } catch (err) {
                 setError(err);
@@ -28,20 +29,20 @@ export function Catalog() {
         fetchServices();
     }, []);
 
-    let ids = [1, 2, 3, 6, 7];
-    const groupedServices = data.reduce((acc, service) => {
-        const typeId = service.typeServiceId;
-        if (!ids.includes(typeId)) return acc;
-        if (!acc[typeId]) {
-            acc[typeId] = {
-                id: service.typeServices.id,
-                name: service.typeServices.name,
-                services: [],
-            };
-        }
-        acc[typeId].services.push(service);
-        return acc;
-    }, {});
+    // let ids = [1, 2, 3, 6, 7];
+    // const groupedServices = data.reduce((acc, service) => {
+    //     const typeId = service.typeServiceId;
+    //     if (!ids.includes(typeId)) return acc;
+    //     if (!acc[typeId]) {
+    //         acc[typeId] = {
+    //             id: service.typeServices.id,
+    //             name: service.typeServices.name,
+    //             services: [],
+    //         };
+    //     }
+    //     acc[typeId].services.push(service);
+    //     return acc;
+    // }, {});
 
     if (error) {
         return <div>Произошла ошибка при загрузке услуг</div>;
@@ -56,7 +57,7 @@ export function Catalog() {
                         Мы предлагаем широкий спектр услуг для красоты и ухода за собой
                     </p>
                     <div className={s.shop_wrapper}>
-                        {Object.values(groupedServices).map((group, index) => (
+                        {data.map((group, index) => (
                             <div key={group.id} className={s.service_group}>
                                 <div className={`${s.service_section} ${index % 2 === 1 ? s.even : ''}`}>
                                     <img 
@@ -80,6 +81,30 @@ export function Catalog() {
                                 </div>
                             </div>
                         ))}
+                        {/* {Object.values(groupedServices).map((group, index) => (
+                            <div key={group.id} className={s.service_group}>
+                                <div className={`${s.service_section} ${index % 2 === 1 ? s.even : ''}`}>
+                                    <img 
+                                        src={serviceImages[group.id]} 
+                                        alt={group.name}
+                                        className={s.service_image}
+                                    />
+                                    <div className={s.service_list}>
+                                    <h2 className={s.group_title}>{group.name}</h2>
+                                        {group.services.map((service) => (
+                                            <div key={service.serviceId} className={s.service_item}>
+                                                <span className={s.service_name}>
+                                                    {service.serviceName}
+                                                </span>
+                                                <span className={s.service_price}>
+                                                    от {service.juniorPrice} ₽
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        ))} */}
                     </div>
                 </div>
             </div>

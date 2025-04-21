@@ -4,6 +4,6 @@ namespace BeautySalonApi.Services.ServicesService
 {
     public interface IServicesService
     {
-        public List<Models.Services> GetAll();
+        public List<ServicesGroup> GetAll();
     }
 }
