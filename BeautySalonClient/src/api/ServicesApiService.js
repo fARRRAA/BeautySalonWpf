@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export class ProductsApiService {
+export class ServicesApiService {
     constructor() {
         this.baseURL ="https://localhost:7165/api";
         this.axiosInstance = axios.create({
@@ -14,9 +14,9 @@ export class ProductsApiService {
         
     }
 
-    async getProducts(params = {}) {
+    async getServices(params = {}) {
         try {
-            const response = await this.axiosInstance.get("/Products/all", { params });
+            const response = await this.axiosInstance.get("/Services/all", { params });
             return response.data;
         } catch (error) {
             throw error;

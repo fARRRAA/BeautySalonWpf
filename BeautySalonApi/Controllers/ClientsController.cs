@@ -29,6 +29,16 @@ namespace BeautySalonApi.Controllers
             await _service.CreateClient(client);
             return Ok("Пожалуйста, подтвердите ваш email.");
         }
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginClient(string email)
+        {
+            if (_service.isExists(email))
+            {
+                return NotFound("пользователь с такой почтой уже существует");
+            }
+            await _service.LoginClient(email);
+            return Ok("Пожалуйста, подтвердите ваш email.");
+        }
         [HttpPost("email-confirm")]
         public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmEmailModel model)
         {
@@ -43,6 +53,5 @@ namespace BeautySalonApi.Controllers
         {
             return Ok(_service.GetClientById(id));
         }
-
     }
 }

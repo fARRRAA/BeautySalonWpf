@@ -1,0 +1,92 @@
+.catalog {
+    margin-top: 120px;
+}
+
+.services_title {
+    color: var(--clr-primary);
+    font-family: var(--abhaya-font);
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.services_subtitle {
+    color: var(--clr-secondary);
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.shop_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.service_group {
+    display: flex;
+    flex-direction: column;
+}
+
+.group_title {
+    color: var(--clr-primary);
+    font-family: var(--abhaya-font);
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.service_section {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.service_section.even {
+    flex-direction: row-reverse;
+}
+
+.service_image {
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.service_list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.service_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    position: relative;
+}
+
+.service_name {
+    color: #333;
+    font-size: 16px;
+    background: white;
+    padding-right: 5px;
+    position: relative;
+    z-index: 2;
+}
+
+.service_price {
+    color: #8B0000;
+    font-size: 16px;
+    background: white;
+    padding-left: 5px;
+    position: relative;
+    z-index: 2;
+}
+
+.service_item::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    border-bottom: 2px dotted #ccc;
+    z-index: 1;
+}

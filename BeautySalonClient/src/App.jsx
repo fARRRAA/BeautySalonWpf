@@ -3,6 +3,7 @@ import './App.css'
 import { Header } from './components/Header/Header'
 import { HomePage } from './pages/HomePage/HomePage'
 import { Footer } from './components/Footer/Footer'
+import { ServicePage } from './pages/ServicesPage/ServicePage'
 
 export function App() {
 
@@ -43,6 +44,7 @@ export function App() {
         <Header />
         <Routes>
           <Route path='/' element={<HomePage />} />
+          <Route path="/services" element={<ServicePage/>}/>
         </Routes>
         <Footer/>
     </>

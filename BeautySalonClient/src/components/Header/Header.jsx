@@ -36,7 +36,7 @@ export function Header() {
                             <Link to="">
                                 <p className={h.nav_item}>Главная</p>
                             </Link>
-                            <Link to="">
+                            <Link to="/services">
                                 <p className={h.nav_item}>Услуги</p>
 
                             </Link>

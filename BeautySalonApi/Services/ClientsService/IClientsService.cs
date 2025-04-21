@@ -12,5 +12,6 @@ namespace BeautySalonApi.Services.ClientsService
         public Clients GetClientByPhone(string phone);
         public bool isExists(string email);
         public  Task ConfirmEmail(Clients _client);
+        public Task LoginClient(string email);
     }
 }

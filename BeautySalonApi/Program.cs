@@ -3,6 +3,7 @@ using BeautySalonApi.DataBase;
 using BeautySalonApi.Services.ClientsService;
 using BeautySalonApi.Services.MastersService;
 using BeautySalonApi.Services.ProductsService;
+using BeautySalonApi.Services.ServicesService;
 using Microsoft.EntityFrameworkCore;
 
 namespace BeautySalonApi
@@ -25,6 +26,7 @@ namespace BeautySalonApi
             builder.Services.AddScoped<IClientsService, ClientService>();
             builder.Services.AddScoped<IProductsService,ProductsService>();
             builder.Services.AddScoped<IMastersService, MastersService>();
+            builder.Services.AddScoped<IServicesService, ServicesService>();
 
 
             builder.Services.AddCors(options =>

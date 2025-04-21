@@ -47,20 +47,20 @@ namespace BeautySalonApi.Services.ClientsService
 
             var newClient = new Clients()
             {
-                FName=client.FName,
-                Lname=client.Lname,
-                phone=client.phone,
-                email=client.email,
-                dateBirth=DateTime.Now,
-                login="",
-                password="",
-                photo="",
-                Preferences="",
-                roleId=3,
-                visitsCount=0,
-                isEmailConfirmed=false,
-                loginCode=verificationCode,
-                codeExpiration=expirationTime
+                FName = client.FName,
+                Lname = client.Lname,
+                phone = client.phone,
+                email = client.email,
+                dateBirth = DateTime.Now,
+                login = "",
+                password = "",
+                photo = "",
+                Preferences = "",
+                roleId = 3,
+                visitsCount = 0,
+                isEmailConfirmed = false,
+                loginCode = verificationCode,
+                codeExpiration = expirationTime
             };
             await _context.Clients.AddAsync(newClient);
             await _context.SaveChangesAsync();
@@ -69,20 +69,29 @@ namespace BeautySalonApi.Services.ClientsService
         }
         public async Task ConfirmEmail(Clients _client)
         {
-            var client= await _context.Clients.FirstOrDefaultAsync(x=>x.email==_client.email);
-            client.isEmailConfirmed = true;
-
+            var client = await _context.Clients.FirstOrDefaultAsync(x => x.email == _client.email);
+            if(!client.isEmailConfirmed) client.isEmailConfirmed = true;
+            
             await _context.SaveChangesAsync();
 
         }
+        public async Task LoginClient(string email)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(x => x.email == email);
+            var verificationCode = GenerateVerificationCode();
+            var expirationTime = DateTime.UtcNow.AddMinutes(3);
+            client.loginCode = verificationCode;
+            client.codeExpiration = expirationTime;
+            await _context.SaveChangesAsync();
+        }
         public Clients GetClientByEmail(string email)
         {
-            return _context.Clients.FirstOrDefault(x=>x.email== email); 
+            return _context.Clients.FirstOrDefault(x => x.email == email);
         }
 
         public Clients GetClientById(int id)
         {
-            return _context.Clients.FirstOrDefault(x => x.userID ==id);
+            return _context.Clients.FirstOrDefault(x => x.userID == id);
         }
 
         public Clients GetClientByPhone(string phone)
@@ -92,7 +101,7 @@ namespace BeautySalonApi.Services.ClientsService
 
         public bool isExists(string email)
         {
-            return _context.Clients.Any(x=>x.email==email);
+            return _context.Clients.Any(x => x.email == email);
         }
     }
 }

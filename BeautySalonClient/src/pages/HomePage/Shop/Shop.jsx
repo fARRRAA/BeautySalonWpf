@@ -36,13 +36,13 @@ export function Shop() {
     };
     const [data, setData] = useState();
     const [error, setError] = useState(null);
-    const api = new ProductsApiService('https://localhost:7165/api');
+    const api = new ProductsApiService();
 
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                var result = await api.getProducts("/Products/all");
+                var result = await api.getProducts();
                 setData(result);
             } catch (err) {
                 setError(err);
