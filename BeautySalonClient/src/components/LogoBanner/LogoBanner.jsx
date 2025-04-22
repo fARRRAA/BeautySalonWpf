@@ -1,6 +1,5 @@
 import s from './LogoBanner.module.css'
-import { store } from '../../../imgStore'
-export function LogoBanner() {
+export function LogoBanner({image,title}) {
     return (
         <>
             <div className={s.banner}>
@@ -15,12 +14,12 @@ export function LogoBanner() {
                                     <path d="M198.606 42.3935C195.677 39.4645 190.929 39.4645 187.999 42.3935L177.393 53C174.465 55.929 174.465 60.6775 177.393 63.6065C180.322 66.5355 185.071 66.5355 188 63.6065L198.606 53C201.535 50.071 201.535 45.3225 198.606 42.3935Z" fill="#6B0606" fill-opacity="0.03" />
                                 </svg>
                             </div>
-                            <p className={s.banner_title}>Салон красоты</p>
+                            <p className={s.banner_title}>{title}</p>
                         </div>
                     </div>
                 </div>
                 <div className={s.banner_bottom}>
-                    <img src={store[0].img} alt="" className={s.banner_bottom} />
+                    <img src={`${image}`} alt="" className={s.banner_bottom} />
                 </div>
             </div>
         </>

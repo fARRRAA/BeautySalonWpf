@@ -1,0 +1,30 @@
+.info {
+    margin-top: 120px;
+}
+.info_inner {
+    text-align: center;
+}
+.content {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    text-align: start;
+}
+
+.column {
+    width: 48%;
+}
+
+.subtitle {
+    color: var(--clr-primary);
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-family: var(--abhaya-font);
+}
+.text {
+    color: #333;
+    line-height: 150%;
+    font-weight: 300;
+}

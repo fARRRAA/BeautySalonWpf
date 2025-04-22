@@ -13,7 +13,12 @@ namespace BeautySalonApi.Services.ProductsService
         }
         public List<Products> GetAll()
         {
-            return _context.Products.Where(x=>x.price>500).Include(x=>x.TypeProducts).ToList();
+            return _context.Products.Include(x=>x.TypeProducts).ToList();
+        }
+
+        public List<TypeProducts> GetTypes()
+        {
+            return _context.TypeProducts.Where(x=>x.typeId!=1).ToList();
         }
     }
 }

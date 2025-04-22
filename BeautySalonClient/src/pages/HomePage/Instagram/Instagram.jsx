@@ -4,8 +4,9 @@ export function Instagram() {
     return (
         <>
             <div className={s.instagram}>
-                <p className={s.title}>Follow our Instagram</p>
-                <p className={s.subtitle}>Viverra nulla amet a ultrices massa dui. Tortor est purus morbi vitae arcu suspendisse amet.</p>
+                <p className={s.title}>Следите за нашим инстаграмом</p>
+                <p className={s.subtitle}> Присоединяйтесь к нам, чтобы быть в курсе всего самого интересного! В нашем Инстаграме мы делимся последними новостями салона.
+                </p>
                 <div className={s.wrapper}>
                     <img src="/src/assets/imgs/inst/inst1.png" className={s.img}></img>
                     <img src="/src/assets/imgs/inst/inst2.png" className={s.img}></img>

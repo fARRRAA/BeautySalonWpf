@@ -1,110 +1,75 @@
 import s from './Catalog.module.css'
 import { useEffect, useState } from 'react';
-import { ServicesApiService } from '../../../api/ServicesApiService';
-
-const serviceImages = {
-    1: "/src/assets/imgs/hairstyle.png", 
-    2: "/src/assets/imgs/manicure.png",     
-    3: "/src/assets/imgs/cosmetology.png",  
-    6: "/src/assets/imgs/makeup.png",  
-    7: "/src/assets/imgs/massage.png" 
-};
+import { ProductsApiService } from '../../../api/ProductsApiService';
 
 export function Catalog() {
-    const [data, setData] = useState([]);
+    const [allProducts, setAllProducts] = useState([]); 
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [types, setTypes] = useState();
     const [error, setError] = useState(null);
-    const api = new ServicesApiService();
+    const [selectedId, setSelectedId] = useState(2);
+    const api = new ProductsApiService();
 
     useEffect(() => {
-        const fetchServices = async () => {
+        const fetchProducts = async () => {
             try {
-                const result = await api.getServices();
-
-                setData(result);
+                const result = await api.getProducts();
+                setAllProducts(result);
+                setFilteredProducts(result.filter(x => x.typeId === selectedId));
             } catch (err) {
                 setError(err);
-                console.error('Error fetching services:', err);
             }
         };
-        fetchServices();
+
+        const fetchTypes = async () => {
+            try {
+                const result = await api.getTypes();
+                setTypes(result);
+            } catch (err) {
+                setError(err);
+            }
+        };
+
+        fetchProducts();
+        fetchTypes();
     }, []);
 
-    // let ids = [1, 2, 3, 6, 7];
-    // const groupedServices = data.reduce((acc, service) => {
-    //     const typeId = service.typeServiceId;
-    //     if (!ids.includes(typeId)) return acc;
-    //     if (!acc[typeId]) {
-    //         acc[typeId] = {
-    //             id: service.typeServices.id,
-    //             name: service.typeServices.name,
-    //             services: [],
-    //         };
-    //     }
-    //     acc[typeId].services.push(service);
-    //     return acc;
-    // }, {});
-
-    if (error) {
-        return <div>Произошла ошибка при загрузке услуг</div>;
-    }
+    const filterProducts = (id) => {
+        setSelectedId(id);
+        const filtered = allProducts.filter(x => x.typeId === id);
+        setFilteredProducts(filtered);
+    };
 
     return (
         <div className={s.catalog}>
             <div className="container">
                 <div className={s.catalog_inner}>
-                    <h1 className={s.services_title}>Услуги и цены</h1>
-                    <p className={s.services_subtitle}>
-                        Мы предлагаем широкий спектр услуг для красоты и ухода за собой
-                    </p>
-                    <div className={s.shop_wrapper}>
-                        {data.map((group, index) => (
-                            <div key={group.id} className={s.service_group}>
-                                <div className={`${s.service_section} ${index % 2 === 1 ? s.even : ''}`}>
-                                    <img 
-                                        src={serviceImages[group.id]} 
-                                        alt={group.name}
-                                        className={s.service_image}
-                                    />
-                                    <div className={s.service_list}>
-                                    <h2 className={s.group_title}>{group.name}</h2>
-                                        {group.services.map((service) => (
-                                            <div key={service.serviceId} className={s.service_item}>
-                                                <span className={s.service_name}>
-                                                    {service.serviceName}
-                                                </span>
-                                                <span className={s.service_price}>
-                                                    от {service.juniorPrice} ₽
-                                                </span>
-                                            </div>
-                                        ))}
-                                    </div>
+                    <p className={s.title}>Наши товары</p>
+                    <p className={s.subtitle}> </p>
+                    <div className={s.catalog_filter}>
+                        {types ? 
+                            types.map(type => (
+                                <button key={type.typeId} onClick={() => filterProducts(type.typeId)}>
+                                    <p className={`${s.type_name} ${selectedId === type.typeId ? s.active : ""}`}>
+                                        {type.name}
+                                    </p>
+                                </button>
+                            ))
+                            : <p>{error}</p>
+                        }
+                    </div>
+                    <div className={s.catalog_wrapper}>
+                        {filteredProducts ? 
+                            filteredProducts.map(item => (
+                                <div className={s.shop_item} key={item.productId}>
+                                    <img src={item.photo} alt={item.name} className={s.item_img} />
+                                    <p className={s.item_name}>{item.name}</p>
+                                    <p className={s.item_type}>{item.typeProducts.name}</p>
+                                    <p className={s.item_price}>{item.price} ₽</p>
                                 </div>
-                            </div>
-                        ))}
-                        {/* {Object.values(groupedServices).map((group, index) => (
-                            <div key={group.id} className={s.service_group}>
-                                <div className={`${s.service_section} ${index % 2 === 1 ? s.even : ''}`}>
-                                    <img 
-                                        src={serviceImages[group.id]} 
-                                        alt={group.name}
-                                        className={s.service_image}
-                                    />
-                                    <div className={s.service_list}>
-                                    <h2 className={s.group_title}>{group.name}</h2>
-                                        {group.services.map((service) => (
-                                            <div key={service.serviceId} className={s.service_item}>
-                                                <span className={s.service_name}>
-                                                    {service.serviceName}
-                                                </span>
-                                                <span className={s.service_price}>
-                                                    от {service.juniorPrice} ₽
-                                                </span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        ))} */}
+                            ))
+                            : <p>{error}</p>
+                        }
                     </div>
                 </div>
             </div>

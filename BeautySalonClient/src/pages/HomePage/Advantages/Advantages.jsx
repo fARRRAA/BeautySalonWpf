@@ -22,8 +22,8 @@ export function Advantages() {
                                 </svg>
 
                             </div>
-                            <p className={s.item_title}>Professional Care</p>
-                            <p className={s.item_subtitle}>Eleifend arcu non lorem justo in tempus purus gravida. </p>
+                            <p className={s.item_title}>Профессиональный уход</p>
+                            <p className={s.item_subtitle}>Комплексный уход от ведущих профессионалов индустрии красоты.</p>
                         </div>
                         <div className={s.advantages_item}>
                             <div className={s.item_icon}>
@@ -40,8 +40,8 @@ export function Advantages() {
                                 </svg>
 
                             </div>
-                            <p className={s.item_title}>Premium brands</p>
-                            <p className={s.item_subtitle}>Eleifend arcu non lorem justo in tempus purus gravida. </p>
+                            <p className={s.item_title}>Премиальные бренды</p>
+                            <p className={s.item_subtitle}> Только премиальные бренды, зарекомендовавшие себя во всем мире. </p>
                         </div>
                         <div className={s.advantages_item}>
                             <div className={s.item_icon}>
@@ -58,8 +58,8 @@ export function Advantages() {
                                 </svg>
 
                             </div>
-                            <p className={s.item_title}>Natural cosmetic</p>
-                            <p className={s.item_subtitle}>Eleifend arcu non lorem justo in tempus purus gravida. </p>
+                            <p className={s.item_title}>Натуральная красота</p>
+                            <p className={s.item_subtitle}> Природная красота начинается с натуральных средств. </p>
                         </div>
                     </div>
                 </div>

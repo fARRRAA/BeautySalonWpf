@@ -1,0 +1,56 @@
+.banner {
+    margin-top: 120px;
+    background: url(/src/assets/imgs/Banner.png);
+    background-size: cover;
+    padding: 120px 0;
+}
+
+.banner_inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.banner_content {
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 856px;
+    background: url(/src/assets/imgs/salebanner.png);
+    background-size: cover;
+    padding: 87.5px;
+
+}
+
+.sale_text {
+    font-size: 40px;
+    color: #fff;
+    font-family: var(--abhaya-font);
+
+}
+
+.sale_title {
+    margin-top: 16px;
+    font-size: 50px;
+    color: #fff;
+    font-family: var(--abhaya-font);
+
+}
+
+.btn {
+    margin-top: 40px;
+    padding: 14px 70px;
+    color: #fff;
+    font-size: 24px;
+    font-family: var(--abhaya-font);
+    background-color: var(--clr-primary);
+    transition: .3s ease-in-out;
+    background: var(--clr-primary);
+}
+
+.btn:hover {
+    background-color: #9a0909;
+}

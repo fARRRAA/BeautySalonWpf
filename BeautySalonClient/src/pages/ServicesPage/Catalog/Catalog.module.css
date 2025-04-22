@@ -1,92 +1,75 @@
 .catalog {
     margin-top: 120px;
+    margin-bottom: 200px;
 }
-
-.services_title {
+.title {
     color: var(--clr-primary);
     font-family: var(--abhaya-font);
     font-size: 50px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-.services_subtitle {
+.subtitle {
     color: var(--clr-secondary);
     text-align: center;
     margin-bottom: 80px;
 }
-
-.shop_wrapper {
+.catalog_filter {
+    margin-top: 40px;
     display: flex;
-    flex-direction: column;
-    gap: 80px;
-}
-
-.service_group {
-    display: flex;
-    flex-direction: column;
-}
-
-.group_title {
-    color: var(--clr-primary);
-    font-family: var(--abhaya-font);
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-.service_section {
-    display: flex;
-    align-items: center;
     gap: 40px;
+    row-gap: 20px;
+    flex-wrap: wrap;
 }
 
-.service_section.even {
-    flex-direction: row-reverse;
-}
-
-.service_image {
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.service_list {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.service_item {
+.catalog_wrapper {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    position: relative;
+margin-top: 80px;
 }
-
-.service_name {
-    color: #333;
+.type_name {
     font-size: 16px;
-    background: white;
-    padding-right: 5px;
-    position: relative;
-    z-index: 2;
+    font-family: var(--inter-font);
+    font-weight: 500;
+}
+.type_name.active {
+    color: var(--clr-primary);
+}
+.shop_item {
+    flex-direction: column;
+    font-family: var(--inter-font);
+text-align: center;
+cursor: pointer;
+transition: .15s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+.shop_item:hover {
+    transform:scale(1.05);
+    transition: .15s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
 }
 
-.service_price {
-    color: #8B0000;
+.item_img {
+    width: 200px;
+    height: 220px;
+    object-fit: cover;
+}
+.item_name {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 500;
+
+}
+.item_type {
+    margin-top: 12px;
     font-size: 16px;
-    background: white;
-    padding-left: 5px;
-    position: relative;
-    z-index: 2;
-}
+    color: var(--clr-secondary);
 
-.service_item::after {
-    content: '';
-    position: absolute;
-    bottom: 8px;
-    left: 0;
-    right: 0;
-    border-bottom: 2px dotted #ccc;
-    z-index: 1;
+}
+.item_price {
+    margin-top: 12px;
+    font-size: 18px;
+    color: var(--clr-primary);
+    font-weight: 700;
+    
 }

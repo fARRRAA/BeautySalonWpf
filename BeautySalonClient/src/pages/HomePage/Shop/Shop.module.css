@@ -12,7 +12,7 @@
     color: var(--clr-primary);
     font-family: var(--abhaya-font);
     font-weight: 500;
-    font-size: 40px;
+    font-size: 50px;
 }
 
 .services_subtitle {
@@ -54,13 +54,13 @@ transition: .15s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 
 }
 .item_type {
-    margin-top: 6px;
+    margin-top: 12px;
     font-size: 16px;
     color: var(--clr-secondary);
 
 }
 .item_price {
-    margin-top: 6px;
+    margin-top: 12px;
     font-size: 18px;
     color: var(--clr-primary);
     font-weight: 700;

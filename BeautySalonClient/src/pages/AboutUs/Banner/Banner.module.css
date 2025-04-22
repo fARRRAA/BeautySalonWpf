@@ -1,0 +1,33 @@
+.banner {
+    margin-top: 120px;
+}
+
+.banner_inner {
+    display: flex;
+    gap: 72px;
+    align-items: center;
+}
+.banner_content>p{
+    max-width: 526px;
+    line-height: 125%;
+}
+.banner_content {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 40px;
+}
+.banner_subtitle {
+    max-width: 526px;
+    font-size: 18px;
+}
+.banner_btn {
+    padding: 14px 41px;
+    color: #fff;
+    font-size: 24px;
+    font-family: var(--abhaya-font);
+    background-color: var(--clr-primary);
+    transition:  .3s ease-in-out;
+
+}
+

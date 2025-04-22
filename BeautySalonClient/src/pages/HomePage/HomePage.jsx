@@ -1,4 +1,4 @@
-import { LogoBanner } from "./LogoBanner/LogoBanner"
+import { LogoBanner } from "../../components/LogoBanner/LogoBanner";
 import h from "./HomePage.module.css"
 import { Services } from "./ServicesHomePage/Services"
 import { Treatments } from "./Treatments/Treatments"
@@ -10,8 +10,8 @@ import { Instagram } from "./Instagram/Instagram"
 export function HomePage(){
     return (
         <>
-        <LogoBanner/>
-        <Services/>
+            <LogoBanner image="/src/assets/imgs/bottombannerimg.png" title="Салон Красоты"/>
+            <Services/>
         <Treatments/>
         <Testimonials/>
         <Advantages/>

@@ -83,14 +83,3 @@
   font-style: normal;
 }
 
-.topheader {
-  background-color: var(--clr-primary);
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-  padding: 10.5px 0;
-}
-.topheader>p {
-  color:white;
-}

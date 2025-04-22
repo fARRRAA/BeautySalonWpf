@@ -58,7 +58,7 @@ export function Header() {
                                     </svg>
                                 </div>
                             </Link>
-                            <Link to="">
+                            <Link to="/about">
                                 <p className={h.nav_item}>О нас</p>
 
                             </Link>

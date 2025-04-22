@@ -34,7 +34,7 @@ export function Shop() {
             draggable: true
         });
     };
-    const [data, setData] = useState();
+    const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const api = new ProductsApiService();
 
@@ -58,12 +58,13 @@ export function Shop() {
             <div className={s.shop}>
                 <div className="container">
                     <div className={s.shop_inner}>
-                        <p className={s.services_title}>Our shop</p>
-                        <p className={s.services_subtitle}>Eleifend arcu non lorem justo in tempus purus gravida. Est tortor egestas sed feugiat </p>
+                        <p className={s.services_title}>Наш магазин</p>
+                        <p className={s.services_subtitle}>В нашем каталоге вы найдете все необходимое для безупречного макияжа, здоровых волос и идеального ухода за кожей.</p>
                         <div className={s.shop_wrapper}>
                             {
                                 data? 
-                                data.slice(0,4).map(item => (
+                                data.filter(x=>x.price>500)
+                                .slice(0,4).map(item => (
                                     <div className={s.shop_item} key={item.productId}>
                                         <img src={item.photo} className={s.item_img}></img>
                                         <p className={s.item_name}>{item.name}</p>

@@ -26,7 +26,7 @@ export function Footer() {
                                         </defs>
                                     </svg>
                                     <p className={s.title}>Салон красоты</p>
-                                    <p className={s.subtitle}>Est tortor egestas sed feugiat elementum. Viverra nulla <br /> amet a ultrices massa dui. Tortor est purus morbi vitae <br />arcu suspendisse amet.</p>
+                                    <p className={s.subtitle}>Позвольте себе быть прекрасной каждый день. Наш салон предлагает полный спектр услуг по уходу за вашей внешностью, где каждая процедура - это сочетание профессионализма и комфорта.</p>
                                     <div className={s.social}>
 
                                         <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">

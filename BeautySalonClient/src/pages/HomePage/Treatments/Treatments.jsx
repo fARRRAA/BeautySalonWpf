@@ -10,7 +10,9 @@ export function Treatments() {
                         <img className="treatments_img" src="/src/assets/imgs/treatmentsImg.png"></img>
                         <div className="treatments_list">
                             <p className="treatments_title">Услуги и цены</p>
-                            <p  className="treatments_subtitle">Velit in dui dictum arcu felis tempor in feugiat in mauris...</p>
+                            <p  className="treatments_subtitle">Мы предлагаем широкий спектр услуг для красоты и ухода за собой
+
+</p>
                             <ul class="services_wrapper">
                                 <li>
                                     <span>Nail care</span>

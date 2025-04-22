@@ -18,5 +18,10 @@ namespace BeautySalonApi.Controllers
         {
             return Ok(_service.GetAll());
         }
+        [HttpGet("types")]
+        public async Task<IActionResult> GetTypes()
+        {
+            return Ok(_service.GetTypes());
+        }
     }
 }

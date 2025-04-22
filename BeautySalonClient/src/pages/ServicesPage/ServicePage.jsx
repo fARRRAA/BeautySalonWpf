@@ -1,11 +1,15 @@
+import { LogoBanner } from "../../components/LogoBanner/LogoBanner";
+import { Masters } from "../AboutUs/Masters/Masters";
 import { Catalog } from "./Catalog/Catalog";
-import { LogoBanner } from "./LogoBanner/LogoBanner";
+import { Services } from "./Services/Services";
 
 export function ServicePage(){
     return (
         <>
-            <LogoBanner/>
+            <LogoBanner image="/src/assets/imgs/serviceslogo.png" title="Услуги"/>
+            <Services/>
             <Catalog/>
+
         </>
     )
 }

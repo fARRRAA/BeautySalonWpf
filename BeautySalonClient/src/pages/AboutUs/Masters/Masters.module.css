@@ -1,0 +1,48 @@
+.masters{
+    margin-top: 120px;
+}
+.masters_inner {
+    text-align: center;
+}
+.subtitle {
+    margin-top: 20px;
+    color: var(--clr-secondary);
+    font-size: 16px;
+    margin-bottom: 60px;
+}
+
+.wrapper {
+   display: flex;
+   flex-wrap: wrap;
+    gap:24px;
+    row-gap: 60px;
+    margin-top: 40px;
+}
+
+.master_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.master_img {
+    background: linear-gradient(180deg, rgba(249, 241, 234, 0) 0%, #f9f1ea 100%);
+}
+.master_photo {
+    width: 300px;
+    height:416px;
+    object-fit: cover;
+}
+.masters_fullname {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 15px;
+    font-size: 24px;
+    font-family: var(--abhaya-font);
+    color: var(--clr-primary);
+}
+.service_type {
+    margin-top: 5px;
+    color: var(--clr-secondary);
+}
