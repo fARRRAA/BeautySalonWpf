@@ -2,6 +2,7 @@ import s from './Shop.module.css'
 import { useEffect, useState } from 'react';
 import { ProductsApiService } from '../../../api/ProductsApiService';
 import { toast, ToastContainer } from 'react-toastify';
+import { Link } from 'react-router-dom';
 export function Shop() {
 
     const messageError = (error) => {
@@ -75,6 +76,8 @@ export function Shop() {
                                 :<p>pipec</p>
                             }
                         </div>
+                        <Link to="/services#catalog" className={s.view_all}>Посмотреть все</Link>
+
                     </div>
                 </div>
             </div>

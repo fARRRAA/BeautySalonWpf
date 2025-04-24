@@ -10,7 +10,7 @@
 
 Title="Salary">
 
-    <Grid  Background="#2C2C2E">
+    <!--<Grid  Background="#2C2C2E">
         <StackPanel Margin="10,0,0,0">
             <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
                 <StackPanel>
@@ -101,5 +101,5 @@ Title="Salary">
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right">
             <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Top" Margin="0,10,10,10"/>
         </ScrollViewer>
-    </Grid>
+    </Grid>-->
 </Page>

@@ -21,6 +21,22 @@ namespace BeautySalonApi.Models
         public TypeServices TypeServices { get; set; }
 
     }
+    public partial class ServiceSkill
+    {
+        [Key]
+        public int id { get; set; }
+        [ForeignKey(nameof(Services))]
+        public int serviceId { get; set; }
+        [ForeignKey(nameof(MastersSkills))]
+        public int skillId { get; set; }
+        public int runTime { get; set; }
+        public int price { get; set; }
+        [JsonPropertyName(name: "mastersSkills")]
+        public  MastersSkills MastersSkills { get; set; }
+        [JsonPropertyName(name: "services")]
+
+        public Services Services { get; set; }
+    }
     public class ServicesGroup
     {
         public int id { get; set; }

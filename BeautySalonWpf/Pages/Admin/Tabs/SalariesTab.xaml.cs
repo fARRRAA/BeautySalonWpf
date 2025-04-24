@@ -24,5 +24,20 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         {
             InitializeComponent();
         }
+
+        private void AddOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RedactOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

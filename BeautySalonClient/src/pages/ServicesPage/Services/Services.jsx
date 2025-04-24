@@ -49,10 +49,10 @@ export function Services() {
     }
 
     return (
-        <div className={s.services}>
+        <div className={s.services} id="services">
             <div className="container">
                 <div className={s.services_inner}>
-                    <h1 className={s.services_title}>Услуги и цены</h1>
+                    <h1 className={s.services_title} >Услуги и цены</h1>
                     <p className={s.services_subtitle}>
                         Мы предлагаем широкий спектр услуг для красоты и ухода за собой
                     </p>

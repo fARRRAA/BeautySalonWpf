@@ -11,6 +11,7 @@
 }
 .header_social {
     display: flex;
+    align-items: center;
     justify-content: start;
     gap: 12px;
 }
@@ -25,5 +26,9 @@
 .header_btns {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
+}
+.header_btns>.button {
+    cursor: pointer;
 }

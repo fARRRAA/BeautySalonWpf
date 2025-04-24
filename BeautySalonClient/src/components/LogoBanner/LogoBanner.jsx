@@ -1,5 +1,5 @@
 import s from './LogoBanner.module.css'
-export function LogoBanner({image,title}) {
+export function LogoBanner({ image, title }) {
     return (
         <>
             <div className={s.banner}>
@@ -18,9 +18,12 @@ export function LogoBanner({image,title}) {
                         </div>
                     </div>
                 </div>
-                <div className={s.banner_bottom}>
-                    <img src={`${image}`} alt="" className={s.banner_bottom} />
-                </div>
+                {
+                    image &&
+                    <div className={s.banner_bottom}>
+                        <img src={`${image}`} alt="" className={s.banner_bottom} />
+                    </div>
+                }
             </div>
         </>
     )

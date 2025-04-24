@@ -15,27 +15,27 @@ export function Treatments() {
 </p>
                             <ul class="services_wrapper">
                                 <li>
-                                    <span>Nail care</span>
-                                    <span class="price">from $25</span>
+                                    <span>Маникюр</span>
+                                    <span class="price">от 800 ₽</span>
                                 </li>
                                 <li>
-                                    <span>Hair Styling</span>
-                                    <span class="price">from $30</span>
+                                    <span>Прическа</span>
+                                    <span class="price">от 1000 ₽</span>
                                 </li>
                                 <li>
-                                    <span>Make up</span>
-                                    <span class="price">from $50</span>
+                                    <span>Макияж</span>
+                                    <span class="price">от 1500 ₽</span>
                                 </li>
                                 <li>
-                                    <span>Cosmetology</span>
-                                    <span class="price">from $30</span>
+                                    <span>Косметология</span>
+                                    <span class="price">от 1200 ₽</span>
                                 </li>
                                 <li>
-                                    <span>SPA procedures</span>
-                                    <span class="price">from $40</span>
+                                    <span>СПА процедуры</span>
+                                    <span class="price">от 2000 ₽</span>
                                 </li>
                             </ul>
-                            <Link to="/services" class="view-all">View all</Link>
+                            <Link to="/services#services" class="view-all">Посмотреть все</Link>
                         </div>
                     </div>
                 </div>

@@ -41,7 +41,7 @@ export function Catalog() {
     };
 
     return (
-        <div className={s.catalog}>
+        <div className={s.catalog} id="catalog">
             <div className="container">
                 <div className={s.catalog_inner}>
                     <p className={s.title}>Наши товары</p>

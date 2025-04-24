@@ -7,6 +7,7 @@ using MailKit.Net.Smtp;
 using MimeKit;
 using MailKit.Security;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 namespace BeautySalonApi.Services.ClientsService
 {
     public class ClientService : IClientsService
@@ -24,14 +25,14 @@ namespace BeautySalonApi.Services.ClientsService
         public async Task SendVerificationCode(string email, int code)
         {
             var message = new MimeMessage();
-            message.From.Add(MailboxAddress.Parse("your-email@example.com"));
+            message.From.Add(MailboxAddress.Parse("farrahovi2006@gmail.com"));
             message.To.Add(MailboxAddress.Parse(email));
-            message.Subject = "Код подтверждения";
+            message.Subject = "Вас приветствует Салон Красоты. Ваш код подтверждения";
             message.Body = new TextPart("plain") { Text = $"Ваш код подтверждения: {code}" };
 
             using var smtp = new MailKit.Net.Smtp.SmtpClient();
-            await smtp.ConnectAsync("smtp.example.com", 587, SecureSocketOptions.StartTls);
-            await smtp.AuthenticateAsync("your-email@example.com", "your-password");
+            await smtp.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+            await smtp.AuthenticateAsync("farrahovi2006@gmail.com", "tmaq iswu pwov lpdi");
             await smtp.SendAsync(message);
             await smtp.DisconnectAsync(true);
         }
@@ -64,7 +65,7 @@ namespace BeautySalonApi.Services.ClientsService
             };
             await _context.Clients.AddAsync(newClient);
             await _context.SaveChangesAsync();
-            //await SendVerificationCode(newClient.email, verificationCode);
+            await SendVerificationCode(newClient.email, verificationCode);
 
         }
         public async Task ConfirmEmail(Clients _client)
@@ -82,6 +83,8 @@ namespace BeautySalonApi.Services.ClientsService
             var expirationTime = DateTime.UtcNow.AddMinutes(3);
             client.loginCode = verificationCode;
             client.codeExpiration = expirationTime;
+            await SendVerificationCode(email, verificationCode);
+
             await _context.SaveChangesAsync();
         }
         public Clients GetClientByEmail(string email)

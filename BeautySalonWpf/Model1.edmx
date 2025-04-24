@@ -145,7 +145,7 @@
           <Property Name="email" Type="nvarchar" MaxLength="100" />
           <Property Name="login" Type="nvarchar" MaxLength="100" />
           <Property Name="password" Type="nvarchar" MaxLength="100" />
-          <Property Name="photo" Type="nvarchar" MaxLength="100" />
+          <Property Name="photo" Type="nvarchar(max)" />
           <Property Name="qualificationId" Type="int" />
           <Property Name="skillId" Type="int" />
           <Property Name="roleId" Type="int" Nullable="false" />
@@ -231,7 +231,7 @@
           <Property Name="productId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="200" />
           <Property Name="price" Type="int" />
-          <Property Name="photo" Type="nvarchar" MaxLength="200" />
+          <Property Name="photo" Type="nvarchar(max)" />
           <Property Name="typeId" Type="int" />
           <Property Name="soldCount" Type="int" />
           <Property Name="inStock" Type="int" />
@@ -950,7 +950,7 @@
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="qualificationId" Type="Int32" />
           <Property Name="skillId" Type="Int32" />
           <Property Name="roleId" Type="Int32" Nullable="false" />
@@ -1021,7 +1021,7 @@
           <Property Name="productId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="price" Type="Int32" />
-          <Property Name="photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="typeId" Type="Int32" />
           <Property Name="soldCount" Type="Int32" />
           <Property Name="inStock" Type="Int32" />

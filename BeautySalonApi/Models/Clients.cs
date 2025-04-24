@@ -8,23 +8,23 @@ namespace BeautySalonApi.Models
     {
         [Key]
         public int userID { get; set; }
-        public string Lname { get; set; }
-        public string FName { get; set; }
+        public string? Lname { get; set; } // Объявлено как nullable
+        public string? FName { get; set; } // Объявлено как nullable
         public DateTime dateBirth { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
-        public string photo { get; set; }
-        public string Preferences { get; set; }
+        public string? login { get; set; } // Объявлено как nullable
+        public string? password { get; set; } // Объявлено как nullable
+        public string? phone { get; set; } // Объявлено как nullable
+        public string? email { get; set; } // Объявлено как nullable
+        public string? photo { get; set; }
+        public string? Preferences { get; set; } // Объявлено как nullable
         [ForeignKey(nameof(Roles))]
         public int roleId { get; set; }
         [JsonPropertyName("roles")]
         public Roles Roles { get; set; }
         public int visitsCount { get; set; }
-        public bool isEmailConfirmed { get; set; }
-        public int loginCode { get; set; }
-        public DateTime codeExpiration { get; set; }
+        public bool isEmailConfirmed { get; set; } = false;
+        public int? loginCode { get; set; }
+        public DateTime? codeExpiration { get; set; }
     }
     public  class Roles
     {

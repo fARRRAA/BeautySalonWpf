@@ -22,6 +22,7 @@
 .testimonials_subtitle {
     color: var(--clr-secondary);
     font-size: 16px;
+    margin-bottom: 30px;
 }
 
 .testimonials_content {

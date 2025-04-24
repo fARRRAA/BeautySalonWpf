@@ -23,5 +23,10 @@ namespace BeautySalonApi.Services.ServicesService
 
             return group;
         }
+        public List<ServiceSkill> GetAllSkill()
+        {
+            var all = _context.ServiceSkill.Include(x=>x.Services).Include(x=>x.Services.TypeServices).Include(x=>x.MastersSkills).ToList();
+            return all;
+        }
     }
 }

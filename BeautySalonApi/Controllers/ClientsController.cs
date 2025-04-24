@@ -29,13 +29,10 @@ namespace BeautySalonApi.Controllers
             await _service.CreateClient(client);
             return Ok("Пожалуйста, подтвердите ваш email.");
         }
-        [HttpPost("login")]
+        [HttpGet("login")]
         public async Task<IActionResult> LoginClient(string email)
         {
-            if (_service.isExists(email))
-            {
-                return NotFound("пользователь с такой почтой уже существует");
-            }
+
             await _service.LoginClient(email);
             return Ok("Пожалуйста, подтвердите ваш email.");
         }
@@ -44,14 +41,24 @@ namespace BeautySalonApi.Controllers
         {
             var user = _service.GetClientByEmail(model.email);
             if (user == null || user.loginCode != model.code || user.codeExpiration < DateTime.UtcNow)
-                return BadRequest("Неверный код или он истек.");
+                return Ok(false);
             await _service.ConfirmEmail(user);
-            return Ok("Email успешно подтвержден.");
+            return Ok(true);
         }
         [HttpGet("client/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(_service.GetClientById(id));
+        }
+        [HttpGet("client/email/{email}")]
+        public async Task<IActionResult> GetByEmail(string email)
+        {
+            return Ok(_service.GetClientByEmail(email));
+        }
+        [HttpGet("client/exists/{email}")]
+        public async Task<IActionResult> ClientExists(string email)
+        {
+            return Ok(_service.isExists(email));
         }
     }
 }

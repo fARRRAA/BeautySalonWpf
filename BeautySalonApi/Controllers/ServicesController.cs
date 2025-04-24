@@ -17,6 +17,11 @@ namespace BeautySalonApi.Controllers
         {
             return Ok(_service.GetAll());
         }
+        [HttpGet("services")]
+        public async Task<IActionResult> GetServiceSkills()
+        {
+            return Ok(_service.GetAllSkill());
+        }
 
     }
 }

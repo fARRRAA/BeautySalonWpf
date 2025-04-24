@@ -1,0 +1,125 @@
+.login {
+    margin-top: 100px;
+
+}
+
+.login_inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+
+
+}
+
+.login_title {
+    margin-top: 20px;
+    font-size: 70px;
+    font-family: var(--imperial-font);
+    color: var(--clr-primary);
+}
+
+.login_form {
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 20px 50px;
+}
+
+.form_item {
+    position: relative;
+    margin-bottom: 10px;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form_item label,
+.form_item input {
+    display: inline-block;
+    transition: all 150ms;
+}
+
+.form_item input {
+    margin-top: 5px;
+    width: 350px;
+    padding: 14px 15px;
+    line-height: 20px;
+    font-size: 18px;
+    color: #222;
+    border: 1px solid var(--clr-primary);
+    background: transparent;
+}
+
+.form_item input:focus {
+    outline: none;
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 2px rgba(var(--focus-rgb), 0.1);
+}
+
+.form_item input:focus + label,
+.form_item input:not(:placeholder-shown) + label {
+    top: 0;
+    transform: translateY(-50%) scale(0.95);
+    color: var(--clr-primary);
+}
+
+.form_item label {
+    position: absolute;
+    top: 55%;
+    left: 15px;
+    transform: translateY(-50%);
+    background-color: white;
+    padding: 0 5px;
+    color: var(--clr-secondary);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    font-size: 16px;
+}
+
+.submit_btn {
+    margin-top: 10px;
+    padding: 15px 0;
+    width: 100%;
+    background-color: var(--clr-primary);
+    color: #fff;
+    font-size: 17px;
+    transition: .3s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.submit_btn:hover {
+    color: var(--clr-primary);
+    background-color: #fff;
+    outline: 1px solid var(--clr-primary);
+}
+
+.register {
+    color: var(--clr-primary);
+}
+
+.register>span {
+    text-decoration: underline;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+    position: absolute;
+}
+
+.fade_in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
