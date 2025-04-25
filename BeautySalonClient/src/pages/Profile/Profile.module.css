@@ -3,6 +3,11 @@
     margin-bottom: 100px;
 }
 
+.profile_container {
+    margin-top: 50px;
+
+}
+
 .profile_inner {
     display: flex;
     flex-direction: column;
@@ -14,139 +19,299 @@
     font-family: var(--imperial-font);
     color: var(--clr-primary);
     margin-bottom: 50px;
+    text-align: center;
 }
 
 .profile_content {
     display: flex;
-    gap: 50px;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    padding: 50px;
     width: 100%;
-    max-width: 1000px;
 }
+.profile_wrapper {
 
+    display: flex;
+    justify-content: start;
+    gap: 10%;
+    width: 100%;
+}
 .profile_photo {
-    flex: 0 0 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
 }
 
 .photo {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
     object-fit: cover;
-    border-radius: 20px;
-    border: 2px solid var(--clr-primary);
+    border: 2px solid #f0f0f0;
 }
 
 .change_photo_btn {
-    padding: 12px 25px;
-    background-color: var(--clr-primary);
+    padding: 8px 16px;
+    background-color: #ff4d4f;
     color: white;
-    border-radius: 8px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .change_photo_btn:hover {
-    background-color: white;
-    color: var(--clr-primary);
-    outline: 1px solid var(--clr-primary);
+    background-color: #ff7875;
 }
 
 .profile_info {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    width: 60%;
+    gap: 24px;
 }
 
 .info_group {
-    background-color: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .group_title {
-    font-family: 'Abhaya Libre', serif;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 600;
-    color: var(--clr-primary);
-    margin-bottom: 20px;
+    color: #333;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.appointments_list>.group_title {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--clr-accent);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .info_item {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
-    font-family: 'Inter', sans-serif;
-}
-
-.info_item:last-child {
-    margin-bottom: 0;
+    margin-bottom: 12px;
 }
 
 .label {
-    flex: 0 0 150px;
+    width: 150px;
     color: #666;
-    font-size: 16px;
+    font-weight: 500;
 }
 
 .value {
-    font-weight: 500;
     color: #333;
-    font-size: 16px;
+    flex: 1;
 }
 
 .not_confirmed {
-    margin-left: 10px;
-    padding: 4px 8px;
-    background-color: #fff3cd;
-    color: #856404;
-    border-radius: 4px;
+    margin-left: 12px;
+    color: #ff4d4f;
     font-size: 14px;
 }
 
 .preferences {
-    font-family: 'Inter', sans-serif;
-    color: #333;
-    line-height: 1.5;
+    color: #666;
+    font-style: italic;
 }
 
 .profile_stats {
     display: flex;
-    gap: 20px;
+    gap: 24px;
+    margin-top: 16px;
 }
 
 .stats_item {
-    background-color: var(--clr-primary);
-    color: white;
-    padding: 15px 25px;
-    border-radius: 10px;
+    background: white;
+    padding: 16px 24px;
+    border-radius: 8px;
     text-align: center;
-    font-family: 'Inter', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .stats_value {
     display: block;
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 5px;
+    color: #1890ff;
+    margin-bottom: 4px;
 }
 
 .stats_label {
+    color: #666;
     font-size: 14px;
-    opacity: 0.9;
 }
 
-.loading {
+/* Стили для списка записей */
+.appointments_list {
+    margin-top: 30px;
+    width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 400px;
-    font-family: 'Inter', sans-serif;
+}
+
+.appointment_card {
+    width: 70%;
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.appointment_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.appointment_date {
     font-size: 18px;
-    color: var(--clr-primary);
+    font-weight: 500;
+    color: var(--clr-accent);
+
+}
+
+.appointment_status {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.appointment_status.cancelled {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #e8f5e9;
+    background-color: #ff9e02;
+}
+
+.appointment_master {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.master_photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.master_info {
+    flex: 1;
+}
+
+.master_name {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.master_qualification {
+    font-size: 14px;
+    color: #666;
+}
+
+.appointment_time {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.time_slot {
+    font-size: 14px;
+}
+
+.time_slot span {
+    color: #666;
+}
+
+.services_list {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.service_item {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.service_item:last-child {
+    border-bottom: none;
+}
+
+.service_name {
+    font-size: 14px;
+}
+
+.appointment_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.appointment_total {
+    font-weight: 500;
+}
+
+.appointment_total span {
+    color: #666;
+    font-weight: normal;
+}
+
+.cancel_button {
+    padding: 8px 16px;
+    background-color: var(--clr-accent);
+    color: white;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.cancel_button:hover {
+    background-color: #cc0000;
+}
+
+.no_appointments {
+    text-align: center;
+    color: #666;
+    padding: 30px;
+    background-color: white;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+/* Стили для вкладок */
+:global(.ant-tabs-nav) {
+    margin-bottom: 0 !important;
+}
+
+:global(.ant-tabs-content) {
+    background: #f5f5f5;
+    min-height: calc(100vh - 64px - 46px);
 }

@@ -18,15 +18,16 @@ export function Appointment() {
         services: [],
         masterId: null,
         date: null,
-        time: null
+        timeStart: null,
+        clientId: currentUser??currentUser.id
     });
 
-    // useEffect(() => {
-    //     if (!currentUser.isAuth) {
-    //         navigate('/login');
-    //         return;
-    //     }
-    // }, [currentUser, navigate]);
+    useEffect(() => {
+        if (!currentUser.isAuth) {
+            navigate('/login');
+            return;
+        }
+    }, [currentUser, navigate]);
 
     const handleNext = (data) => {
         setAppointmentData(prev => ({

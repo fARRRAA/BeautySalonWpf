@@ -26,6 +26,11 @@ namespace BeautySalonApi.Models
         [JsonPropertyName("clients")]
         public Clients Clients { get; set; }
     }
+    public class AppointmentsFull
+    {
+        public Appointments appointment { get; set; }
+        public List<AppointmentsServices> appointmentServices { get; set; }
+    }
     public  class AppointmentStatus
     {
         [Key]

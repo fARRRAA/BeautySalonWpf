@@ -15,7 +15,16 @@ export class AppointmentApiService {
 
     async getTimeSlots(params = {}) {
         try {
-            const response = await this.axiosInstance.get("/timeslots", { params });
+            const response = await this.axiosInstance.get("/time", { params });
+            console.log(response)
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+    async getMasters(params = {}) {
+        try {
+            const response = await this.axiosInstance.get("/masters", { params });
             return response.data;
         } catch (error) {
             throw error;
@@ -35,7 +44,7 @@ export class AppointmentApiService {
                 clientId: data.clientId
             };
 
-            const response = await this.axiosInstance.post("", appointmentData);
+            const response = await this.axiosInstance.post("/add", appointmentData);
             return response.data;
         } catch (error) {
             throw error;
@@ -53,7 +62,7 @@ export class AppointmentApiService {
 
     async cancelAppointment(appointmentId) {
         try {
-            const response = await this.axiosInstance.put(`/${appointmentId}/cancel`);
+            const response = await this.axiosInstance.get(`/cancel/${appointmentId}`);
             return response.data;
         } catch (error) {
             throw error;

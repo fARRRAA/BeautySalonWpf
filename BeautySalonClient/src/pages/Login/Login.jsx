@@ -5,11 +5,13 @@ import { AuthApiService } from '../../api/AuthApiService';
 import { useAuth } from '../../hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
-import { Navigate, useNavigate,Link } from 'react-router-dom';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
 
 export function Login() {
 
     let api = new AuthApiService();
+    const [loading, setLoading] = useState(false);
+
     const [isConfirmStep, setIsConfirmStep] = useState(false);
     const [emailInput, setEmail] = useState('');
     const [codeInput, setCode] = useState('');
@@ -62,11 +64,13 @@ export function Login() {
                 return;
             }
             var res = await api.checkUser(emailInput);
-            if(!res){
+            if (!res) {
                 showToastMessageError('Пользователя с такой почтой не существует');
                 return;
             }
+            setLoading(true);
             let login = await api.login(emailInput);
+            setLoading(false);
             showToastMessageSuccess(login);
             setIsConfirmStep(true);
         } else {
@@ -128,9 +132,10 @@ export function Login() {
                                     <label htmlFor="code">Введите код из письма</label>
                                 </div>
 
-                                <button type='submit' className={s.submit_btn} onClick={checkForm}>
+                                <button type='submit' className={s.submit_btn} disabled={loading} onClick={checkForm}>
                                     <p>
-                                        {!isConfirmStep ? 'Войти в аккаунт' : 'Подтвердить код'}
+                                        {loading ? 'Вход...' : (!isConfirmStep ? 'Войти в аккаунт' : 'Подтвердить код')}
+                                        
                                     </p>
                                 </button>
                             </form>

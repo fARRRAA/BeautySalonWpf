@@ -1,19 +1,27 @@
-import s from './Profile.module.css'
-import { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Tabs } from 'antd';
+import { PersonalInfo } from './PersonalInfo';
+import { AppointmentsList } from './AppointmentsList';
+import styles from './Profile.module.css';
 import { AuthApiService } from '../../api/AuthApiService'
 import { useAuth } from '../../hooks/useAuth'
 import defaultAvatar from '/src/assets/imgs/default-avatar.png'
 import { useDispatch } from 'react-redux'
 import { removeUser } from '../../store/slices/userSlice'
 import { useNavigate } from 'react-router-dom'
-export function Profile() {
-    const [user, setUser] = useState(null)
+
+const { TabPane } = Tabs;
+
+export const Profile = () => {
+    const user = useAuth();
     const currentUser = useAuth()
     const api = new AuthApiService()
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     useEffect(() => {
-        if(!currentUser.isAuth){
+        if (!currentUser.isAuth) {
             navigate("/login");
         }
         const fetchUser = async () => {
@@ -25,7 +33,9 @@ export function Profile() {
         fetchUser()
     }, [currentUser.id])
 
-    if (!user) return <div className={s.loading}>Загрузка...</div>
+    if (!user) {
+        return <div>Пожалуйста, войдите в систему</div>;
+    }
 
     const formatDate = (dateString) => {
         const date = new Date(dateString)
@@ -38,75 +48,20 @@ export function Profile() {
     }
 
     return (
-        <div className={s.profile}>
-            <div className="container">
-                <div className={s.profile_inner}>
-                    <h1 className={s.profile_title}>Личный кабинет</h1>
-
-                    <div className={s.profile_content}>
-                        <div className={s.profile_photo}>
-                            <img
-                                src={user.photo || defaultAvatar}
-                                alt="Фото профиля"
-                                className={s.photo}
-                            />
-                            {/* <button className={s.change_photo_btn}>
-                                Изменить фото
-                            </button> */}
-                            <button className={s.change_photo_btn} onClick={exit}>
-                                Выйти
-                            </button>
-                        </div>
-
-                        <div className={s.profile_info}>
-                            <div className={s.info_group}>
-                                <h2 className={s.group_title}>Основная информация</h2>
-                                <div className={s.info_item}>
-                                    <span className={s.label}>Фамилия:</span>
-                                    <span className={s.value}>{user.lname}</span>
-                                </div>
-                                <div className={s.info_item}>
-                                    <span className={s.label}>Имя:</span>
-                                    <span className={s.value}>{user.fName}</span>
-                                </div>
-                                <div className={s.info_item}>
-                                    <span className={s.label}>Дата рождения:</span>
-                                    <span className={s.value}>{formatDate(user.dateBirth)}</span>
-                                </div>
-                            </div>
-
-                            <div className={s.info_group}>
-                                <h2 className={s.group_title}>Контактная информация</h2>
-                                <div className={s.info_item}>
-                                    <span className={s.label}>Email:</span>
-                                    <span className={s.value}>{user.email}</span>
-                                    {!user.isEmailConfirmed &&
-                                        <span className={s.not_confirmed}>Не подтвержден</span>
-                                    }
-                                </div>
-                                <div className={s.info_item}>
-                                    <span className={s.label}>Телефон:</span>
-                                    <span className={s.value}>{user.phone}</span>
-                                </div>
-                            </div>
-
-                            <div className={s.info_group}>
-                                <h2 className={s.group_title}>Предпочтения</h2>
-                                <div className={s.preferences}>
-                                    <p>{user.preferences || 'Предпочтения не указаны'}</p>
-                                </div>
-                            </div>
-
-                            <div className={s.profile_stats}>
-                                <div className={s.stats_item}>
-                                    <span className={s.stats_value}>{user.visitsCount}</span>
-                                    <span className={s.stats_label}>посещений</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div className="container">
+            <div className={styles.profile_container}>
+                <h1 className={styles.profile_title}>Личный кабинет</h1>
+                <Tabs defaultActiveKey="1" className={styles.profile_tabs}>
+                    <TabPane tab="Личная информация" key="1" style={{background:'#fff'}}>
+                        <PersonalInfo user={user} />
+                    </TabPane>
+                    <TabPane tab="Мои записи" key="2" style={{background:'#fff'}}>
+                        <AppointmentsList userId={user.id} />
+                    </TabPane>
+                </Tabs>
             </div>
         </div>
-    )
-}
+    );
+};
+
+export default Profile;
