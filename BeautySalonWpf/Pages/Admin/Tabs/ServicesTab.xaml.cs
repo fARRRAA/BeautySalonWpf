@@ -96,5 +96,10 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             paginationElem.MaxPageCount = pageCount;
             paginationElem.PageIndex = pageCount;
         }
+
+        private void updateProducts_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateServicesList();
+        }
     }
 }

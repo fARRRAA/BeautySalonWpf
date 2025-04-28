@@ -4,30 +4,28 @@ import styles from '../Appointment.module.css';
 import { AppointmentApiService } from '../../../api/AppointmentApiservice';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { toast, ToastContainer } from 'react-toastify';
 
 const appointmentApi = new AppointmentApiService();
 
 const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
     const [selectedDate, setSelectedDate] = useState(null);
-    const [selectedTime, setSelectedTime] = useState(null);
+    const [selectedTimes, setSelectedTimes] = useState({});
     const [selectedMaster, setSelectedMaster] = useState(null);
     const [availableMasters, setAvailableMasters] = useState([]);
     const [mastersTimeSlots, setMastersTimeSlots] = useState({});
     const [loading, setLoading] = useState(false);
 
-    // Вычисляем общую длительность выбранных услуг
     const calculateTotalDuration = () => {
         return appointmentData.services.reduce((total, service) => {
             return total + service.skillLevel.duration;
         }, 0);
     };
 
-    // Получаем serviceId из первой услуги
     const getServiceId = () => {
         return appointmentData.services[0].serviceId;
     };
 
-    // Получаем skillId из первой услуги
     const getSkillId = () => {
         return appointmentData.services[0].skillLevel.name;
     };
@@ -37,7 +35,6 @@ const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
             if (!selectedDate) return;
             try {
                 setLoading(true);
-                // Создаем новую дату с учетом часового пояса
                 const localDate = new Date(selectedDate);
                 localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
                 const formattedDate = localDate.toISOString().split('T')[0];
@@ -50,7 +47,6 @@ const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
                 if (response && response.length > 0) {
                     setAvailableMasters(response);
 
-                    // Получаем временные слоты для каждого мастера
                     const timeSlotsMap = {};
                     for (const master of response) {
                         const timeSlots = await appointmentApi.getTimeSlots({
@@ -61,7 +57,7 @@ const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
                         });
 
                         if (timeSlots && timeSlots.length > 0) {
-                            timeSlotsMap[master.id] = timeSlots;
+                            timeSlotsMap[master.masterId] = timeSlots;
                         }
                     }
                     setMastersTimeSlots(timeSlotsMap);
@@ -70,8 +66,6 @@ const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
                     setMastersTimeSlots({});
                 }
             } catch (error) {
-                errorMsg('Ошибка при загрузке мастеров', 2000);
-                console.error('Error fetching masters:', error);
                 setAvailableMasters([]);
                 setMastersTimeSlots({});
             } finally {
@@ -85,28 +79,31 @@ const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
     const handleDateSelect = (date) => {
         setSelectedDate(date);
         setSelectedMaster(null);
-        setSelectedTime(null);
+        setSelectedTimes({});
     };
 
     const handleMasterSelect = (master) => {
         setSelectedMaster(master);
-        setSelectedTime(null);
     };
 
-    const handleTimeSelect = (time) => {
-        setSelectedTime(time);
+    const handleTimeSelect = (masterId, time) => {
+        if(!selectedMaster || selectedMaster.masterId !== masterId){
+            warningMsg('Пожалуйста, выберите мастера',2000);
+            return;
+        }
+        setSelectedTimes(prev => ({ ...prev, [masterId]: time }));
     };
 
     const handleNext = () => {
-        if (!selectedDate || !selectedTime || !selectedMaster) {
-            warningMsg('Пожалуйста, выберите дату, мастера и время', 2000);
+        if (!selectedDate || !selectedMaster || !selectedTimes[selectedMaster.masterId]) {
+            warningMsg('Пожалуйста, выберите дату, мастера и время',2000);
             return;
         }
 
         onNext({
             masterId: selectedMaster.masterId,
             date: selectedDate,
-            timeStart: `${selectedTime}:00`,
+            timeStart: `${selectedTimes[selectedMaster.masterId]}:00`,
         });
     };
 
@@ -117,7 +114,6 @@ const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
     const formatTime = (timeString) => {
         return timeString.slice(0, 5);
     };
-
     return (
         <div className={styles.step_container}>
             <div className={styles.date_master_container}>
@@ -142,31 +138,30 @@ const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
                                 <div className={styles.loading}>Загрузка мастеров...</div>
                             ) : availableMasters.length > 0 ? (
                                 availableMasters.map(master => (
-                                    <div key={master.id} className={styles.master_block}>
+                                    <div key={master.masterId} className={styles.master_block}>
                                         <div
-                                            className={`${styles.master_item} ${selectedMaster?.id === master.id ? styles.selected : ''}`}
+                                            className={`${styles.master_item} ${selectedMaster?.masterId === master.masterId ? styles.selected : ''}`}
                                             onClick={() => handleMasterSelect(master)}
                                         >
                                             <div className={styles.master_name}>
                                                 {master.lname + " " + master.fname + " " + master.patronymic}
                                             </div>
                                             <div className={styles.master_info}>
-                                            <p className={styles.master_subinfo}>{master.mastersQualifications.typeServices.name},</p>
-                                            <p className={styles.master_subinfo}> {master.mastersSkills.name}</p>
-
+                                                <p className={styles.master_subinfo}>{master.mastersQualifications.typeServices.name},</p>
+                                                <p className={styles.master_subinfo}> {master.mastersSkills.name}</p>
                                             </div>
                                         </div>
 
-                                        {selectedMaster?.id === master.id && (
+                                        {selectedMaster?.masterId === master.masterId && (
                                             <div className={styles.time_slots_container}>
                                                 <h4 className={styles.time_slots_title}>Доступное время:</h4>
                                                 <div className={styles.time_slots}>
-                                                    {mastersTimeSlots[master.id]?.length > 0 ? (
-                                                        mastersTimeSlots[master.id].map(time => (
+                                                    {mastersTimeSlots[master.masterId]?.length > 0 ? (
+                                                        mastersTimeSlots[master.masterId].map(time => (
                                                             <div
                                                                 key={time}
-                                                                className={`${styles.time_slot} ${selectedTime === time ? styles.selected : ''}`}
-                                                                onClick={() => handleTimeSelect(time)}
+                                                                className={`${styles.time_slot} ${selectedTimes[master.masterId] === time ? styles.selected : ''}`}
+                                                                onClick={() => handleTimeSelect(master.masterId, time)}
                                                             >
                                                                 {formatTime(time)}
                                                             </div>
@@ -205,6 +200,8 @@ const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
                     Далее
                 </button>
             </div>
+            <ToastContainer />
+
         </div>
     );
 };

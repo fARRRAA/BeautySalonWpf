@@ -32,3 +32,6 @@
 .header_btns>.button {
     cursor: pointer;
 }
+.user_btn {
+    margin-top: 2px;
+}

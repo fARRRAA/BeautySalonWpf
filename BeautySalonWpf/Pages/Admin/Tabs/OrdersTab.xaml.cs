@@ -154,5 +154,10 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             var viewOrderDialog = new ViewOrder(selected,this);
             viewOrderDialog.Show();
         }
+
+        private void updateProducts_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateOrdersList();
+        }
     }
 }

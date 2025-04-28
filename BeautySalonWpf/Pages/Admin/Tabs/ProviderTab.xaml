@@ -31,10 +31,13 @@
         </StackPanel>
         <StackPanel Margin="0,20,0,0" VerticalAlignment="Bottom" Orientation="Horizontal">
             <Label x:Name="ProvidersCountText" Content="Всего поставщиков: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="520,0,0,0">
-                <Button x:Name="deleteProvider" Content="Удалить мастера" Margin="5" Style="{StaticResource ButtonDanger}" Click="deleteProvider_Click"/>
-                <Button x:Name="redactProvider" Content="Отредактировать мастера" Margin="5" Style="{StaticResource ButtonWarning}" Click="redactProvider_Click"/>
-                <Button    x:Name="addProvider" Content="Добавить мастера" Margin="5" Style="{StaticResource ButtonInfo}" Click="addProvider_Click"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="400,0,0,0">
+                    <Button x:Name="updateProducts" Background="#FF676767" Click="updateProducts_Click" HorizontalAlignment="Left" Margin="0,0,20,0">
+                        <Image Source="/imgs/media/icons/refresh.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Button>
+                    <Button x:Name="deleteProvider" Content="Удалить поставщика" Margin="5" Style="{StaticResource ButtonDanger}" Click="deleteProvider_Click"/>
+                <Button x:Name="redactProvider" Content="Отредактировать поставщика" Margin="5" Style="{StaticResource ButtonWarning}" Click="redactProvider_Click"/>
+                <Button    x:Name="addProvider" Content="Добавить поставщика" Margin="5" Style="{StaticResource ButtonInfo}" Click="addProvider_Click"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>

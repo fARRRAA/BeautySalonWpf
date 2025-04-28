@@ -96,7 +96,6 @@ const ServiceSelection = ({ onNext, appointmentData }) => {
                     }
                 }
             } catch (error) {
-                errorMsg('Ошибка при загрузке услуг', 200);
                 console.error('Error fetching services:', error);
             } finally {
                 setLoading(false);

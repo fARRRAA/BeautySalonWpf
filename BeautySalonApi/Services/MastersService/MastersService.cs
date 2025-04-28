@@ -23,5 +23,10 @@ namespace BeautySalonApi.Services.MastersService
             }
             return MastersFull;
         }
+
+        public Masters GetMaster(int id)
+        {
+            return _context.Masters.Include(x=>x.MastersQualifications).Include(x=>x.MastersSkills).Include(x=>x.MastersQualifications.TypeServices).FirstOrDefault(x => x.masterId == id);
+        }
     }
 }

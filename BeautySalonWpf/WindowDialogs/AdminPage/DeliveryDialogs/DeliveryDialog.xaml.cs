@@ -25,7 +25,7 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.DeliveryDialogs
         private DeliveryTab _owner;
         private Delivery _delivery;
         private List<BeautySalonWpf.Products> _products;
-        private List<Provider> _providers;
+        private List<BeautySalonWpf.Provider> _providers;
         public RedactDelivery(DeliveryTab owner,Delivery delivery)
         {
             InitializeComponent();

@@ -34,16 +34,17 @@
             </StackPanel>
             <StackPanel Margin="0,20,0,0" VerticalAlignment="Bottom" Orientation="Horizontal">
                 <Label x:Name="ProductsCountText" Content="Всего товаров: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="520,0,0,0">
+                <StackPanel Orientation="Horizontal" Margin="480,0,0,0">
+                    <Button x:Name="updateProducts" Background="#FF676767" Click="updateProducts_Click" HorizontalAlignment="Left" Margin="0,0,20,0">
+                        <Image Source="/imgs/media/icons/refresh.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Button>
                     <Button x:Name="deleteProduct" Content="Удалить товар" Margin="5" Style="{StaticResource ButtonDanger}" Click="deleteProduct_Click"/>
                     <Button x:Name="redactProduct" Content="Отредактировать товар" Margin="5" Style="{StaticResource ButtonWarning}" Click="redactProduct_Click"/>
                     <Button x:Name="addProduct" Content="Добавить товар" Margin="5" Style="{StaticResource ButtonInfo}" Click="addProduct_Click"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <Button x:Name="updateProducts" Background="#FF676767" Click="updateProducts_Click" HorizontalAlignment="Left" Margin="20,10,0,0">
-            <Image Source="/imgs/media/icons/refresh.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        </Button>
+
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right">
             <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Top" Margin="0,10,10,10"/>
         </ScrollViewer>

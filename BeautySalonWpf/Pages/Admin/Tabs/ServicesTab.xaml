@@ -81,7 +81,10 @@
             </StackPanel>
             <StackPanel Margin="0,20,0,0" VerticalAlignment="Bottom" Orientation="Horizontal">
                 <Label x:Name="ServiceCountText" Content="Всего услуг: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="600,0,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="550,0,0,0">
+                    <Button x:Name="updateProducts" Background="#FF676767" Click="updateProducts_Click" HorizontalAlignment="Left" Margin="0,0,20,0">
+                        <Image Source="/imgs/media/icons/refresh.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Button>
                     <Button x:Name="deleteService"         Content="Удалить услугу" Margin="5" Style="{StaticResource ButtonDanger}" Click="deleteService_Click"/>
                     <Button x:Name="redactService" Content="Отредактировать услугу" Margin="5" Style="{StaticResource ButtonWarning}" Click="redactService_Click"/>
                     <Button    x:Name="addService"        Content="Добавить услугу" Margin="5" Style="{StaticResource ButtonInfo}" Click="addService_Click"/>

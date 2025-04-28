@@ -3,10 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                  xmlns:hc="https://handyorg.github.io/handycontrol"
 
       xmlns:local="clr-namespace:BeautySalonWpf.Pages.Admin.Tabs"
       mc:Ignorable="d" 
+                        xmlns:hc="https://handyorg.github.io/handycontrol"
       d:DesignHeight="950" d:DesignWidth="1180"
       Title="ClientsTab">
 
@@ -39,7 +39,10 @@
             </StackPanel>
             <StackPanel Margin="0,20,0,0" VerticalAlignment="Bottom" Orientation="Horizontal">
                 <Label x:Name="ClientsCountText" Content="Всего клиентов: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="450,0,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="400,0,0,0">
+                    <Button x:Name="updateProducts" Background="#FF676767" Click="updateProducts_Click" HorizontalAlignment="Left" Margin="0,0,20,0">
+                        <Image Source="/imgs/media/icons/refresh.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Button>
                     <Button x:Name="deleteClient" Content="Удалить клиента" Margin="5" Style="{StaticResource ButtonDanger}" Click="deleteClient_Click"/>
                     <Button x:Name="redactClient" Content="Отредактировать клиента" Margin="5" Style="{StaticResource ButtonWarning}" Click="redactClient_Click"/>
                     <Button x:Name="addClient" Content="Добавить клиента" Margin="5" Style="{StaticResource ButtonInfo}" Click="addClient_Click"/>

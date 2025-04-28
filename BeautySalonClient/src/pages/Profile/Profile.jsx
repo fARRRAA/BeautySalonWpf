@@ -14,8 +14,7 @@ import { useNavigate } from 'react-router-dom'
 const { TabPane } = Tabs;
 
 export const Profile = () => {
-    const user = useAuth();
-    const currentUser = useAuth()
+    const currentUser = useAuth();
     const api = new AuthApiService()
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -24,16 +23,9 @@ export const Profile = () => {
         if (!currentUser.isAuth) {
             navigate("/login");
         }
-        const fetchUser = async () => {
-            if (currentUser.id) {
-                const userData = await api.getUserById(currentUser.id)
-                setUser(userData)
-            }
-        }
-        fetchUser()
     }, [currentUser.id])
 
-    if (!user) {
+    if (!currentUser) {
         return <div>Пожалуйста, войдите в систему</div>;
     }
 
@@ -44,6 +36,7 @@ export const Profile = () => {
 
     function exit() {
         dispatch(removeUser());
+        Cookies.remove('user');
         navigate("/");
     }
 
@@ -53,10 +46,10 @@ export const Profile = () => {
                 <h1 className={styles.profile_title}>Личный кабинет</h1>
                 <Tabs defaultActiveKey="1" className={styles.profile_tabs}>
                     <TabPane tab="Личная информация" key="1" style={{background:'#fff'}}>
-                        <PersonalInfo user={user} />
+                        <PersonalInfo user={currentUser} />
                     </TabPane>
                     <TabPane tab="Мои записи" key="2" style={{background:'#fff'}}>
-                        <AppointmentsList userId={user.id} />
+                        <AppointmentsList userId={currentUser.id} />
                     </TabPane>
                 </Tabs>
             </div>

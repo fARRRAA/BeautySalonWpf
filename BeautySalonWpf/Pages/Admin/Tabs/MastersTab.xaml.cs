@@ -111,5 +111,10 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             paginationElem.PageIndex = index;
 
         }
+
+        private void updateProducts_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateMastersList();
+        }
     }
 }

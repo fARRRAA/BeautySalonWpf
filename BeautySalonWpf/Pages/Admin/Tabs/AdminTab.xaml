@@ -32,7 +32,10 @@
 		</StackPanel>
 		<StackPanel Margin="0,20,0,0" VerticalAlignment="Bottom" Orientation="Horizontal">
 			<Label x:Name="AdminsCountText" Content="Всего администраторов: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="500,0,0,0">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="470,0,0,0">
+                    <Button x:Name="updateProducts" Background="#FF676767" Click="updateProducts_Click" HorizontalAlignment="Left" Margin="0,0,20,0">
+                        <Image Source="/imgs/media/icons/refresh.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Button>
                     <Button x:Name="deleteAdmin" Content="Удалить админа" Style="{StaticResource ButtonDanger}" Margin="5" Click="deleteAdmin_Click"/>
                     <Button x:Name="redactAdmin" Content="Отредактировать админа" Margin="5"  Style="{StaticResource ButtonWarning}" Click="redactAdmin_Click"/>
                     <Button x:Name="addAdmin" Content="Добавить админа" Margin="5" Style="{StaticResource ButtonInfo}" Click="addAdmin_Click"/>

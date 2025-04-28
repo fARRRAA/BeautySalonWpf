@@ -65,7 +65,7 @@ namespace BeautySalonApi.Services.ClientsService
             };
             await _context.Clients.AddAsync(newClient);
             await _context.SaveChangesAsync();
-            await SendVerificationCode(newClient.email, verificationCode);
+            SendVerificationCode(newClient.email, verificationCode);
 
         }
         public async Task ConfirmEmail(Clients _client)
@@ -83,7 +83,7 @@ namespace BeautySalonApi.Services.ClientsService
             var expirationTime = DateTime.UtcNow.AddMinutes(3);
             client.loginCode = verificationCode;
             client.codeExpiration = expirationTime;
-            await SendVerificationCode(email, verificationCode);
+           // SendVerificationCode(email, verificationCode);
 
             await _context.SaveChangesAsync();
         }

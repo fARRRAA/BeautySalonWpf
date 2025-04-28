@@ -103,5 +103,10 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         {
 
         }
+
+        private void updateProducts_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateDeliveryList();
+        }
     }
 }

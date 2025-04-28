@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import styles from './Confirmation.module.css';
 import { AppointmentApiService } from '../../../api/AppointmentApiservice';
 import { useAuth } from '../../../hooks/useAuth';
 import { AuthApiService } from '../../../api/AuthApiService';
 import { successMsg } from '../../../messages/mesages';
+import { MastersApiService } from '../../../api/MastersApiService';
 const appointmentApi = new AppointmentApiService();
 const userApi = new AuthApiService();
-
+const masterApi = new MastersApiService();
 const Confirmation = ({ onPrev, appointmentData }) => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const currentUser = useAuth();
     const [user, setUser] = useState(null);
+    const [master, setMaster] = useState(null);
     useEffect(() => {
         const getUser = async () => {
             var user = await userApi.getUserByEmail(currentUser.email);
             setUser(user);
         };
+        const getMaster = async () => {
+            var master = await masterApi.getMaster(appointmentData.masterId);
+            setMaster(master);
+        };
         getUser();
+        getMaster();
     }, [])
 
     const formatDate = (date) => {
@@ -38,11 +45,9 @@ const Confirmation = ({ onPrev, appointmentData }) => {
         return `${price.toLocaleString('ru-RU')} ₽`;
     };
 
-    // Рассчитываем общую стоимость и длительность
     const totalSum = appointmentData.services.reduce((sum, service) => sum + service.skillLevel.price, 0);
     const totalDuration = appointmentData.services.reduce((sum, service) => sum + service.skillLevel.duration, 0);
 
-    // Вычисляем время окончания
     const calculateEndTime = () => {
         const [hours, minutes] = appointmentData.timeStart.split(':');
         const startTime = new Date(appointmentData.date);
@@ -55,7 +60,6 @@ const Confirmation = ({ onPrev, appointmentData }) => {
     };
 
     const handleConfirm = async () => {
-        // Создаем дату с временем с учетом часового пояса
         const [hours, minutes] = appointmentData.timeStart.slice(0, -3).split(':');
         const appointmentDateTime = new Date(appointmentData.date);
         appointmentDateTime.setMinutes(appointmentDateTime.getMinutes() - appointmentDateTime.getTimezoneOffset());
@@ -63,7 +67,7 @@ const Confirmation = ({ onPrev, appointmentData }) => {
 
         let app = {
             masterId: appointmentData.masterId,
-            timeStart: appointmentData.timeStart.slice(0,-3),
+            timeStart: appointmentData.timeStart.slice(0, -3),
             timeEnd: calculateEndTime(),
             totalSum: totalSum,
             totalDuration: totalDuration,
@@ -71,7 +75,6 @@ const Confirmation = ({ onPrev, appointmentData }) => {
             clientId: currentUser.id,
             services: appointmentData.services
         }
-        console.log(app)
         try {
             setLoading(true);
             const res = await fetch('https://localhost:7165/api/Appointments/add', {
@@ -92,7 +95,7 @@ const Confirmation = ({ onPrev, appointmentData }) => {
             setLoading(false);
         }
     };
-
+    console.log(appointmentData)
     return (
         <div className={styles.step_container}>
             <div className={styles.step_wrapper}>
@@ -136,7 +139,27 @@ const Confirmation = ({ onPrev, appointmentData }) => {
                                 <span className={styles.info_value}>{formatTime(calculateEndTime())}</span>
                             </div>
                         </div>
-
+                        {
+                            master ?
+                                <div>
+                                    <h3 className={styles.info_title} style={{ marginTop: '20px' }}>Информация о мастере</h3>
+                                    <div className={styles.info_block}>
+                                        <div className={styles.info_row}>
+                                            <span className={styles.info_label}>Имя:</span>
+                                            <span className={styles.info_value}> {master.lname+ " "+master.fname}</span>
+                                        </div>
+                                        <div className={styles.info_row}>
+                                            <span className={styles.info_label}>Квалификация:</span>
+                                            <span className={styles.info_value}>{master.mastersQualifications.typeServices.name}</span>
+                                        </div>
+                                        <div className={styles.info_row}>
+                                            <span className={styles.info_label}>Мастерство:</span>
+                                            <span className={styles.info_value}>{master.mastersSkills.name}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                : <p>загрузка данных</p>
+                        }
                         <h3 className={styles.info_title} style={{ marginTop: '20px' }}>Выбранные услуги</h3>
                         <div className={styles.info_block}>
                             {appointmentData.services.map((service, index) => (
@@ -185,6 +208,7 @@ const Confirmation = ({ onPrev, appointmentData }) => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
 
         </div>
 

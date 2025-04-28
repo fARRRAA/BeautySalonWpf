@@ -17,5 +17,10 @@ namespace BeautySalonApi.Controllers
         {
             return Ok(_service.GetAll());
         }
+        [HttpGet("master/{id}")]
+        public async Task<IActionResult> GetMasterById(int id)
+        {
+            return Ok(_service.GetMaster(id));
+        }
     }
 }

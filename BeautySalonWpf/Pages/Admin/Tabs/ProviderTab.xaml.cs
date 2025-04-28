@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HandyControl.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         public ProviderTab()
         {
 
-            InitializeComponent();      
+            InitializeComponent();
             _providers = ConnectionDb.db.Provider.ToList();
             ProvidersList.ItemsSource = _providers.Take(pageSize);
             pageCount = (int)Math.Round(Convert.ToDouble(_providers.Count / pageSize)) + 1;
@@ -34,23 +35,48 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             ProvidersCountText.Content = $"Всего поставщиков: {_providers.Count}";
         }
 
-        private void deleteProvider_Click(object sender, RoutedEventArgs e)
+        private async void deleteProvider_Click(object sender, RoutedEventArgs e)
         {
+            if (ProvidersList.SelectedItem is Provider selectedProvider)
+            {
 
+                ConnectionDb.db.Provider.Remove(selectedProvider);
+                ConnectionDb.db.SaveChanges();
+                Growl.Success("Поставщик удалён");
+                await Task.Delay(1500);
+                UpdateProvidersList();
+            }
+            else
+            {
+                Growl.Error(message: "выберите поставку");
+                await Task.Delay(1500);
+                Growl.Clear();
+                return;
+            }
         }
+
+        
         private void ProviderSearchText_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchText = ProviderSearchText.Text.ToLower();
             var filtered = _providers.Where(a => a.name.ToLower().Contains(searchText)
             || a.name.ToLower().Contains(searchText)
             || a.INN.ToLower().Contains(searchText)
-            ||a.phone.ToLower().Contains(searchText)
+            || a.phone.ToLower().Contains(searchText)
             ).ToList();
             ProvidersList.ItemsSource = filtered;
         }
         private void redactProvider_Click(object sender, RoutedEventArgs e)
         {
-
+            if (ProvidersList.SelectedItem is Provider selectedProvider)
+            {
+                var redactWindow = new BeautySalonWpf.WindowDialogs.Provider.RedactProvider(this, selectedProvider);
+                redactWindow.ShowDialog();
+            }
+            else
+            {
+                HandyControl.Controls.Growl.Info("Выберите поставщика для редактирования");
+            }
         }
         private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
         {
@@ -58,7 +84,30 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
         }
         private void addProvider_Click(object sender, RoutedEventArgs e)
         {
+            var addWindow = new BeautySalonWpf.WindowDialogs.Provider.AddProvider(this);
+            addWindow.ShowDialog();
+        }
 
+        private void updateProducts_Click()
+        {
+
+        }
+
+        public async void UpdateProvidersList()
+        {
+            var index = paginationElem.PageIndex;
+            var newItems = ConnectionDb.db.Provider.ToList();
+            ProvidersList.ItemsSource = newItems.Skip((paginationElem.PageIndex - 1) * pageSize).Take(pageSize).ToList();
+            _providers = newItems;
+            pageCount = (int)Math.Round(Convert.ToDouble(_providers.Count / pageSize)) + 1;
+            paginationElem.MaxPageCount = pageCount;
+            paginationElem.PageIndex = index;
+            ProvidersCountText.Content = $"Всего поставщиков: {_providers.Count}";
+        }
+
+        private void updateProducts_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateProvidersList();
         }
     }
 }

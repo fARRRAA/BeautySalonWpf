@@ -99,7 +99,10 @@
             </StackPanel>
             <StackPanel Margin="0,0,0,50" VerticalAlignment="Bottom" Orientation="Horizontal">
                 <Label x:Name="AppointmentsCountText" Content="Всего записей: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="600,0,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="562,0,0,0">
+                    <Button x:Name="updateProducts" Background="#FF676767" Click="updateProducts_Click" HorizontalAlignment="Left" Margin="0,0,20,0">
+                        <Image Source="/imgs/media/icons/refresh.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Button>
                     <Button x:Name="deleteAppointment"         Content="Удалить запись" Margin="5" Style="{StaticResource ButtonDanger}" Click="deleteAppointment_Click"/>
                     <Button x:Name="redactAppointment" Content="отметить выполненным" Margin="5" Style="{StaticResource ButtonWarning}" Click="redactAppointment_Click"/>
                     <Button    x:Name="addAppointment"        Content="Добавить запись" Margin="5" Style="{StaticResource ButtonInfo}" Click="addAppointment_Click"/>

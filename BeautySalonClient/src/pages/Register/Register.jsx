@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
 import { Navigate, useNavigate, Link } from 'react-router-dom';
-
+import Cookies from 'js-cookie';
 export function Register() {
     let api = new AuthApiService();
     const [isConfirmStep, setIsConfirmStep] = useState(false);
@@ -105,7 +105,13 @@ export function Register() {
                 role: user.roleId,
                 isEmailConfirmed: user.isEmailConfirmed
             }));
-
+            Cookies.set('user', JSON.stringify({
+                id: user.userID,
+                email: user.email,
+                phone: user.phone,
+                role: user.roleId,
+                isEmailConfirmed: user.isEmailConfirmed
+            }), { expires: 7 });
             setTimeout(() => navigate("/user/profile"), 1500);
         }
     }

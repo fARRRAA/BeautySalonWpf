@@ -6,6 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
 import { Navigate, useNavigate, Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 export function Login() {
 
@@ -73,6 +74,7 @@ export function Login() {
             setLoading(false);
             showToastMessageSuccess(login);
             setIsConfirmStep(true);
+
         } else {
             if (codeInput.length == 0) {
                 showToastMessageError('Введите код подтверждения');
@@ -92,9 +94,14 @@ export function Login() {
                 role: user.roleId,
                 isEmailConfirmed: user.isEmailConfirmed
             }));
-            // showToastMessageSuccess(currentUser.id);
+            Cookies.set('user', JSON.stringify({
+                id: user.userID,
+                email: user.email,
+                phone: user.phone,
+                role: user.roleId,
+                isEmailConfirmed: user.isEmailConfirmed
+            }), { expires: 7 });
             setTimeout(() => navigate("/user/profile"), 1500);
-            // console.log(currentUser)
         }
     }
 

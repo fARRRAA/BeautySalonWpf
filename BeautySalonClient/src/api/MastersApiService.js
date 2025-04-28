@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export class MastersApiService {
     constructor() {
-        this.baseURL ="https://localhost:7165/api";
+        this.baseURL = "https://localhost:7165/api";
         this.axiosInstance = axios.create({
             baseURL: this.baseURL,
             timeout: 5000,
@@ -11,7 +11,7 @@ export class MastersApiService {
                 'Accept': 'application/json'
             }
         });
-        
+
     }
 
     async getMasters(params = {}) {
@@ -22,7 +22,14 @@ export class MastersApiService {
             throw error;
         }
     }
+    async getMaster(id) {
+        try {
+            const response = await this.axiosInstance.get(`/Masters/master/${id}`);
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
 
-   
 }
 

@@ -145,5 +145,10 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
             var filtered = _appointments.Where(a => a.statusId == 3).ToList();
             AppointmentsList.ItemsSource = filtered;
         }
+
+        private void updateProducts_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateAppoinmentsList();
+        }
     }
 }

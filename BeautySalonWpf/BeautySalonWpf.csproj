@@ -283,6 +283,12 @@
     <Compile Include="WindowDialogs\AdminPage\ProductDialog\RedactProduct.xaml.cs">
       <DependentUpon>RedactProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowDialogs\AdminPage\Providerdialog\AddProvider.xaml.cs">
+      <DependentUpon>AddProvider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowDialogs\AdminPage\Providerdialog\RedactProvider.xaml.cs">
+      <DependentUpon>RedactProvider.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowDialogs\AdminPage\Service\AddService.xaml.cs">
       <DependentUpon>AddService.xaml</DependentUpon>
     </Compile>
@@ -447,6 +453,14 @@
     <Page Include="WindowDialogs\AdminPage\ProductDialog\RedactProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowDialogs\AdminPage\Providerdialog\AddProvider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WindowDialogs\AdminPage\Providerdialog\RedactProvider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="WindowDialogs\AdminPage\Service\AddService.xaml">
       <SubType>Designer</SubType>
