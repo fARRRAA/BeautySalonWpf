@@ -11,6 +11,7 @@ import { Login } from './pages/Login/Login'
 import { Profile } from './pages/Profile/Profile'
 import { Register } from './pages/Register/Register'
 import { Appointment } from './pages/Appointment/Appointment'
+import { Cart } from './pages/Cart/Cart'
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { setUser } from './store/slices/userSlice';
@@ -49,6 +50,7 @@ export function App() {
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/book" element={<Appointment />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </>

@@ -15,7 +15,7 @@ export class ServicesApiService {
 
     async getAll(params = {}) {
         try {
-            const response = await this.axiosInstance.get("/Services/services", { params });
+            const response = await this.axiosInstance.get("/Services/all", { params });
             // Преобразуем данные в формат, удобный для фронтенда
             const transformedData = response.data.map(item => ({
                 id: item.id,

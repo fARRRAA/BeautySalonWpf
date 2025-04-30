@@ -24,6 +24,7 @@ namespace BeautySalonApi.DataBase
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Clients> Clients { get; set; }
         public DbSet<ServiceSkill> ServiceSkill { get; set; }
+        public DbSet<Cart> Cart { get; set; }
 
     }
 }

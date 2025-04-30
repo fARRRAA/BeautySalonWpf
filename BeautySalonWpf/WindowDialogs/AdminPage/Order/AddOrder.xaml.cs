@@ -184,6 +184,10 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.Order
                 var product = ConnectionDb.db.Products.FirstOrDefault(x=>x.productId==orderItem.Products.productId);
                 product.inStock -= orderItem.count;
             }
+            foreach(var product in selectedProducts)
+            {
+                product.Product.soldCount += product.Quantity;
+            }
             ConnectionDb.db.SaveChanges();
             Growl.Success("Заказ успешно создан");
             await Task.Delay(1000);

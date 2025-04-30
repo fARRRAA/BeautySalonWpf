@@ -45,6 +45,7 @@ const ServiceSelection = ({ onNext, appointmentData }) => {
             try {
                 setLoading(true);
                 const data = await serviceApi.getAll();
+                console.log(data)
                 const groupedServices = data.reduce((acc, item) => {
                     if (!acc[item.serviceId]) {
                         acc[item.serviceId] = {

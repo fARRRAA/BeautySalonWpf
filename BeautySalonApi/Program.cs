@@ -1,6 +1,7 @@
 
 using BeautySalonApi.DataBase;
 using BeautySalonApi.Services.AppointmentsService;
+using BeautySalonApi.Services.CartService;
 using BeautySalonApi.Services.ClientsService;
 using BeautySalonApi.Services.MastersService;
 using BeautySalonApi.Services.ProductsService;
@@ -29,7 +30,7 @@ namespace BeautySalonApi
             builder.Services.AddScoped<IMastersService, MastersService>();
             builder.Services.AddScoped<IServicesService, ServicesService>();
             builder.Services.AddScoped<IAppointmentService, AppointmentService>();
-
+            builder.Services.AddScoped<ICartService, CartService>();
 
             builder.Services.AddCors(options =>
             {

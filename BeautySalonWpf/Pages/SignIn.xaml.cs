@@ -38,39 +38,9 @@ namespace BeautySalonWpf.Pages
             LoginTextMaster.Text = "fara";
             PasswordTextMaster.Password = "123";
             TabControl.SelectedIndex = 1;
-            LoginTextUser.Text = "fara";
-            PasswordTextUser.Password = "123";
+
         }
 
-
-
-        private async void LoginBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var login = LoginTextUser.Text;
-            var password = PasswordTextUser.Password;
-            var temp = new Clients()
-            {
-                login = login,
-                password = password,
-            };
-            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
-            {
-                Growl.Error("Заполните все поля");
-                await Task.Delay(1500);
-                Growl.Clear();
-                return;
-            }
-            var check = await ConnectionDb.db.Clients.FirstOrDefaultAsync(x=>x.login == login&&x.password==password);
-            if(check == null){
-                Growl.Error("Неправильный логин или пароль");
-                return;
-            }
-
-            Growl.Success("Вы успешно вошли в систему");
-            await Task.Delay(1500);
-            Growl.Clear();
-            _mw.MainFrame.NavigationService.Navigate(new Pages.Client.ClientPage(_mw,check));
-        }
 
         private void notRegistered_Click(object sender, RoutedEventArgs e)
         {
