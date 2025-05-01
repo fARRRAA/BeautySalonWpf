@@ -11,6 +11,7 @@
   --abhayaMed-font: "Abhaya Libre Medium";
   --poppins-font: "Poppins", sans-serif;
   --greatVibes-font: "Great Vibes", sans-serif;
+  --header-height: 80px; /* Высота хедера */
 }
 
 *,
@@ -29,6 +30,15 @@ body {
     line-height: 1;
     letter-spacing: normal;
     font-family: var(--inter-font);
+    /* Для плавного скролла */
+    scroll-behavior: smooth;
+}
+
+body {
+    /* Добавляем отступ сверху для фиксированного хедера */
+    padding-top: var(--header-height);
+    /* Скрываем возможные горизонтальные полосы прокрутки */
+    overflow-x: hidden;
 }
 
 header,
@@ -74,4 +84,16 @@ li {
 .container {
     max-width: 1296px;
     margin: 0 auto;
+    padding: 0 15px; /* Добавляем отступы по бокам для мобильных устройств */
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px; /* Меньшая высота хедера на мобильных */
+    }
+    
+    :root {
+        --header-height: 60px;
+    }
 }

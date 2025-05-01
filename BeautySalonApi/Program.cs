@@ -4,6 +4,7 @@ using BeautySalonApi.Services.AppointmentsService;
 using BeautySalonApi.Services.CartService;
 using BeautySalonApi.Services.ClientsService;
 using BeautySalonApi.Services.MastersService;
+using BeautySalonApi.Services.OrdersService;
 using BeautySalonApi.Services.ProductsService;
 using BeautySalonApi.Services.ServicesService;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,7 @@ namespace BeautySalonApi
             builder.Services.AddScoped<IServicesService, ServicesService>();
             builder.Services.AddScoped<IAppointmentService, AppointmentService>();
             builder.Services.AddScoped<ICartService, CartService>();
-
+            builder.Services.AddScoped<IOrderService,OrderService>();
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>

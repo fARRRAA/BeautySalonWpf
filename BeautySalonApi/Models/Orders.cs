@@ -20,6 +20,24 @@ namespace BeautySalonApi.Models
         [JsonPropertyName("orderStatus")]
         public OrderStatus OrderStatus { get; set; }
     }
+    public class OrderReq
+    {
+        public int clientId { get; set; }   
+        public int sum { get; set; }
+        public int count { get; set; }  
+        public List<CartOrder> items { get; set; }
+
+    }
+    public class CartOrder
+    {
+        public int productId { get; set; }
+        public int count { get; set; }
+    }
+    public class FullOrder
+    {
+        public Orders order { get; set; }
+        public List<OrderProducts> products { get; set; }
+    }
     public  class OrderStatus
     {
 
@@ -43,4 +61,6 @@ namespace BeautySalonApi.Models
         [JsonPropertyName("products")]
         public virtual Products Products { get; set; }
     }
+
+
 }

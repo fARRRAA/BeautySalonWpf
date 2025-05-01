@@ -11,6 +11,14 @@ namespace BeautySalonApi.Services.CartService
         {
             _context = context;
         }
+
+        public async Task ClearCart(int userId)
+        {
+            var cart = _context.Cart.Where(x => x.userId == userId).ToList();
+            _context.Cart.RemoveRange(cart);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task CreateCart(CartRequest cart)
         {
             var newCart = new Cart()
@@ -32,9 +40,9 @@ namespace BeautySalonApi.Services.CartService
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteCart(int cartId)
+        public async Task DeleteCart(int userId,int productId)
         {
-            var cart = _context.Cart.FirstOrDefault(x => x.id == cartId);
+            var cart = _context.Cart.FirstOrDefault(x => x.userId == userId && x.productId == productId);
             _context.Cart.Remove(cart);
             await _context.SaveChangesAsync();
         }

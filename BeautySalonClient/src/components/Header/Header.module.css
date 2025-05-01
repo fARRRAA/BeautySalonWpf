@@ -1,14 +1,36 @@
 .header {
     flex-direction: column;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: white;
+}
 
+.header.scrolled {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+}
+
+.header.hidden {
+    transform: translateY(-100%);
 }
 
 .bottomheader {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
-
+    padding: 10px 0;
+    transition: all 0.3s ease;
 }
+
+.scrolled .bottomheader {
+    padding: 5px 0;
+    margin-top: 0;
+}
+
 .header_social {
     display: flex;
     align-items: center;
@@ -21,8 +43,13 @@
     gap: 20px;
 }
 .nav_item {
-
+    transition: color 0.3s ease;
 }
+
+.scrolled .nav_item:hover {
+    color: #6B0606;
+}
+
 .header_btns {
     display: flex;
     align-items: center;
@@ -72,4 +99,19 @@
     0% { opacity: 0.5; }
     50% { opacity: 1; }
     100% { opacity: 0.5; }
+}
+
+/* Добавляем отступ для основного контента, чтобы он не перекрывался хедером */
+.header_spacer {
+    height: 80px;
+    width: 100%;
+}
+
+/* Эффект при скролле для логотипа */
+.logo {
+    transition: transform 0.3s ease;
+}
+
+.scrolled .logo {
+    transform: scale(0.9);
 }

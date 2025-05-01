@@ -1,52 +1,98 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useCart } from '../../hooks/useCart';
 import { useCartActions } from '../../hooks/useCartAction';
 import { useSelector } from 'react-redux';
 import styles from './Cart.module.css';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth'
-
+import { useAuth } from '../../hooks/useAuth';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export function Cart() {
-    const { items, totalPrice, loading, error, cartId } = useCart();
-    const { fetchUserCart, increaseProductCount, decreaseProductCount } = useCartActions();
+    const { items, totalPrice, loading, error, userId, totalItems } = useCart();
+    const { fetchUserCart, increaseProductCount, decreaseProductCount, removeFromCart, clearUserCart } = useCartActions();
     const user = useAuth();
+    const [localItems, setLocalItems] = useState([]);
 
-    // Добавим логирование состояния корзины для отладки
     const cartState = useSelector(state => state.cart);
-    console.log('Cart state:', cartState);
-
+    //console.log(cartState);
     useEffect(() => {
         if (user && user.id) {
-            console.log('Loading cart for user ID:', user.id);
             fetchUserCart(user.id);
-        } else {
-            console.log('No user ID available for cart loading');
         }
     }, [user, fetchUserCart]);
-    console.log(items)
+
+    const totalCount = useMemo(() => 
+        items.reduce((acc, item) => acc + item.count, 0), 
+        [items]
+    );
+
+    useEffect(() => {
+        setLocalItems(items);
+    }, [items]);
+
     const handleIncreaseCount = (productId) => {
-        // Проверяем наличие user.id, т.к. cartId может быть не установлен правильно
         if (user && user.id) {
-            console.log('Increasing product count for productId:', productId, 'userId:', user.id);
-            // Используем user.id вместо cartId
+            // Находим текущий товар
+            const currentItem = localItems.find(item => item.id === productId);
+
+            // Проверяем, не превышаем ли лимит наличия на складе
+            // Используем значение inStock из самого товара
+            if (currentItem && currentItem.count >= currentItem.inStock) {
+                toast.warning(`Нельзя добавить больше товара, чем имеется на складе (${currentItem.inStock} шт.)`);
+                return;
+            }
+
+            // Обновляем локальное состояние для мгновенной реакции UI
+            setLocalItems(prevItems => prevItems.map(item =>
+                item.id === productId
+                    ? { ...item, count: item.count + 1 }
+                    : item
+            ));
+
+            // Отправляем запрос на сервер
             increaseProductCount({ userId: user.id, productId });
-        } else {
-            console.log('Cannot increase count - no user ID available');
         }
     };
 
     const handleDecreaseCount = (productId) => {
-        // Проверяем наличие user.id, т.к. cartId может быть не установлен правильно
         if (user && user.id) {
-            console.log('Decreasing product count for productId:', productId, 'userId:', user.id);
-            // Используем user.id вместо cartId
+            // Находим текущий товар
+            const currentItem = localItems.find(item => item.id === productId);
+
+            // Если количество больше 1, уменьшаем локально
+            if (currentItem && currentItem.count > 1) {
+                setLocalItems(prevItems => prevItems.map(item =>
+                    item.id === productId
+                        ? { ...item, count: item.count - 1 }
+                        : item
+                ));
+            }
+
+            // Отправляем запрос на сервер
             decreaseProductCount({ userId: user.id, productId });
-        } else {
-            console.log('Cannot decrease count - no user ID available');
         }
     };
 
-    if (loading) {
+    const handleRemoveItem = (productId) => {
+        if (user && user.id) {
+            // Удаляем товар из локального состояния
+            setLocalItems(prevItems => prevItems.filter(item => item.id !== productId));
+
+            // Отправляем запрос на сервер
+            removeFromCart({ userId: user.id, productId });
+        }
+    };
+
+    const localTotalPrice = useMemo(() =>
+        localItems.reduce((acc, item) => acc + (item.price * item.count), 0),
+        [localItems]
+    );
+
+    const canIncreaseCount = (item) => {
+        return item.count < item.inStock;
+    };
+
+    if (loading && localItems.length === 0) {
         return (
             <div className="container">
                 <div className={styles.loading}>Загрузка корзины...</div>
@@ -65,7 +111,7 @@ export function Cart() {
         );
     }
 
-    if (!items || items.length === 0) {
+    if (!localItems || localItems.length === 0) {
         return (
             <div className="container">
                 <div className={styles.emptyCart}>
@@ -78,17 +124,59 @@ export function Cart() {
             </div>
         );
     }
+    async function CreateOrder() {
+        const totalCount = localItems.reduce((acc, item) => acc + item.count, 0);
+        
+        const orderData = {
+            clientId: user.id,
+            sum: localTotalPrice,
+            count: totalCount,
+            items: localItems.map(item => {
+                return {
+                    productId: item.id,
+                    count: item.count,
+                }
+            })
+        };
+        try {
+            const res = await fetch("https://localhost:7165/api/Orders/add", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            });
+            
+            if (res.status === 200) {
+                toast.success("Заказ успешно оформлен");
 
+                setTimeout(async () => {
+                    await clearUserCart(user.id);
+                    setLocalItems([]);
+                }, 1500);
+            } else {
+                toast.error("Ошибка при оформлении заказа");
+            }
+            console.log(res);
+        } catch (error) {
+            toast.error("Ошибка при оформлении заказа: " + error.message);
+            console.error(error);
+        }
+    }
     return (
         <div className="container">
+            <ToastContainer position="top-center" autoClose={3000} />
             <div className={styles.cartPage}>
                 <h1>Корзина</h1>
                 <div className={styles.cartItems}>
-                    {items.map(item => (
+                    {localItems.map(item => (
                         <div key={item.id} className={styles.cartItem}>
                             <div className={styles.itemInfo}>
                                 <h3>{item.name}</h3>
                                 <p className={styles.itemDescription}>{item.description}</p>
+                                <p className={styles.itemStock}>
+                                    В наличии: {item.inStock} шт.
+                                </p>
                             </div>
                             <div className={styles.itemControls}>
                                 <div className={styles.quantity}>
@@ -103,6 +191,7 @@ export function Cart() {
                                     <button
                                         onClick={() => handleIncreaseCount(item.id)}
                                         className={styles.quantityBtn}
+                                        disabled={!canIncreaseCount(item)}
                                     >
                                         +
                                     </button>
@@ -110,6 +199,11 @@ export function Cart() {
                                 <div className={styles.price}>
                                     {item.price * item.count} ₽
                                 </div>
+                                <button
+                                    onClick={() => handleRemoveItem(item.id)}
+                                    className={styles.removeBtn}
+                                    title="Удалить из корзины"
+                                > ✕</button>
                             </div>
                         </div>
                     ))}
@@ -117,11 +211,13 @@ export function Cart() {
                 <div className={styles.cartSummary}>
                     <div className={styles.totalPrice}>
                         <span>Итого:</span>
-                        <span>{totalPrice} ₽</span>
+                        <span>{localTotalPrice} ₽</span>
                     </div>
-                    <button className={styles.checkoutBtn}>Оформить заказ</button>
+                    <button className={styles.checkoutBtn} onClick={CreateOrder}>Оформить заказ</button>
                 </div>
             </div>
+            <ToastContainer position="top-center" autoClose={2000} />
         </div>
+
     );
 } 

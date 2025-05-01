@@ -16,9 +16,9 @@ import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { setUser } from './store/slices/userSlice';
 import { useEffect } from 'react'
-
+import { useCartActions } from './hooks/useCartAction';
 export function App() {
-
+  const { fetchUserCart } = useCartActions();
   const dispatch = useDispatch();
   useEffect(() => {
     async function useInitUserFromCookie() {
@@ -32,6 +32,9 @@ export function App() {
           role: user.role,
           isEmailConfirmed: user.isEmailConfirmed
         }));
+        if (user && user.id) {
+          fetchUserCart(user.id);
+        }
       }
     }
     useInitUserFromCookie();

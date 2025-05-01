@@ -37,10 +37,16 @@ namespace BeautySalonApi.Controllers
             await _service.CreateCart(cart);
             return Ok();
         }
-        [HttpPost("cart/{id}/del")]
-        public async Task<IActionResult> CreateCart(int id)
+        [HttpDelete("cart/{userId}/product/{productId}/del")]
+        public async Task<IActionResult> CreateCart(int userId,int productId)
         {
-            await _service.DeleteCart(id);
+            await _service.DeleteCart(userId,productId);
+            return Ok();
+        }
+        [HttpDelete("cart/{id}/clear")]
+        public async Task<IActionResult> ClearCart(int id)
+        {
+            await _service.ClearCart(id);
             return Ok();
         }
 

@@ -8,6 +8,7 @@ namespace BeautySalonApi.Services.CartService
         public Task IncreaseProductCount(int userId, int productId);
         public Task DecreaseProductCount(int userId, int productId);
         public Task CreateCart(CartRequest cart);
-        public Task DeleteCart(int cartId);
+        public Task DeleteCart(int userId, int productId);
+        public Task ClearCart(int userId);
     }
 }
