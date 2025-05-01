@@ -18,7 +18,7 @@ export function Services() {
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const result = await api.getAll();
+                const result = await api.getServices();
                 setData(result);
             } catch (err) {
                 setError(err);

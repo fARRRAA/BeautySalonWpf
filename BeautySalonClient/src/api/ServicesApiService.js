@@ -12,11 +12,20 @@ export class ServicesApiService {
             }
         });
     }
-
-    async getAll(params = {}) {
+    //для страницы услуг
+    async getServices(params = {}) {
         try {
             const response = await this.axiosInstance.get("/Services/all", { params });
-            // Преобразуем данные в формат, удобный для фронтенда
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+    //для страницы записи
+    async getAll(params = {}) {
+        try {
+            const response = await this.axiosInstance.get("/Services/services", { params });
+            console.log(response);
             const transformedData = response.data.map(item => ({
                 id: item.id,
                 serviceId: item.serviceId,
@@ -45,7 +54,9 @@ export class ServicesApiService {
                     name:item.services.typeServices.name
                 }
             }));
+        //  console.log(transformedData);
             return transformedData;
+            
         } catch (error) {
             throw error;
         }
