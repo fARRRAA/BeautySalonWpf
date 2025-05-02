@@ -5,213 +5,335 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeautySalonWpf.WindowDialogs.AdminPage.Appointmentdialogs"
         mc:Ignorable="d"
-                      xmlns:hc="https://handyorg.github.io/handycontrol"
-        Title="AddAppointment" Height="650" Width="1000">
-    <Grid   Background="{DynamicResource BackgroundBrush}">
-        <hc:StepBar x:Name="Steps"  StepIndex="{Binding StepIndex}" Height="33" VerticalAlignment="Top" Margin="35,20,15,0">
-            <hc:StepBarItem HorizontalAlignment="Center">
-            </hc:StepBarItem>
-            <hc:StepBarItem />
-            <hc:StepBarItem Margin="10,0,23,0"/>
-            <hc:StepBarItem Margin="10,0,34,0"/>
-            <hc:StepBarItem Margin="10,0,23,0"/>
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        Title="Запись на услуги" Height="800" Width="1200">
+
+    <Grid Background="{DynamicResource BackgroundBrush}">
+        <!-- StepBar для визуализации шагов -->
+        <hc:StepBar x:Name="Steps" Height="30" VerticalAlignment="Top" Margin="35,20,15,0">
+            <hc:StepBarItem Content="Выбор услуги"/>
+            <hc:StepBarItem Content="Выбор даты и мастера"/>
+            <hc:StepBarItem Content="Подтверждение"/>
         </hc:StepBar>
-        <TabControl x:Name="TabControl" Margin="10,58,10,33" Style="{StaticResource TabControlInLine}" Width="930" SelectionChanged="TabControl_SelectionChanged">
-            <TabItem Header="Выбор клиента" TabIndex="0">
-                <StackPanel>
-                    <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,20,0">
-                        <Button Content="Назад"  Style="{StaticResource ButtonPrimary}" x:Name="PrevBtn" Padding="10,0,10,0" Height="20" Click="PrevBtn_Click" />
-                        <Button Content="Дальше" Style="{StaticResource ButtonPrimary}" x:Name="NextBtn"  Margin="5,0,0,0" Padding="10,0,10,0" Height="20" Click="NextBtn_Click"/>
-                    </StackPanel>-->
-                    <StackPanel Orientation="Horizontal" Margin="10,20,0,0">
-                        <StackPanel VerticalAlignment="Top" Height="414">
-                            <hc:SearchBar x:Name="ClientsSearchText" Height="35" FontSize="16" hc:InfoElement.ShowClearButton="True"  Width="440"  hc:InfoElement.Placeholder="Введите данные о клиенте"  Style="{StaticResource SearchBarPlus}" hc:InfoElement.Necessary="True" TextChanged="ClientsSearchText_TextChanged"  />
-                            <ListBox x:Name="ClientsList" Margin="16" Width="440"  ItemsSource="{Binding _clients}" Height="359" SelectionChanged="ClientsList_SelectionChanged">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Lname}" Style="{StaticResource TextBlockSubTitle}"/>
-                                            <TextBlock Text="{Binding FName}" Style="{StaticResource TextBlockSubTitle}" Margin="5,0,0,0"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+
+        <!-- TabControl для переключения между шагами -->
+        <TabControl x:Name="TabControl" Margin="10,58,10,33" Style="{StaticResource TabControlInLine}" 
+                    Width="1100" SelectionChanged="TabControl_SelectionChanged">
+
+            <!-- Вкладка 1: Выбор услуги и уровня мастера -->
+            <TabItem Header="Выбор услуги" TabIndex="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Левая панель для выбора категории и поиска услуг -->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Поиск услуг -->
+                        <hc:SearchBar x:Name="ServiceSearchText" Grid.Row="0" Height="35" FontSize="16" 
+                                    hc:InfoElement.ShowClearButton="True" Width="440" Margin="0,25,0,10"
+                                    hc:InfoElement.Placeholder="Поиск услуг..." 
+                                    Style="{StaticResource SearchBarPlus}" 
+                                    TextChanged="ServiceSearchText_TextChanged"/>
+
+                        <!-- Выбор уровня мастера -->
+                        <StackPanel Grid.Row="1" Margin="0,10,0,10">
+                            <TextBlock Text="Уровень мастера:" FontSize="16" Margin="40,0,0,15"/>
+                            <ComboBox x:Name="SkillLevelComboBox" Width="440" 
+                                    SelectedIndex="0" SelectionChanged="SkillLevelComboBox_SelectionChanged">
+                                <ComboBoxItem Content="Младший мастер"/>
+                                <ComboBoxItem Content="Средний мастер"/>
+                                <ComboBoxItem Content="Старший мастер"/>
+                            </ComboBox>
                         </StackPanel>
-                        <StackPanel Width="446" Height="407" HorizontalAlignment="Center">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,100,0,0">
-                                <TextBlock x:Name="ClientLnameText" Style="{StaticResource TextBlockLarge}" />
-                                <TextBlock x:Name="ClientFnameText" Style="{StaticResource TextBlockLarge}" Margin="5,0,0,0"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,17,0,0">
-                                <TextBlock x:Name="ClientPhoneText" Style="{StaticResource TextBlockTitle}"/>
-                                <TextBlock x:Name="ClientEmailText" Margin="0,5,0,0" Style="{StaticResource TextBlockTitle}"/>
-                            </StackPanel>
+
+                        <!-- Категории услуг (заменён на ComboBox) -->
+                        <StackPanel Grid.Row="2" Margin="0,10,0,10">
+                            <TextBlock Text="Выберите категорию услуг:" FontSize="16" Margin="40,0,0,15"/>
+                            <ComboBox x:Name="CategoriesList" Width="440" 
+                                    DisplayMemberPath="name"
+                                    SelectionChanged="CategoriesList_SelectionChanged" />
                         </StackPanel>
-                    </StackPanel>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="Выбор мастера" TabIndex="1">
-                <StackPanel>
-                    <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,20,0">
-        <Button Content="Назад"  Style="{StaticResource ButtonPrimary}" x:Name="PrevBtn" Padding="10,0,10,0" Height="20" Click="PrevBtn_Click" />
-        <Button Content="Дальше" Style="{StaticResource ButtonPrimary}" x:Name="NextBtn"  Margin="5,0,0,0" Padding="10,0,10,0" Height="20" Click="NextBtn_Click"/>
-    </StackPanel>-->
-                    <StackPanel Orientation="Horizontal" Margin="10,20,0,0">
-                        <StackPanel VerticalAlignment="Top" Height="414">
-                            <hc:SearchBar x:Name="MastersSearchText" Height="35" FontSize="16" hc:InfoElement.ShowClearButton="True"  Width="440"  hc:InfoElement.Placeholder="Введите данные о мастере"  Style="{StaticResource SearchBarPlus}" hc:InfoElement.Necessary="True" TextChanged="MastersSearchText_TextChanged"  />
-                            <ListBox x:Name="MastersList" Margin="16" Width="440"  ItemsSource="{Binding _masters}" Height="359" SelectionChanged="MastersList_SelectionChanged">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Lname}" Style="{StaticResource TextBlockSubTitle}"/>
-                                            <TextBlock Text="{Binding Fname}" Style="{StaticResource TextBlockSubTitle}" Margin="5,0,0,0"/>
-                                            <TextBlock Text="{Binding Patronymic}" Style="{StaticResource TextBlockSubTitle}" Margin="5,0,0,0"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                        <StackPanel Width="446" Height="407" HorizontalAlignment="Center">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,100,0,0">
-                                <TextBlock x:Name="MasterLnameText" Style="{StaticResource TextBlockLarge}" />
-                                <TextBlock x:Name="MasterFnameText" Style="{StaticResource TextBlockLarge}" Margin="5,0,0,0"/>
-                                <TextBlock x:Name="MasterPatronymicText" Style="{StaticResource TextBlockLarge}" Margin="5,0,0,0"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,17,0,0">
-                                <TextBlock x:Name="MasterSkillText" Style="{StaticResource TextBlockLarge}"/>
-                                <TextBlock x:Name="MasterQualificationText" Style="{StaticResource TextBlockLarge}" Margin="0,5,0,0"/>
-                                <TextBlock x:Name="MasterPhoneText" Style="{StaticResource TextBlockTitle}" Margin="0,10,0,0" />
-                                <TextBlock x:Name="MasterEmailText" Margin="0,5,0,0" Style="{StaticResource TextBlockTitle}"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </StackPanel>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="Выбор услуг" TabIndex="2">
-                <StackPanel>
-                    <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,20,0">
-    <Button Content="Назад"  Style="{StaticResource ButtonPrimary}" x:Name="PrevBtn" Padding="10,0,10,0" Height="20" Click="PrevBtn_Click" />
-    <Button Content="Дальше" Style="{StaticResource ButtonPrimary}" x:Name="NextBtn"  Margin="5,0,0,0" Padding="10,0,10,0" Height="20" Click="NextBtn_Click"/>
-</StackPanel>-->
-                    <StackPanel Orientation="Horizontal" Margin="10,20,0,0">
-                        <StackPanel VerticalAlignment="Top" Height="414">
-                            <hc:SearchBar x:Name="ServiceSearchText" Height="35" FontSize="16" hc:InfoElement.ShowClearButton="True"  Width="400"  hc:InfoElement.Placeholder="Введите данные о услуге" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="" Style="{StaticResource SearchBarPlus}" hc:InfoElement.Necessary="True" TextChanged="ServiceSearchText_TextChanged" Margin="0,25,0,0" />
-                            <ListBox x:Name="ServicesList" Width="400" MouseDoubleClick="ServicesList_MouseDoubleClick" Height="374" SelectionChanged="MastersList_SelectionChanged" HorizontalAlignment="Left" Margin="0,16,0,0">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Vertical" Margin="0,5,0,5">
-                                            <TextBlock  Text="{Binding Services.serviceName}" Style="{StaticResource TextBlockSubTitle}" HorizontalAlignment="Left"/>
-                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <Image Source="/imgs/media/icons/alarm-clock.png" Width="20" Height="20"/>
-                                                    <TextBlock Text="{Binding runTime, Converter={StaticResource TimeConverter}}" Margin="5,0,0,0" HorizontalAlignment="Left"/>
+
+                        <!-- Список всех услуг -->
+                        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+                            <StackPanel>
+                                <TextBlock Text="Доступные услуги:" FontSize="16" Margin="40,5,0,15"/>
+                                <ListBox x:Name="ServicesList" SelectionMode="Single" Height="350" Width="440"
+                                        SelectionChanged="ServicesList_SelectionChanged"
+                                        MouseDoubleClick="ServicesList_MouseDoubleClick">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical" Margin="5">
+                                                <TextBlock Text="{Binding Services.serviceName}" FontSize="14" FontWeight="SemiBold"/>
+                                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                                    <TextBlock Text="Цена: " FontSize="12"/>
+                                                    <TextBlock x:Name="PriceText" Text="{Binding price, Converter={StaticResource DefaultPriceConverter}}" FontSize="12"/>
                                                 </StackPanel>
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0">
-                                                    <Image Source="/imgs/media/icons/coins-sec.png" Width="20" Height="20"/>
-                                                    <TextBlock Text="{Binding price, Converter={StaticResource DefaultPriceConverter}}" Margin="5,0,0,0" HorizontalAlignment="Left"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Длительность: " FontSize="12"/>
+                                                    <TextBlock x:Name="DurationText" Text="{Binding runTime, Converter={StaticResource TimeConverter}}" FontSize="12"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,0">
-                            <Button BorderBrush="{x:Null}" x:Name="RemoveService" Width="70" Height="63" Padding="0,0,0,0" Click="RemoveService_Click">
-                                <Image Source="/imgs/media/icons/arrow-left.png" Width="40" Height="40"/>
-                            </Button>
-                            <Button x:Name="AddService" BorderBrush="{x:Null}" Width="70" Height="63" Padding="0,0,0,0" Click="AddService_Click">
-                                <Image Source="/imgs/media/icons/arrow-right.png" Width="40" Height="40"/>
-                            </Button>
-                        </StackPanel>
-                        <StackPanel Width="400" Height="337" VerticalAlignment="Bottom" >
-                            <ListBox x:Name="SelectedServicesList" Width="400" MouseDoubleClick="SelectedServicesList_MouseDoubleClick" ItemsSource="{Binding _selectedServices}" Height="361" SelectionChanged="MastersList_SelectionChanged" HorizontalAlignment="Left">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Vertical" Margin="0,5,0,5">
-                                            <TextBlock  Text="{Binding Services.serviceName}" Style="{StaticResource TextBlockSubTitle}" HorizontalAlignment="Left"/>
-                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <Image Source="/imgs/media/icons/alarm-clock.png" Width="20" Height="20"/>
-                                                    <TextBlock Text="{Binding runTime, Converter={StaticResource TimeConverter}}" Margin="5,0,0,0" HorizontalAlignment="Left"/>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0">
-                                                    <Image Source="/imgs/media/icons/coins-sec.png" Width="20" Height="20"/>
-                                                    <TextBlock Text="{Binding price, Converter={StaticResource DefaultPriceConverter}}" Margin="5,0,0,0" HorizontalAlignment="Left"/>
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </StackPanel>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="Выбор даты" TabIndex="3">
-                <StackPanel HorizontalAlignment="Center">
-                    <hc:DatePicker x:Name="DateText" Margin="0,30,0,0" hc:InfoElement.ShowClearButton="True" Height="70" SelectedDateChanged="DateText_SelectedDateChanged" hc:InfoElement.Title="Выберите день записи"  FontSize="16"  hc:InfoElement.Placeholder="Введите дату рождения" Width="559"/>
-                    <TextBlock Text="Свободные даты:" Margin="25,15,0,0"  Style="{StaticResource TextBlockTitle}" HorizontalAlignment="Left" />
-                    <hc:TransitioningContentControl Margin="25,30,0,0" Height="287" Width="590">
-                        <ListBox x:Name="AvailableSlotsList" hc:ScrollViewer.IsInertiaEnabled="True"  BorderThickness="0" Style="{StaticResource WrapPanelHorizontalListBox}" ItemsSource="{Binding availableSlots}" VerticalAlignment="Top" SelectionChanged="AvailableSlotsList_SelectionChanged">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate DataType="data:CardModel">
-                                    <hc:Card  BorderThickness="0"  Margin="8" Footer="{Binding Footer}">
-                                        <Label x:Name="TimeText" Content="{Binding Converter={StaticResource TimeSpanConverter}}" Width="90" Height="40" FontSize="16"/>
-                                    </hc:Card>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </hc:TransitioningContentControl>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="Подтверждение" TabIndex="4">
-                <StackPanel Margin="0,30,0,0" Orientation="Horizontal" >
-                    <StackPanel Width="490" HorizontalAlignment="Left" Margin="15,0,0,0">
-                        <hc:TextBox  x:Name="ClientText" IsReadOnly="True" hc:InfoElement.ShowClearButton="True" Width="450" hc:InfoElement.Title="Клиент"  FontSize="16" Height="70" HorizontalAlignment="Left"  />
-                        <hc:TextBox  x:Name="MasterText" IsReadOnly="True" hc:InfoElement.ShowClearButton="True" Width="450" hc:InfoElement.Title="Мастер" Margin="0,25,0,0"  FontSize="16" Height="70" HorizontalAlignment="Left"  />
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,25,0,0">
-                            <Image  Source="/imgs/media/icons/alarm-clock.png" Width="25" Height="25"/>
-                            <TextBlock x:Name="totalTimeText"  Margin="15,0,0,0" Style="{StaticResource TextBlockSubTitle}" HorizontalAlignment="Left"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,25,0,0">
-                            <Image Source="/imgs/media/icons/coins-sec.png" Width="25" Height="25"/>
-                            <TextBlock x:Name="totalPriceText" Style="{StaticResource TextBlockSubTitle}" Margin="15,0,0,0" HorizontalAlignment="Left"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,25,0,0">
-                            <Image Source="/imgs/media/icons/appointment.png" Width="25" Height="25"/>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock x:Name="dateText" Style="{StaticResource TextBlockSubTitle}" Margin="5,0,0,0" HorizontalAlignment="Left"/>
-                                <TextBlock x:Name="timeText" Style="{StaticResource TextBlockSubTitle}" Margin="15,0,0,0" HorizontalAlignment="Left"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </StackPanel>
-                        </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <!-- Средняя панель с кнопками перемещения услуг -->
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
+                        <Button x:Name="AddServiceButton" Content="→" FontSize="20" FontWeight="Bold"
+                                Width="40" Height="40" Margin="0,10" Click="AddServiceButton_Click"/>
+                        <Button x:Name="RemoveServiceButton" Content="←" FontSize="20" FontWeight="Bold"
+                                Width="40" Height="40" Margin="0,10" Click="RemoveServiceButton_Click"/>
                     </StackPanel>
-                    <StackPanel HorizontalAlignment="Right" Margin="0,0,15,0">
-                        <TextBlock Text="Выбранные услуги" Style="{StaticResource TextBlockTitle}" HorizontalAlignment="Left" />
-                        <ListBox x:Name="SelectedServicesListConfirm" Width="400" Margin="0,20,0,0" ItemsSource="{Binding _selectedServices}" Height="356"  HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
+                    <!-- Правая панель для выбранных услуг -->
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="Выбранные услуги:" FontSize="16" Margin="40,30,0,0"/>
+
+                        <ListBox x:Name="SelectedServicesList" Grid.Row="1" Height="450" Width="440"
+                                SelectionMode="Single" SelectionChanged="SelectedServicesList_SelectionChanged"
+                                MouseDoubleClick="SelectedServicesList_MouseDoubleClick">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Vertical" Margin="0,5,0,5">
-                                        <TextBlock  Text="{Binding Services.serviceName}" Style="{StaticResource TextBlockSubTitle}" HorizontalAlignment="Left"/>
+                                    <StackPanel Orientation="Vertical" Margin="5">
+                                        <TextBlock Text="{Binding Services.serviceName}" FontSize="14" FontWeight="SemiBold"/>
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <Image Source="/imgs/media/icons/alarm-clock.png" Width="20" Height="20"/>
-                                                <TextBlock Text="{Binding runTime, Converter={StaticResource TimeConverter}}" Margin="5,0,0,0" HorizontalAlignment="Left"/>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0">
-                                                <Image Source="/imgs/media/icons/coins-sec.png" Width="20" Height="20"/>
-                                                <TextBlock Text="{Binding price, Converter={StaticResource DefaultPriceConverter}}" Margin="5,0,0,0" HorizontalAlignment="Left"/>
-                                            </StackPanel>
+                                            <TextBlock Text="Цена: " FontSize="12"/>
+                                            <TextBlock Text="{Binding price, Converter={StaticResource DefaultPriceConverter}}" FontSize="12"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Длительность: " FontSize="12"/>
+                                            <TextBlock Text="{Binding runTime, Converter={StaticResource TimeConverter}}" FontSize="12"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <Button Content="Записать" Style="{StaticResource ButtonSuccess}" Margin="0,15,0,0" Width="126" HorizontalAlignment="Right" FontSize="16" Height="32" Click="CreateAppointmentButton_Click"/>
+
+                        <Button Grid.Row="2" x:Name="NextToDateButton" Content="Далее" 
+                                Style="{StaticResource ButtonPrimary}" Width="120" Height="35" 
+                                HorizontalAlignment="Right" Margin="0,10,40,50"
+                                Click="NextToDateButton_Click"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка 2: Выбор даты и мастера -->
+            <TabItem Header="Выбор даты и мастера" TabIndex="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Левая панель с календарём -->
+                    <StackPanel Grid.Column="0" Margin="10">
+                        <TextBlock Text="Выберите дату:" FontSize="16" Margin="0,10"/>
+                        <Calendar x:Name="AppointmentDatePicker" Margin="0,10" 
+                                 SelectedDatesChanged="AppointmentDatePicker_SelectedDatesChanged"
+                                 DisplayDateStart="{Binding Today}"/>
                     </StackPanel>
-                </StackPanel>
+
+                    <!-- Правая панель со списком мастеров и временем -->
+                    <Grid Grid.Column="1" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="Доступные мастера:" FontSize="16" Margin="0,10"/>
+
+                        <ListBox x:Name="MastersList" Grid.Row="1" SelectionMode="Single"
+                                SelectionChanged="MastersList_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="5,5,5,20">
+                                        <TextBlock>
+                                            <Run Text="{Binding Lname}"/>
+                                            <Run Text="{Binding Fname}"/>
+                                            <Run Text="{Binding Patronymic}"/>
+                                        </TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding MastersQualifications.TypeServices.name}" FontSize="12"/>
+                                            <TextBlock Text=", " FontSize="12"/>
+                                            <TextBlock Text="{Binding MastersSkills.name}" FontSize="12"/>
+                                        </StackPanel>
+
+                                        <!-- Доступные слоты времени (показываются только для выбранного мастера) -->
+                                        <StackPanel x:Name="TimeSlotsPanel" Visibility="Collapsed" Margin="0,10,0,0">
+                                            <TextBlock Text="Доступное время:" FontSize="14" Margin="0,0,0,5"/>
+                                            <ItemsControl x:Name="TimeSlotsList" ItemsSource="{Binding AvailableTimeSlots}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Button Content="{Binding}" Style="{StaticResource ButtonDefault}"
+                                                                Margin="5" Padding="10,5" Click="TimeSlotButton_Click"/>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                            <Button x:Name="BackToServicesButton" Content="Назад" 
+                                    Style="{StaticResource ButtonDefault}" Width="100" Height="35" 
+                                    Margin="0,0,10,0" Click="BackToServicesButton_Click"/>
+                            <Button x:Name="NextToConfirmButton" Content="Далее" 
+                                    Style="{StaticResource ButtonPrimary}" Width="100" Height="35" 
+                                    Click="NextToConfirmButton_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка 3: Подтверждение записи -->
+            <TabItem Header="Подтверждение" TabIndex="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Левая панель с информацией о записи -->
+                    <StackPanel Grid.Column="0" Margin="30,20,110,0">
+                        <TextBlock Text="Информация о клиенте" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Фамилия:" Margin="0,5"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="ClientLastNameText" Margin="0,5"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Имя:" Margin="0,5"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="ClientFirstNameText" Margin="0,5"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Телефон:" Margin="0,5"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="ClientPhoneText" Margin="0,5"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Email:" Margin="0,5"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="ClientEmailText" Margin="0,5"/>
+                        </Grid>
+
+                        <TextBlock Text="Информация о мастере" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="ФИО:" Margin="0,5"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="MasterFullNameText" Margin="0,5"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Квалификация:" Margin="0,5"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="MasterQualificationText" Margin="0,5"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Мастерство:" Margin="0,5"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="MasterSkillText" Margin="0,5"/>
+                        </Grid>
+
+                        <TextBlock Text="Информация о записи" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Дата:" Margin="0,5"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="AppointmentDateText" Margin="0,5"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Время начала:" Margin="0,5"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="AppointmentStartTimeText" Margin="0,5"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Время окончания:" Margin="0,5"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="AppointmentEndTimeText" Margin="0,5"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Общая стоимость:" Margin="0,5"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TotalPriceText" FontWeight="Bold" Foreground="{DynamicResource SuccessBrush}" Margin="0,5"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Правая панель со списком выбранных услуг и кнопками -->
+                    <StackPanel Margin="612,20,30,0" Grid.ColumnSpan="2">
+                        <TextBlock Text="Выбранные услуги" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                        <ListBox x:Name="ConfirmationServicesList" Height="400" Margin="0,0,0,20">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="5">
+                                        <TextBlock Text="{Binding Services.serviceName}" FontWeight="SemiBold"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                            <TextBlock Text="Цена: "/>
+                                            <TextBlock Text="{Binding price, Converter={StaticResource DefaultPriceConverter}}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Длительность: "/>
+                                            <TextBlock Text="{Binding runTime, Converter={StaticResource TimeConverter}}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                            <Button x:Name="BackToDateButton" Content="Назад" 
+                                    Style="{StaticResource ButtonDefault}" Width="100" Height="35" 
+                                    Margin="0,0,10,0" Click="BackToDateButton_Click"/>
+                            <Button x:Name="ConfirmAppointmentButton" Content="Подтвердить запись" 
+                                    Style="{StaticResource ButtonSuccess}" Width="160" Height="35" 
+                                    Click="ConfirmAppointmentButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </TabItem>
         </TabControl>
+
+        <!-- Область для уведомлений -->
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right">
             <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Top" Margin="0,10,10,10"/>
         </ScrollViewer>

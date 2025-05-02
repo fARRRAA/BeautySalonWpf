@@ -1,5 +1,4 @@
-﻿using BeautySalonWpf.WindowDialogs.ClientPage;
-using HandyControl.Controls;
+﻿using HandyControl.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -81,8 +80,8 @@ namespace BeautySalonWpf.Pages.Client.Tabs
 
         private void redactAppointment_Click(object sender, RoutedEventArgs e)
         {
-            var add = new RegisterAppointment(this,_client);
-            add.Show();
+            //var add = new RegisterAppointment(this,_client);
+            //add.Show();
         }
     }
 }

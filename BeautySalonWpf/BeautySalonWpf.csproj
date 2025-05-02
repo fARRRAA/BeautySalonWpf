@@ -295,9 +295,6 @@
     <Compile Include="WindowDialogs\AdminPage\Service\RedactService.xaml.cs">
       <DependentUpon>RedactService.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowDialogs\ClientPage\RegisterAppointment.xaml.cs">
-      <DependentUpon>RegisterAppointment.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WindowDialogs\MasterPage\AddMaterialReceive.xaml.cs">
       <DependentUpon>AddMaterialReceive.xaml</DependentUpon>
     </Compile>
@@ -470,10 +467,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowDialogs\ClientPage\RegisterAppointment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="WindowDialogs\MasterPage\AddMaterialReceive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -570,6 +563,7 @@
     <Folder Include="imgs\pfp\clients\" />
     <Folder Include="imgs\pfp\masters\" />
     <Folder Include="imgs\pfp\products\" />
+    <Folder Include="WindowDialogs\ClientPage\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="imgs\media\icons\discount.png" />
