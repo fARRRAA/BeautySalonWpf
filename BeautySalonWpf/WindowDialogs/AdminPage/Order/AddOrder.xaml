@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:BeautySalonWpf.WindowDialogs.AdminPage.Order"
         mc:Ignorable="d"
         Title="Создание заказа" Height="650" Width="900">
-    <Grid Background="#FF2C2C2E">
+    <Grid  Background="{DynamicResource BackgroundBrush}">
         <StackPanel Orientation="Vertical">
             <StackPanel Margin="0,50,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
                 <ComboBox x:Name="ClientsComboBox" IsReadOnly="True" ItemsSource="{Binding _typeServices}" SelectedIndex="0" hc:InfoElement.Title="Клиент" Style="{StaticResource ComboBoxExtend}" Height="70" Width="300" FontSize="16" Text=""/>
@@ -23,11 +23,11 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0">
-                    <TextBlock Text="Доступные товары" Foreground="White" FontSize="16" Margin="0,0,0,10"/>
-                    <ListBox x:Name="AvailableProductsListBox" Height="300" Background="#FF3E3E40" MouseDoubleClick="AddToCartButton_Click">
+                    <TextBlock Text="Доступные товары" Foreground="{DynamicResource TextBrush}" FontSize="16" Margin="0,0,0,10"/>
+                    <ListBox x:Name="AvailableProductsListBox" Height="300"  Background="{DynamicResource BackgroundBrush}" MouseDoubleClick="AddToCartButton_Click">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding name}" Foreground="White"/>
+                                <TextBlock Text="{Binding name}" Foreground="{DynamicResource TextBrush}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -39,19 +39,19 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="2">
-                    <TextBlock Text="Выбранные товары" Foreground="White" FontSize="16" Margin="0,0,0,10"/>
-                    <ListBox x:Name="SelectedProductsListBox" Height="300" Background="#FF3E3E40" MouseDoubleClick="RemoveFromCartButton_Click">
+                    <TextBlock Text="Выбранные товары" Foreground="{DynamicResource TextBrush}" FontSize="16" Margin="0,0,0,10"/>
+                    <ListBox x:Name="SelectedProductsListBox" Height="300" Background="{DynamicResource BackgroundBrush}" MouseDoubleClick="RemoveFromCartButton_Click">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                                     <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding Product.name}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                                        <TextBlock Text="{Binding Product.name}" Foreground="{DynamicResource TextBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                                     </StackPanel>
 
                                     <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" 
                                            Width="50" Margin="15,0,0,0"
                                            PreviewTextInput="NumberValidationTextBox" FontSize="11"/>
-                                    <TextBlock Text="шт." Foreground="White" HorizontalAlignment="Center" Margin="15,0,0,0" VerticalAlignment="Center" FontSize="16"/>
+                                    <TextBlock Text="шт." Foreground="{DynamicResource TextBrush}" HorizontalAlignment="Center" Margin="15,0,0,0" VerticalAlignment="Center" FontSize="16"/>
 
                                 </StackPanel>
                             </DataTemplate>
@@ -61,7 +61,7 @@
             </Grid>
 
             <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center">
-                <TextBlock x:Name="TotalPriceText" Text="Итого: 0 руб." Foreground="White" FontSize="18" Margin="0,0,0,10"/>
+                <TextBlock x:Name="TotalPriceText" Text="Итого: 0 руб." Foreground="{DynamicResource TextBrush}" FontSize="18" Margin="0,0,0,10"/>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="CloseAddBtn" Content="Отмена" FontSize="15" Height="37" Click="CloseAddBtn_Click" Width="128" Padding="10,0,10,0"/>
                     <Button x:Name="ConfirmAddBtn" Content="Добавить" Margin="10,0,0,0" FontSize="15" Height="37" Width="128" Padding="10,0,10,0" Click="ConfirmAddBtn_Click"/>

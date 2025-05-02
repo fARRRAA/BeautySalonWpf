@@ -9,7 +9,7 @@
         mc:Ignorable="d"
                 WindowStartupLocation="CenterScreen"
         Title="DeliveryDialog" Height="550" Width="600">
-    <Grid Background="#FF2C2C2E">
+    <Grid  Background="{DynamicResource BackgroundBrush}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
             <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center">
                 <StackPanel HorizontalAlignment="Center" >

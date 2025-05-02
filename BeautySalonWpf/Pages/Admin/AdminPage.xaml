@@ -7,10 +7,10 @@
       xmlns:hc="https://handyorg.github.io/handycontrol"
 
       mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="1400" 
+      d:DesignHeight="950" d:DesignWidth="1450" 
       Title="AdminPage">
 
-    <Grid Background="#2C2C2E">
+    <Grid  Background="{DynamicResource BackgroundBrush}">
 
         <TabControl TabStripPlacement="Left">
             <TabItem Width="218" HorizontalAlignment="Left">
@@ -21,7 +21,7 @@
                     </StackPanel>
                 </TabItem.Header>
 
-                <StackPanel Background="#2C2C2E">
+                <StackPanel  Background="{DynamicResource BackgroundBrush}">
                     <Grid HorizontalAlignment="Center" Margin="0,200,0,0">
                         <StackPanel>
                             <Image Source="/imgs/media/icons/hairdresser.png" x:Name="Photo" Width="304" Height="300" Grid.Row="0" HorizontalAlignment="Center" />
@@ -48,7 +48,7 @@
                         <TextBlock Text="Мастеры" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16"/>
                     </StackPanel>
                 </TabItem.Header>
-                <!--<StackPanel Background="#2C2C2E">
+                <!--<StackPanel  Background="{DynamicResource BackgroundBrush}">
                     <StackPanel Margin="15,0,0,0">
                         <StackPanel HorizontalAlignment="Left">
                             <hc:SearchBar x:Name="MasterSearchText" Height="35" FontSize="16" hc:InfoElement.ShowClearButton="True"  Width="600"  hc:InfoElement.Placeholder="Введите данные о мастере" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="" Style="{StaticResource SearchBarPlus}" hc:InfoElement.Necessary="True" TextChanged="AdminsSearchText_TextChanged" Margin="0,25,0,0" />

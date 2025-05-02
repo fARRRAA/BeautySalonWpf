@@ -30,7 +30,7 @@ namespace BeautySalonWpf.Pages.Admin
         {
             InitializeComponent();
             _mw = mw;
-            _mw.ChangeWindowSize(900, 1400);
+            _mw.ChangeWindowSize(950, 1450);
             _admin = admin;
             AdminTabFrame.Navigate(new AdminTab(_admin));
             MastersTabFrame.Navigate(new MastersTab(_admin));

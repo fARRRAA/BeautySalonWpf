@@ -7,7 +7,7 @@
                         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         Title="RedactProduct" Height="300" Width="650">
-    <Grid Background="#FF2C2C2E">
+    <Grid  Background="{DynamicResource BackgroundBrush}">
         <StackPanel Margin="00,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" Height="113" VerticalAlignment="Top">
                 <hc:TextBox  x:Name="NameText" hc:InfoElement.ShowClearButton="True" hc:InfoElement.Title="Название" Width="250" FontSize="16" Height="70" Margin="0,20,0,0" hc:InfoElement.Placeholder="Введите название" HorizontalAlignment="Left" />

@@ -10,7 +10,7 @@
       Title="ClientPage">
 
     <Grid>
-        <Grid Background="#2C2C2E">
+        <Grid  Background="{DynamicResource BackgroundBrush}">
 
             <TabControl TabStripPlacement="Left">
                 <TabItem Width="218" HorizontalAlignment="Left">
@@ -21,7 +21,7 @@
                         </StackPanel>
                     </TabItem.Header>
 
-                    <StackPanel Background="#2C2C2E">
+                    <StackPanel  Background="{DynamicResource BackgroundBrush}">
                         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,200,0,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>

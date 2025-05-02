@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         Title="RedactClient" Height="650" Width="850">
-    <Grid Background="#FF2C2C2E">
+    <Grid  Background="{DynamicResource BackgroundBrush}">
         <StackPanel Orientation="Horizontal" >
             <StackPanel Margin="20,20,0,0">
                 <hc:TextBox x:Name="LNameText" hc:InfoElement.ShowClearButton="True" hc:InfoElement.Title="Фамилия" Width="250" FontSize="16" Height="70" Margin="0,20,0,0" hc:InfoElement.Placeholder="Введите фамилию" />

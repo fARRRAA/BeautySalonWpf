@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="Добавление услуги" Height="500" Width="900">
-    <Grid Background="#FF2C2C2E">
+    <Grid  Background="{DynamicResource BackgroundBrush}">
         <StackPanel Orientation="Vertical" >
             <StackPanel Margin="0,50,0,0" HorizontalAlignment="Center" Orientation="Horizontal" >
                 <hc:TextBox x:Name="NameText" hc:InfoElement.ShowClearButton="True" hc:InfoElement.Title="Название услуги" Width="300" FontSize="16" Height="70" Margin="0,20,0,0" hc:InfoElement.Placeholder="Введите название" />

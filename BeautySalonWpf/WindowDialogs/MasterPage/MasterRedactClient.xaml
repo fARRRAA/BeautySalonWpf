@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="MasterRedactClient" Height="450" Width="800">
     
-    <Grid Background="#FF2C2C2E">
+    <Grid  Background="{DynamicResource BackgroundBrush}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <StackPanel Margin="20,20,0,0" HorizontalAlignment="Center">
                 <hc:TextBox x:Name="PreferencesText" MaxLength="999" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" HorizontalScrollBarVisibility="Visible" hc:InfoElement.ShowClearButton="True" Width="250" Height="160" FontSize="16" hc:InfoElement.Title="Предпочтения" Margin="0,20,0,0" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Пожелания клиента..." hc:InfoElement.TitlePlacement="Top"/>

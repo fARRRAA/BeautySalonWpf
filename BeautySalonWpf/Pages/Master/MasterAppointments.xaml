@@ -10,7 +10,7 @@
         d:DesignHeight="950" d:DesignWidth="1180"
   Title="AppointmentsTab">
 
-    <Grid  Background="#2C2C2E">
+    <Grid   Background="{DynamicResource BackgroundBrush}">
         <StackPanel Margin="10,0,0,0">
             <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
                 <StackPanel>

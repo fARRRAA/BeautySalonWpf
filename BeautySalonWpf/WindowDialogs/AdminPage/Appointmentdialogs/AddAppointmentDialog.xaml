@@ -7,7 +7,7 @@
         mc:Ignorable="d"
                       xmlns:hc="https://handyorg.github.io/handycontrol"
         Title="AddAppointment" Height="650" Width="1000">
-    <Grid  Background="#2C2C2E">
+    <Grid   Background="{DynamicResource BackgroundBrush}">
         <hc:StepBar x:Name="Steps"  StepIndex="{Binding StepIndex}" Height="33" VerticalAlignment="Top" Margin="35,20,15,0">
             <hc:StepBarItem HorizontalAlignment="Center">
             </hc:StepBarItem>

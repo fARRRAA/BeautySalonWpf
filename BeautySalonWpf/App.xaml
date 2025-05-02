@@ -9,7 +9,11 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
-                <hc:Theme SyncWithSystem="True"/>
+                <hc:Theme SyncWithSystem="True" />
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="BackgroundBrush" Color="#FFFFFF"/>
+                    <SolidColorBrush x:Key="TextBrush" Color="#000000"/>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <local:TimeConverter x:Key="TimeConverter"/>
             <local:PriceConverter x:Key="PriceConverter"/>

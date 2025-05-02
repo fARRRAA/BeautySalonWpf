@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:BeautySalonWpf.Pages.Master"
             xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="1400" 
+      d:DesignHeight="950" d:DesignWidth="1450" 
       Title="MasterPage">
 
-    <Grid Background="#2C2C2E">
+    <Grid  Background="{DynamicResource BackgroundBrush}">
 
         <TabControl TabStripPlacement="Left">
             <TabItem Width="218" HorizontalAlignment="Left">
@@ -20,7 +20,7 @@
                     </StackPanel>
                 </TabItem.Header>
 
-                <StackPanel Background="#2C2C2E">
+                <StackPanel  Background="{DynamicResource BackgroundBrush}">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,150,0,0">
                         <TextBlock Text="Добро пожаловать в Салон Красоты Зимняя Вишня"  TextWrapping="Wrap"  Margin="0,30,0,0" FontWeight="DemiBold"   Foreground="#FF99BE29" FontSize="30" HorizontalAlignment="Center" Grid.Row="1" TextAlignment="Center"/>
                         <StackPanel Width="446" Height="267" HorizontalAlignment="Center" Margin="0,50,0,0">

@@ -27,7 +27,7 @@ namespace BeautySalonWpf.Pages.Master
         {
             InitializeComponent();
             _mw = mw;
-            _mw.ChangeWindowSize(900, 1400);
+            _mw.ChangeWindowSize(950, 1450);
 
 
 

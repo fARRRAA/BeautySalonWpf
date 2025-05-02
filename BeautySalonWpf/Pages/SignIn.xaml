@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       xmlns:hc="https://handyorg.github.io/handycontrol"
       d:DesignHeight="600" d:DesignWidth="700"
-      Title="SignIn" Background="#2B2B2D">
+      Title="SignIn" Background="{DynamicResource BackgroundBrush}">
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0" Height="549">

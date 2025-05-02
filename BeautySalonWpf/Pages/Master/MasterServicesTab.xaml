@@ -10,7 +10,7 @@
   d:DesignHeight="950" d:DesignWidth="1180"
   Title="ServicesTab">
 
-    <StackPanel Background="#2C2C2E">
+    <StackPanel  Background="{DynamicResource BackgroundBrush}">
         <StackPanel Margin="15,0,0,0">
             <StackPanel HorizontalAlignment="Left">
                 <hc:SearchBar x:Name="ServiceSearchText" Height="35" FontSize="16" hc:InfoElement.ShowClearButton="True"  Width="600"  hc:InfoElement.Placeholder="Введите данные о услуге" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="" Style="{StaticResource SearchBarPlus}" hc:InfoElement.Necessary="True" TextChanged="ServiceSearchText_TextChanged" Margin="0,25,0,0" />

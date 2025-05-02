@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="AddMaterialReceive" Height="450" Width="600">
-    <Grid Background="#FF2C2C2E">
+    <Grid  Background="{DynamicResource BackgroundBrush}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <StackPanel Margin="20,20,0,0" HorizontalAlignment="Center">
                 <StackPanel HorizontalAlignment="Left" >

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Содержимое заказа" Height="600" Width="950"
                                xmlns:hc="https://handyorg.github.io/handycontrol">
-    <Grid Background="#FF2C2C2E">
+    <Grid  Background="{DynamicResource BackgroundBrush}">
         <StackPanel>
             <StackPanel Margin="0,30,0,0" Orientation="Horizontal" >
                 <StackPanel Width="490" Margin="15,0,0,0" Height="454" VerticalAlignment="Top">
