@@ -99,7 +99,7 @@
             </StackPanel>
             <StackPanel Margin="0,0,0,50" VerticalAlignment="Bottom" Orientation="Horizontal">
                 <Label x:Name="AppointmentsCountText" Content="Всего записей: " Margin="0,4,0,0" HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="562,0,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="542,0,0,0">
                     <Button x:Name="updateProducts" Background="#FF676767" Click="updateProducts_Click" HorizontalAlignment="Left" Margin="0,0,20,0">
                         <Image Source="/imgs/media/icons/refresh.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </Button>

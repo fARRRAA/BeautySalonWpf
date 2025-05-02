@@ -101,6 +101,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Converters\DateConverter.cs" />
+    <Compile Include="Converters\MonthNameConverter.cs" />
     <Compile Include="Converters\PercentConverter.cs" />
     <Compile Include="Converters\PriceConverter.cs" />
     <Compile Include="Converters\DefaultPriceConverter.cs" />
@@ -289,6 +290,9 @@
     <Compile Include="WindowDialogs\AdminPage\Providerdialog\RedactProvider.xaml.cs">
       <DependentUpon>RedactProvider.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowDialogs\AdminPage\SalaryDialogs\AddBonusDialog.xaml.cs">
+      <DependentUpon>AddBonusDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowDialogs\AdminPage\Service\AddService.xaml.cs">
       <DependentUpon>AddService.xaml</DependentUpon>
     </Compile>
@@ -456,6 +460,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="WindowDialogs\AdminPage\Providerdialog\RedactProvider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WindowDialogs\AdminPage\SalaryDialogs\AddBonusDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

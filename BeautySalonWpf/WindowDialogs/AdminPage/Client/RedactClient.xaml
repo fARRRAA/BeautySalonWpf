@@ -8,7 +8,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         Title="RedactClient" Height="650" Width="850">
     <Grid  Background="{DynamicResource BackgroundBrush}">
-        <StackPanel Orientation="Horizontal" >
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
             <StackPanel Margin="20,20,0,0">
                 <hc:TextBox x:Name="LNameText" hc:InfoElement.ShowClearButton="True" hc:InfoElement.Title="Фамилия" Width="250" FontSize="16" Height="70" Margin="0,20,0,0" hc:InfoElement.Placeholder="Введите фамилию" />
                 <hc:TextBox  x:Name="FNameText" hc:InfoElement.ShowClearButton="True" hc:InfoElement.Title="Имя" Width="250" FontSize="16" Height="70" Margin="0,20,0,0" hc:InfoElement.Placeholder="Введите имя" />
@@ -30,22 +30,6 @@
                         <Button x:Name="ConfirmAddBtn" Content="Подтвердить" Margin="10,0,0,0" FontSize="15" Height="37" Width="128" Padding="10,0,10,0" Click="ConfirmAddBtn_Click"></Button>
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
-            <StackPanel Margin="40,40,0,0">
-                <Border BorderThickness="1,1,1,1">
-                    <Border.BorderBrush>
-                        <LinearGradientBrush EndPoint="1,1" StartPoint="0.5,0">
-                            <GradientStop Color="Black"/>
-                            <GradientStop Color="White" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.BorderBrush>
-                    <Image x:Name="Photo" Width="200" Height="200"/>
-                </Border>
-                <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
-                    <!--<Button x:Name="deletePhoto" Content="Удалить" FontSize="14" Height="35"  Style="{StaticResource ButtonDashedDanger}"/>-->
-                    <Button x:Name="addPhoto" Content="Добавить"   FontSize="14" Height="35" Style="{StaticResource ButtonDashedSuccess}" Margin="0,0,0,0" Click="addPhoto_Click"/>
-                </StackPanel>
-
             </StackPanel>
         </StackPanel>
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right">

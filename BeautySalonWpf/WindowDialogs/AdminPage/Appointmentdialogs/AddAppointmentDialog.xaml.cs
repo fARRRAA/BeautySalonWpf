@@ -41,6 +41,7 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.Appointmentdialogs
         private List<Masters> _availableMasters = new List<Masters>();
         private Masters _selectedMaster;
         private TimeSpan? _selectedTimeSlot;
+        private Button _lastSelectedTimeButton = null; // Для хранения последней выбранной кнопки
         
         // Данные для вычислений
         private int _totalDuration = 0;
@@ -335,6 +336,8 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.Appointmentdialogs
             }
         }
         
+        
+        
         private void AddServiceButton_Click(object sender, RoutedEventArgs e)
         {
             if (ServicesList.SelectedItem is ServiceSkill selectedService)
@@ -475,8 +478,14 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.Appointmentdialogs
         {
             _selectedDate = AppointmentDatePicker.SelectedDate;
             
+            // Сбрасываем выбранное время и кнопку при смене даты
+            _selectedTimeSlot = null;
+            _lastSelectedTimeButton = null;
+            
             if (_selectedDate.HasValue)
             {
+                // Показываем информационное сообщение
+                
                 // Загрузка доступных мастеров для выбранной даты и услуг
                 LoadAvailableMasters();
             }
@@ -540,12 +549,10 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.Appointmentdialogs
                       DbFunctions.TruncateTime(a.date) == DbFunctions.TruncateTime(date))
                 .ToList();
             
-            // Создаем временные слоты с шагом 30 минут
             for (var time = startTime; time.Add(appointmentDuration) <= endTime; time = time.Add(TimeSpan.FromMinutes(30)))
             {
                 bool isAvailable = true;
                 
-                // Проверяем, нет ли пересечений с существующими записями
                 foreach (var appointment in appointments)
                 {
                     if ((appointment.timeStart <= time && appointment.timeEnd > time) ||
@@ -570,42 +577,41 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.Appointmentdialogs
 
         private void MastersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            _selectedTimeSlot = null;
+            _lastSelectedTimeButton = null;
+            
             if (MastersList.SelectedItem is Masters selectedMaster)
             {
                 _selectedMaster = selectedMaster;
                 
-                // Показать доступные слоты времени для выбранного мастера
+                
                 foreach (var item in MastersList.Items)
                 {
                     if (item is Masters master)
                     {
-                        // Находим ContentPresenter для этого элемента
                         var container = MastersList.ItemContainerGenerator.ContainerFromItem(master) as ListBoxItem;
                         if (container != null)
                         {
-                            // Находим TimeSlotsPanel внутри шаблона
                             var timeSlotsPanel = FindVisualChild<StackPanel>(container, "TimeSlotsPanel");
                             
                             if (timeSlotsPanel != null)
                             {
-                                // Показываем панель только для выбранного мастера
                                 timeSlotsPanel.Visibility = (master == selectedMaster) 
                                     ? Visibility.Visible 
                                     : Visibility.Collapsed;
                                 
-                                // Если это выбранный мастер, загружаем доступные слоты
                                 if (master == selectedMaster)
                                 {
                                     var timeSlotsList = FindVisualChild<ItemsControl>(container, "TimeSlotsList");
                                     if (timeSlotsList != null)
                                     {
-                                        // Получаем доступные слоты для выбранного мастера
                                         var availableSlots = GetAvailableTimeSlots(
                                             selectedMaster, 
                                             _selectedDate.Value, 
                                             _totalDuration);
                                             
                                         timeSlotsList.ItemsSource = availableSlots;
+
                                     }
                                 }
                             }
@@ -635,20 +641,26 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.Appointmentdialogs
         
         private void TimeSlotButton_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button button && button.Content is TimeSpan timeSlot)
+            if (sender is Button clickedButton && clickedButton.Content is TimeSpan timeSlot)
             {
+                // Если нажата та же кнопка, что уже выбрана - ничего не делаем
+                if (_lastSelectedTimeButton == clickedButton && _selectedTimeSlot == timeSlot)
+                    return;
+                
+                // Сохраняем выбранное время
                 _selectedTimeSlot = timeSlot;
                 
-                // Выделяем выбранный слот времени
-                foreach (var container in MastersList.ItemContainerGenerator.Items)
+                // Сбрасываем выделение предыдущей кнопки, если она была
+                if (_lastSelectedTimeButton != null)
                 {
-                    if (container is Button timeButton)
-                    {
-                        timeButton.Background = (timeButton == button) 
-                            ? new SolidColorBrush(Colors.LightBlue) 
-                            : new SolidColorBrush(Colors.Transparent);
-                    }
+                    _lastSelectedTimeButton.Tag = false;
                 }
+                
+                // Выделяем текущую кнопку и сохраняем ссылку на нее
+                clickedButton.Tag = true;
+                _lastSelectedTimeButton = clickedButton;
+                
+                // Уведомляем пользователя о выбранном времени
             }
         }
         
@@ -845,6 +857,15 @@ namespace BeautySalonWpf.WindowDialogs.AdminPage.Appointmentdialogs
             {
                 return null;
             }
+        }
+        
+        // Обработчик закрытия окна
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            
+            // Очищаем ссылки для предотвращения утечек памяти
+            _lastSelectedTimeButton = null;
         }
     }
 }

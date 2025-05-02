@@ -45,7 +45,7 @@ namespace BeautySalonWpf.WindowDialogs.Client
             PreferencesText.Text = _client.Preferences;
             if (!string.IsNullOrWhiteSpace(_client.photo))
             {
-                Photo.Source = new BitmapImage(new Uri(System.IO.Path.Combine(adminProfilePhotoFolder, _client.photo.Replace(removePath, string.Empty)), UriKind.RelativeOrAbsolute));
+                //Photo.Source = new BitmapImage(new Uri(System.IO.Path.Combine(adminProfilePhotoFolder, _client.photo.Replace(removePath, string.Empty)), UriKind.RelativeOrAbsolute));
             }
         }
         private async void ConfirmAddBtn_Click(object sender, RoutedEventArgs e)
