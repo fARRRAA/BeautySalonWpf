@@ -60,7 +60,7 @@ namespace BeautySalonApi.Services.AppointmentsService
             ).Include(x => x.MastersQualifications.TypeServices).Include(x => x.MastersSkills).ToList();
         }
 
-        public List<TimeSpan> GetAvailableSlots(int serviceId, int skillId, DateTime date, int duration)
+        public List<TimeSpan> GetAvailableSlots(int masterId ,int serviceId, int skillId, DateTime date, int duration)
         {
             var availableSlots = new List<TimeSpan>();
             var startTime = new TimeSpan(9, 0, 0);
@@ -72,6 +72,7 @@ namespace BeautySalonApi.Services.AppointmentsService
             for (var time = startTime; time.Add(appointmentDurations) <= endTime; time = time.Add(TimeSpan.FromMinutes(30)))
             {
                 bool isAvailable = !_context.Appointments.Any(a =>
+                    a.masterId == masterId &&
                     a.Masters.qualificationId == service.typeServiceId &&
                     a.Masters.skillId == skillId &&
                     a.date == date &&

@@ -26,9 +26,9 @@ namespace BeautySalonApi.Controllers
 
         }
         [HttpGet("time")]
-        public async Task<IActionResult> GetAvaiableTime(int serviceId, int skillId, DateTime date, int duration)
+        public async Task<IActionResult> GetAvaiableTime(int masterId, int serviceId, int skillId, DateTime date, int duration)
         {
-            return Ok(_service.GetAvailableSlots(serviceId,skillId, date, duration));
+            return Ok(_service.GetAvailableSlots(masterId,serviceId,skillId, date, duration));
         }
         [HttpGet("client/{id}")]
         public async Task<IActionResult> GetClientApps(int id)

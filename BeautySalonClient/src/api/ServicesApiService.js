@@ -25,7 +25,6 @@ export class ServicesApiService {
     async getAll(params = {}) {
         try {
             const response = await this.axiosInstance.get("/Services/services", { params });
-            console.log(response);
             const transformedData = response.data.map(item => ({
                 id: item.id,
                 serviceId: item.serviceId,

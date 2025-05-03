@@ -50,6 +50,7 @@ const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
                     const timeSlotsMap = {};
                     for (const master of response) {
                         const timeSlots = await appointmentApi.getTimeSlots({
+                            masterId: master.masterId,
                             serviceId: getServiceId(),
                             skillId: getSkillId(),
                             date: formattedDate,
@@ -59,6 +60,7 @@ const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
                         if (timeSlots && timeSlots.length > 0) {
                             timeSlotsMap[master.masterId] = timeSlots;
                         }
+                        console.log(timeSlotsMap)
                     }
                     setMastersTimeSlots(timeSlotsMap);
                 } else {
@@ -114,6 +116,7 @@ const DateMasterSelection = ({ onNext, onPrev, appointmentData }) => {
     const formatTime = (timeString) => {
         return timeString.slice(0, 5);
     };
+    console.log(selectedMaster)
     return (
         <div className={styles.step_container}>
             <div className={styles.date_master_container}>
