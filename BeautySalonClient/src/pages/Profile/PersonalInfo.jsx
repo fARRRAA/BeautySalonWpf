@@ -85,12 +85,6 @@ export const PersonalInfo = ({ user }) => {
                                 </div>
                             </div>
 
-                            <div className={styles.profile_stats}>
-                                <div className={styles.stats_item}>
-                                    <span className={styles.stats_value}>{userData.visitsCount}</span>
-                                    <span className={styles.stats_label}>посещений</span>
-                                </div>
-                            </div>
                         </div>
                         : <p>загрузка данных...</p>
                 }

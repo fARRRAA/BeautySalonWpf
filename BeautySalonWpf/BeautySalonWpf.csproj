@@ -41,8 +41,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="HandyControl, Version=3.5.1.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
-      <HintPath>..\packages\HandyControl.3.5.1\lib\net472\HandyControl.dll</HintPath>
+    <Reference Include="HandyControl, Version=3.5.2.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
+      <HintPath>..\packages\HandyControls.3.5.3\lib\net472\HandyControl.dll</HintPath>
     </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
@@ -578,6 +578,8 @@
     <Resource Include="imgs\media\icons\boxes.png" />
     <Resource Include="imgs\media\icons\reduce-cost.png" />
     <Resource Include="imgs\media\icons\salary.png" />
+    <Resource Include="imgs\media\icons\darkmode.png" />
+    <Resource Include="imgs\media\icons\lightmode.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

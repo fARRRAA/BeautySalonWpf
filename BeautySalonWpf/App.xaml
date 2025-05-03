@@ -7,9 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
-                <hc:Theme SyncWithSystem="True" />
+                <hc:ThemeResources RequestedTheme="Dark" UsingSystemTheme="true" SystemThemeChanged="ThemeResources_OnSystemThemeChanged"/>
+                <hc:Theme/>
                 <ResourceDictionary>
                     <SolidColorBrush x:Key="BackgroundBrush" Color="#FFFFFF"/>
                     <SolidColorBrush x:Key="TextBrush" Color="#000000"/>

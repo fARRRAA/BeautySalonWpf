@@ -22,8 +22,18 @@ export function Register() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (currentUser.isAuth) {
+        const userCookie = Cookies.get('user');
+        if (userCookie) {
+            const user = JSON.parse(userCookie);
+            dispatch(setUser({
+                id: user.id,
+                email: user.email,
+                phone: user.phone,
+                role: user.role,
+                isEmailConfirmed: user.isEmailConfirmed
+            }));
             navigate("/");
+
         }
     }, [])
 
@@ -67,7 +77,7 @@ export function Register() {
                 return;
             }
             var res = await api.checkUser(formData.email);
-            if(res){
+            if (res) {
                 showToastMessageError('Пользователь с такой почтой существует');
                 return;
             }
@@ -78,7 +88,7 @@ export function Register() {
                     lname: formData.lastName,
                     phone: formData.phone
                 });
-                
+
                 showToastMessageSuccess("Код подтверждения отправлен на почту");
                 setIsConfirmStep(true);
             } catch (error) {
@@ -96,7 +106,7 @@ export function Register() {
                 return;
             }
             showToastMessageSuccess("Email успешно подтвержден.");
-            
+
             var user = await api.getUserByEmail(formData.email);
             dispatch(setUser({
                 id: user.userID,

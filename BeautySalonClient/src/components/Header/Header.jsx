@@ -100,6 +100,10 @@ export function Header() {
                                 <p className={h.nav_item}>Услуги</p>
 
                             </Link>
+                            <Link to="/shop">
+                                <p className={h.nav_item}>Магазин</p>
+
+                            </Link>
                             <Link to="/">
                                 <div className={h.logo}>
 

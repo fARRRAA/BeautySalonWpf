@@ -7,9 +7,12 @@ import { useCartActions } from '../../../hooks/useCartAction';
 import { useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useLocation } from 'react-router-dom';
+import { LogoBanner } from '../../../components/LogoBanner/LogoBanner';
 export function Catalog() {
-    const [allProducts, setAllProducts] = useState([]); 
+    const location = useLocation();
+
+    const [allProducts, setAllProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [types, setTypes] = useState();
     const [error, setError] = useState(null);
@@ -88,7 +91,7 @@ export function Catalog() {
 
         // Проверка, есть ли товар уже в корзине
         const itemInCart = items.find(item => item.id === product.productId);
-        
+
         if (itemInCart) {
             // Если товар уже в корзине, не выполняем никаких действий
             toast.warning("Товар уже добавлен в корзину");
@@ -96,7 +99,7 @@ export function Catalog() {
         } else {
             // Немедленно обновляем локальное состояние - добавляем в список "в процессе добавления"
             setAddingProducts(prev => [...prev, product.productId]);
-            
+
             // Добавляем товар в корзину
             addToCart({
                 userId: user.id,
@@ -112,7 +115,7 @@ export function Catalog() {
         if (user && user.id) {
             // Немедленно обновляем локальное состояние
             setAddedProducts(prev => prev.filter(id => id !== productId));
-            
+
             // Отправляем запрос на сервер
             removeFromCart({ userId: user.id, productId });
             toast.info("Товар удален из корзины");
@@ -120,14 +123,26 @@ export function Catalog() {
     };
 
     return (
-        <div className={s.catalog} id="catalog">
+        <div className={s.catalog} style={{
+            marginTop: location.pathname === "/shop" ? "0px" : "120px",
+        }}>
             <ToastContainer position="top-center" autoClose={3000} />
             <div className="container">
-                <div className={s.catalog_inner}>
-                    <p className={s.title}>Наши товары</p>
-                    <p className={s.subtitle}> </p>
-                    <div className={s.catalog_filter}>
-                        {types ? 
+                <div className={s.catalog_inner} id="catalog">
+                    {
+                        location.pathname === "/shop" ?
+                            <LogoBanner title="Магазин" />
+                            :
+                            <div>
+                                <p className={s.title}>Наши товары</p>
+                                <p className={s.subtitle}> </p>
+                            </div>
+
+                    }
+                    <div className={s.catalog_filter} style={{
+            marginTop: location.pathname === "/shop" ? "40px" : "0px",
+        }}>
+                        {types ?
                             types.map(type => (
                                 <button key={type.typeId} onClick={() => filterProducts(type.typeId)}>
                                     <p className={`${s.type_name} ${selectedId === type.typeId ? s.active : ""}`}>
@@ -139,7 +154,7 @@ export function Catalog() {
                         }
                     </div>
                     <div className={s.catalog_wrapper}>
-                        {filteredProducts ? 
+                        {filteredProducts ?
                             filteredProducts.map(item => (
                                 <div className={s.shop_item} key={item.productId}>
                                     <img src={item.photo} alt={item.name} className={s.item_img} />
@@ -147,13 +162,13 @@ export function Catalog() {
                                     <p className={s.item_type}>{item.typeProducts.name}</p>
                                     <p className={s.item_price}>{item.price} ₽</p>
                                     <div className={s.stock_and_cart}>
-                                        <button 
+                                        <button
                                             className={`${s.add_to_cart_btn} ${isInCart(item.productId) ? s.in_cart : ''}`}
                                             onClick={() => handleAddToCart(item)}
                                             disabled={isInCart(item.productId)}
                                         >
-                                            {isInCart(item.productId) 
-                                                ? "В корзине" 
+                                            {isInCart(item.productId)
+                                                ? "В корзине"
                                                 : "В корзину"
                                             }
                                         </button>

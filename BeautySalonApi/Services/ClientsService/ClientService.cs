@@ -83,7 +83,7 @@ namespace BeautySalonApi.Services.ClientsService
             var expirationTime = DateTime.UtcNow.AddMinutes(3);
             client.loginCode = verificationCode;
             client.codeExpiration = expirationTime;
-           // SendVerificationCode(email, verificationCode);
+           SendVerificationCode(email, verificationCode);
 
             await _context.SaveChangesAsync();
         }

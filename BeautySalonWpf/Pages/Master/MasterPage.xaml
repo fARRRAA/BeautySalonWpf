@@ -9,7 +9,7 @@
       d:DesignHeight="950" d:DesignWidth="1450" 
       Title="MasterPage">
 
-    <Grid  Background="{DynamicResource BackgroundBrush}">
+    <Grid x:Name="MasrerPageGrid"  Background="{DynamicResource BackgroundBrush}">
 
         <TabControl TabStripPlacement="Left">
             <TabItem Width="218" HorizontalAlignment="Left">
@@ -103,10 +103,19 @@
                 <Frame x:Name="SalaryFrame"></Frame>
             </TabItem>
         </TabControl>
-        <Button x:Name="QuitBtn" HorizontalAlignment="Left" Margin="14,799,0,0" VerticalAlignment="Top" Width="58" Height="50" Click="QuitBtn_Click">
-            <Image Source="/imgs/media/icons/logout.png" Width="30" Height="30"/>
-        </Button>
-            
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="30,0,0,60" VerticalAlignment="Bottom">
+            <Button x:Name="QuitBtn" HorizontalAlignment="Left" Margin="0,0,10,0" VerticalAlignment="Top" Width="50" Height="36" Click="QuitBtn_Click">
+                <Image Source="/imgs/media/icons/logout.png" Width="26" Height="26"/>
+            </Button>
+            <Button x:Name="ThemeToggleButton" Click="ThemeToggleButton_Click" 
+         ToolTip="Сменить тему"
+         Style="{StaticResource ButtonPrimary}" Height="36" Width="50">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/imgs/media/icons/darkmode.png" Width="26" Height="26" Margin="0,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right">
             <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Top" Margin="0,10,10,10"/>
         </ScrollViewer>

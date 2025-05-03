@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Diagnostics;
 using System.Windows.Media;
+using HandyControl.Themes;
+using HandyControl.Tools;
+using HandyControl.Data;
 
 namespace BeautySalonWpf
 {
@@ -25,30 +28,24 @@ namespace BeautySalonWpf
         {
             base.OnStartup(e);
             
-            bool isDarkTheme = IsSystemUsingSolidColorTheme();
-            SetTheme(isDarkTheme);
+            // Принудительно устанавливаем тёмную тему при запуске
+            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+            
+            // Обработка системной темы происходит через HandyControl
+            // Настройка происходит через App.xaml в ThemeResources
         }
         
-        private bool IsSystemUsingSolidColorTheme()
+        private void ThemeResources_OnSystemThemeChanged(object sender, FunctionEventArgs<ThemeManager.SystemTheme> e)
         {
-            try
-            {
-                Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
-                if (key != null)
-                {
-                    object value = key.GetValue("AppsUseLightTheme");
-                    if (value != null && value is int)
-                    {
-                        // 0 означает, что используется темная тема
-                        return (int)value == 0;
-                    }
-                }
-            }
-            catch
-            {
-                // В случае ошибки возвращаем false (светлая тема по умолчанию)
-            }
-            return false;
+            Debug.WriteLine($"Системная тема изменена: {e.Info.CurrentTheme}");
+            
+            // Дополнительные действия при изменении системной темы
+            // Например, логирование или обновление специфичных элементов
+            
+            Application.Current.Dispatcher.Invoke(() => {
+                // Обновление пользовательских ресурсов соответственно системной теме
+                UpdateCustomResources(e.Info.CurrentTheme == ApplicationTheme.Dark);
+            });
         }
         
         /// <summary>
@@ -56,6 +53,20 @@ namespace BeautySalonWpf
         /// </summary>
         /// <param name="isDark">true - тёмная тема, false - светлая тема</param>
         public static void SetTheme(bool isDark)
+        {
+            // Изменяем тему через ThemeManager
+            ThemeManager.Current.ApplicationTheme = isDark 
+                ? ApplicationTheme.Dark 
+                : ApplicationTheme.Light;
+                
+            // Обновляем пользовательские ресурсы
+            UpdateCustomResources(isDark);
+        }
+        
+        /// <summary>
+        /// Обновляет пользовательские ресурсы в соответствии с выбранной темой
+        /// </summary>
+        private static void UpdateCustomResources(bool isDark)
         {
             // Получаем ресурсы приложения
             var resources = Application.Current.Resources;
