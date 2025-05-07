@@ -40,9 +40,23 @@ namespace BeautySalonWpf.Pages.Admin.Tabs
 
         }
 
-        private void deleteAppointment_Click(object sender, RoutedEventArgs e)
+        private async void deleteAppointment_Click(object sender, RoutedEventArgs e)
         {
-
+            var app = AppointmentsList.SelectedItem as Appointments;
+            var appItems = ConnectionDb.db.AppointmentsServices.Where(x=>x.appointmentId==app.id).ToList();
+            if (app != null)
+            {
+                ConnectionDb.db.Appointments.Remove(app);
+                if(appItems != null)
+                {
+                    ConnectionDb.db.AppointmentsServices.RemoveRange(appItems);
+                    ConnectionDb.db.SaveChanges();
+                    Growl.Success("Удаление прошло успешно!");
+                    await Task.Delay(1500);
+                    Growl.Clear();
+                    UpdateAppoinmentsList();
+                }
+            }
         }
 
         private void addAppointment_Click(object sender, RoutedEventArgs e)

@@ -46,7 +46,8 @@
 .item_img {
     width: 306px;
     height: 320px;
-    object-fit: cover;
+    object-fit: contain;
+
 }
 
 .item_name {

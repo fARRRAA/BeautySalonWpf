@@ -52,7 +52,7 @@ transition: .15s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 .item_img {
     width: 200px;
     height: 220px;
-    object-fit: cover;
+    object-fit: contain;
 }
 .item_name {
     margin-top: 10px;
