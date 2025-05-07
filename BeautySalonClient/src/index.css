@@ -32,6 +32,8 @@ body {
     font-family: var(--inter-font);
     /* Для плавного скролла */
     scroll-behavior: smooth;
+    padding: 0;
+    margin: 0;
 }
 
 body {

@@ -31,3 +31,34 @@
 
 }
 
+@media (max-width: 900px) {
+    .banner_inner {
+        flex-direction: column;
+        gap: 24px;
+        align-items: center;
+    }
+    .banner_content {
+        gap: 18px;
+    }
+    .banner_content>p, .banner_subtitle {
+        max-width: 90vw;
+        font-size: 15px;
+    }
+    .banner_btn {
+        font-size: 18px;
+        padding: 10px 24px;
+    }
+}
+@media (max-width: 600px) {
+    .banner {
+        margin-top: 40px;
+    }
+    .banner_content>p, .banner_subtitle {
+        font-size: 13px;
+    }
+    .banner_btn {
+        font-size: 15px;
+        padding: 8px 12px;
+    }
+}
+

@@ -54,3 +54,40 @@
 .btn:hover {
     background-color: #9a0909;
 }
+
+@media (max-width: 900px) {
+    .banner_content {
+        width: 90vw;
+        padding: 24px;
+    }
+    .sale_text {
+        font-size: 22px;
+    }
+    .sale_title {
+        font-size: 28px;
+    }
+    .btn {
+        font-size: 16px;
+        padding: 10px 24px;
+    }
+}
+@media (max-width: 600px) {
+    .banner {
+        margin-top: 40px;
+        padding: 40px 0;
+    }
+    .banner_content {
+        width: 98vw;
+        padding: 8px;
+    }
+    .sale_text {
+        font-size: 14px;
+    }
+    .sale_title {
+        font-size: 18px;
+    }
+    .btn {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+}

@@ -220,4 +220,70 @@
         width: 100%;
         justify-content: space-between;
     }
+}
+
+@media (max-width: 600px) {
+    .cartPage {
+        margin: 30px 0;
+        padding: 10px 0;
+    }
+    .cartPage h1 {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+    .cartItem, .cartSummary {
+        width: 98vw;
+        min-width: unset;
+        max-width: 99vw;
+        padding: 10px;
+    }
+    .cartItems {
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+    .itemInfo h3 {
+        font-size: 15px;
+    }
+    .itemDescription {
+        font-size: 12px;
+    }
+    .itemStock {
+        font-size: 10px;
+    }
+    .itemControls {
+        gap: 10px;
+    }
+    .quantityBtn, .removeBtn {
+        width: 24px;
+        height: 24px;
+        font-size: 13px;
+    }
+    .count, .price {
+        font-size: 13px;
+        min-width: 40px;
+    }
+    .totalPrice {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+    .checkoutBtn, .btnServices {
+        font-size: 13px;
+        padding: 8px;
+    }
+    .emptyCart {
+        margin-top: 30px;
+        margin-bottom: 60px;
+        padding: 20px 0;
+    }
+    .emptyCart h2 {
+        font-size: 16px;
+    }
+    .emptyCart p {
+        font-size: 12px;
+        margin-bottom: 16px;
+    }
+    .loading, .error {
+        font-size: 13px;
+        padding: 30px 0;
+    }
 } 

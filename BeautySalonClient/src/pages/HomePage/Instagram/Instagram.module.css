@@ -29,3 +29,31 @@ margin-bottom: 20px;
     width: 288px;
     aspect-ratio: 1;
 }
+
+@media (max-width: 900px) {
+    .img {
+        width: 180px;
+    }
+    .title {
+        font-size: 28px;
+    }
+}
+@media (max-width: 600px) {
+    .img {
+        width: 90vw;
+        max-width: 320px;
+    }
+    .title {
+        font-size: 18px;
+    }
+    .subtitle {
+        font-size: 13px;
+    }
+    .instagram {
+        margin-top: 40px;
+    }
+    .wrapper {
+        gap: 8px;
+        margin-top: 16px;
+    }
+}

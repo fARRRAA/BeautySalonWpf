@@ -187,6 +187,62 @@
     }
 }
 
+@media (max-width: 900px) {
+    .step_wrapper {
+        flex-direction: column;
+        gap: 18px;
+        align-items: stretch;
+    }
+    .confirm_section, .confirm_section.summary {
+        padding: 10px;
+        gap: 12px;
+    }
+    .info_block {
+        width: 100%;
+        padding: 8px;
+    }
+    .summary_block {
+        width: 100%;
+        padding: 10px;
+    }
+    .button_group {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+    }
+    .button {
+        width: 100%;
+        font-size: 15px;
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .step_container {
+        padding: 4px;
+    }
+    .info_title {
+        font-size: 1rem;
+        padding-bottom: 4px;
+    }
+    .info_label, .info_value {
+        font-size: 0.95rem;
+    }
+    .info_row {
+        padding: 6px;
+    }
+    .summary_block {
+        padding: 6px;
+    }
+    .total_label, .total_value {
+        font-size: 0.95rem;
+    }
+    .button {
+        font-size: 13px;
+        padding: 8px 0;
+    }
+}
+
 /* Дополнительные стили */
 .duration_badge {
     font-size: 0.8rem;

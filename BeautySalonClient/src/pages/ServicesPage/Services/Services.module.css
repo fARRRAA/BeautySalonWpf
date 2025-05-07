@@ -89,3 +89,59 @@
     border-bottom: 2px dotted #ccc;
     z-index: 1;
 }
+
+@media (max-width: 1100px) {
+    .services_title {
+        font-size: 32px;
+    }
+    .group_title {
+        font-size: 24px;
+    }
+    .services_wrapper {
+        gap: 40px;
+    }
+    .service_section {
+        gap: 20px;
+    }
+    .service_image {
+        width: 220px;
+        height: 220px;
+    }
+}
+@media (max-width: 800px) {
+    .services {
+        margin-top: 60px;
+    }
+    .services_title {
+        font-size: 22px;
+    }
+    .services_subtitle {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+    .group_title {
+        font-size: 16px;
+    }
+    .services_wrapper {
+        gap: 18px;
+    }
+    .service_section {
+        flex-direction: column !important;
+        align-items: center;
+        gap: 10px;
+    }
+    .service_image {
+        width: 90vw;
+        max-width: 320px;
+        height: 120px;
+    }
+    .service_list {
+        gap: 10px;
+    }
+    .service_name, .service_price {
+        font-size: 14px;
+    }
+    .service_item::after {
+        bottom: 2px;
+    }
+}

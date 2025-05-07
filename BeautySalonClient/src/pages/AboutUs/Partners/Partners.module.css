@@ -8,3 +8,19 @@
     justify-content: space-between;
     align-items: center;
 }
+@media (max-width: 900px) {
+    .partners_inner {
+        flex-direction: column;
+        gap: 18px;
+        align-items: center;
+    }
+    .partners {
+        padding: 24px 0;
+    }
+}
+@media (max-width: 600px) {
+    .partners {
+        margin-top: 40px;
+        padding: 12px 0;
+    }
+}

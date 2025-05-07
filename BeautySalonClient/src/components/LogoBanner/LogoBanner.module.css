@@ -19,6 +19,7 @@
 }
 .banner_title {
     width: 1000px;
+    max-width: 95vw;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -26,6 +27,20 @@
     font-family: var(--imperial-font);
     font-size: 100px;
     color: var(--clr-primary);
+}
+@media (max-width: 900px) {
+    .banner_title {
+        width: 90vw;
+        max-width: 90vw;
+        font-size: 72px;
+    }
+}
+@media (max-width: 600px) {
+    .banner_title {
+        width: 98vw;
+        max-width: 98vw;
+        font-size: 60px;
+    }
 }
 .banner_bottom {
     width: 100%;

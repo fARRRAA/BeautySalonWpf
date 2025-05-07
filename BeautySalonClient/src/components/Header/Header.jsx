@@ -6,6 +6,7 @@ import { useCartActions } from '../../hooks/useCartAction'
 import { useSelector } from 'react-redux'
 import { MiniCart } from './MiniCart'
 import { useAuth } from '../../hooks/useAuth'
+import { FaBars, FaTimes } from 'react-icons/fa'
 
 export function Header() {
     const { items, totalItems, loading } = useCart();
@@ -16,6 +17,7 @@ export function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [hidden, setHidden] = useState(false);
     const lastScrollY = useRef(0);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
         if (user && user.id) {
@@ -49,6 +51,17 @@ export function Header() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    // Закрытие меню при изменении ширины окна (например, если пользователь развернул экран)
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth > 900 && menuOpen) {
+                setMenuOpen(false);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [menuOpen]);
 
     const handleMouseEnter = () => {
         clearTimeout(miniCartTimeoutRef.current);
@@ -92,19 +105,21 @@ export function Header() {
 
                             </Link>
                         </div>
-                        <nav className={h.header_nav}>
-                            <Link to="">
+                        {/* Бургер-меню для мобильных */}
+                        <div className={h.burger} onClick={() => setMenuOpen(!menuOpen)}>
+                            {menuOpen ? <FaTimes size={28} /> : <FaBars size={28} />}
+                        </div>
+                        <nav className={`${h.header_nav} ${menuOpen ? h.open : ''}`}>
+                            <Link to="" onClick={() => setMenuOpen(false)}>
                                 <p className={h.nav_item}>Главная</p>
                             </Link>
-                            <Link to="/services">
+                            <Link to="/services" onClick={() => setMenuOpen(false)}>
                                 <p className={h.nav_item}>Услуги</p>
-
                             </Link>
-                            <Link to="/shop">
+                            <Link to="/shop" onClick={() => setMenuOpen(false)}>
                                 <p className={h.nav_item}>Магазин</p>
-
                             </Link>
-                            <Link to="/">
+                            <Link to="/" onClick={() => setMenuOpen(false)}>
                                 <div className={h.logo}>
 
                                     <svg width="64" height="48" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -122,20 +137,62 @@ export function Header() {
                                     </svg>
                                 </div>
                             </Link>
-                            <Link to="/about">
+                            <Link to="/about" onClick={() => setMenuOpen(false)}>
                                 <p className={h.nav_item}>О нас</p>
-
                             </Link>
-
-                            <Link to="/contacts">
+                            <Link to="/contacts" onClick={() => setMenuOpen(false)}>
                                 <p className={h.nav_item}>Контакты</p>
-
                             </Link>
-                            <Link to="/book">
+                            <Link to="/book" onClick={() => setMenuOpen(false)}>
                                 <p className={h.nav_item}>Записаться</p>
-
                             </Link>
+                            {/* Иконки и кнопки в бургер-меню (только для мобильных) */}
+                            <div className={h.mobile_btns}>
+                                <div className={h.button}>
+                                    <div
+                                        className={h.cart_wrapper}
+                                        onMouseEnter={handleMouseEnter}
+                                        onMouseLeave={handleMouseLeave}
+                                    >
+                                        <Link to="/cart" onClick={() => setMenuOpen(false)}>
+                                            <div className={h.cart_btn}>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C20.96 5.34 21 5.17 21 5C21 4.45 20.55 4 20 4H5.21L4.27 2H1ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z" fill="black" />
+                                                </svg>
+                                                {loading ? (
+                                                    <span className={`${h.cart_counter} ${h.loading}`}>...</span>
+                                                ) : totalItems > 0 && (
+                                                    <span className={h.cart_counter}>{items.length}</span>
+                                                )}
+                                            </div>
+                                        </Link>
+                                        {showMiniCart && <MiniCart />}
+                                    </div>
+                                </div>
+                                {user.isAuth ? (
+                                    <div className={h.button}>
+                                        <Link to="/user/profile" onClick={() => setMenuOpen(false)}>
+                                            <div className={h.user_btn}>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C18.6276 0 24 4.9584 24 11.0753C24.0041 13.6313 23.0464 16.1094 21.2904 18.0859L21.3144 18.1103L21.156 18.2343C20.0306 19.4627 18.6282 20.4496 17.0467 21.126C15.4653 21.8024 13.743 22.152 12 22.1505C8.46 22.1505 5.28001 20.7362 3.08401 18.488L2.84401 18.2332L2.68561 18.1114L2.70961 18.0848C0.953896 16.1085 -0.00384279 13.6309 1.15885e-05 11.0753C1.15885e-05 4.9584 5.37241 0 12 0ZM12 16.6129C9.768 16.6129 7.7508 17.2686 6.2484 18.1701C7.90751 19.3185 9.92612 19.9381 12 19.9355C14.0739 19.9381 16.0925 19.3185 17.7516 18.1701C16.0348 17.155 14.0389 16.6146 12 16.6129ZM12 2.21505C10.1934 2.21501 8.42351 2.68544 6.89367 3.57227C5.36383 4.45911 4.13617 5.72636 3.3518 7.22836C2.56743 8.73035 2.25817 10.4061 2.45959 12.0631C2.66101 13.7201 3.36491 15.2909 4.49041 16.5952C6.43561 15.3071 9.09 14.3979 12 14.3979C14.91 14.3979 17.5644 15.3071 19.5096 16.5952C20.6351 15.2909 21.339 13.7201 21.5404 12.0631C21.7418 10.4061 21.4326 8.73035 20.6482 7.22836C19.8638 5.72636 18.6362 4.45911 17.1063 3.57227C15.5765 2.68544 13.8066 2.21501 12 2.21505ZM12 4.43011C13.273 4.43011 14.4939 4.89685 15.3941 5.72766C16.2943 6.55846 16.8 7.68528 16.8 8.86022C16.8 10.0352 16.2943 11.162 15.3941 11.9928C14.4939 12.8236 13.273 13.2903 12 13.2903C10.727 13.2903 9.50606 12.8236 8.60589 11.9928C7.70572 11.162 7.2 10.0352 7.2 8.86022C7.2 7.68528 7.70572 6.55846 8.60589 5.72766C9.50606 4.89685 10.727 4.43011 12 4.43011ZM12 6.64516C11.3635 6.64516 10.753 6.87854 10.3029 7.29394C9.85286 7.70934 9.6 8.27275 9.6 8.86022C9.6 9.44769 9.85286 10.0111 10.3029 10.4265C10.753 10.8419 11.3635 11.0753 12 11.0753C12.6365 11.0753 13.247 10.8419 13.6971 10.4265C14.1471 10.0111 14.4 9.44769 14.4 8.86022C14.4 8.27275 14.1471 7.70934 13.6971 7.29394C13.247 6.87854 12.6365 6.64516 12 6.64516Z" fill="black" />
+                                                </svg>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                ) : (
+                                    <div className={h.button}>
+                                        <Link to="/login" onClick={() => setMenuOpen(false)}>
+                                            <div className={h.auth_btn}>
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12 24V21.3333H21.3333V2.66667H12V0H21.3333C22.0667 0 22.6947 0.261333 23.2173 0.784C23.74 1.30667 24.0009 1.93422 24 2.66667V21.3333C24 22.0667 23.7391 22.6947 23.2173 23.2173C22.6956 23.74 22.0676 24.0009 21.3333 24H12ZM9.33333 18.6667L7.5 16.7333L10.9 13.3333H0V10.6667H10.9L7.5 7.26667L9.33333 5.33333L16 12L9.33333 18.6667Z" fill="black" />
+                                                </svg>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                )}
+                            </div>
                         </nav>
+                        {/* Кнопки для десктопа */}
                         <div className={h.header_btns}>
                             <div className={h.button}>
                                 <div

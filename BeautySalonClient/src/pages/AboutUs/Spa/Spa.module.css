@@ -39,3 +39,27 @@
     color: var(--clr-secondary);
     font-size: 16px;
 }
+
+@media (max-width: 900px) {
+    .testimonials_title {
+        font-size: 28px;
+    }
+    .testimonials_content {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .testimonials_inner {
+        padding: 20px 0 0 0;
+    }
+}
+@media (max-width: 600px) {
+    .testimonials {
+        margin-top: 40px;
+    }
+    .testimonials_title {
+        font-size: 18px;
+    }
+    .testimonials_subtitle, .subtitle {
+        font-size: 13px;
+    }
+}

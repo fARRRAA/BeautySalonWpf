@@ -990,3 +990,129 @@ color: #000;
 .time_slots::-webkit-scrollbar-thumb:hover {
     background: var(--clr-accent);
 }
+
+@media (max-width: 600px) {
+    .step_container {
+        padding: 0;
+    }
+    .appointment {
+        margin-top: 8px;
+        margin-bottom: 30px;
+    }
+    .content_area {
+        padding: 10px;
+        min-height: 200px;
+        border-radius: 8px;
+    }
+    .steps {
+        padding: 8px;
+        gap: 8px;
+    }
+    .step_item {
+        padding: 8px;
+        font-size: 13px;
+    }
+    .step_number {
+        width: 24px;
+        height: 24px;
+        font-size: 13px;
+        margin-right: 8px;
+    }
+    .step_content h3 {
+        font-size: 13px;
+    }
+    .step_content p {
+        font-size: 11px;
+    }
+    .search_bar {
+        max-width: 98vw;
+        margin-bottom: 10px;
+    }
+    .search_input {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+    .list_container {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .list_area, .info_area {
+        max-width: 98vw;
+        padding: 0;
+    }
+    .list_box {
+        height: 180px;
+        padding: 4px;
+    }
+    .list_item {
+        padding: 8px;
+        font-size: 13px;
+    }
+    .info_text {
+        font-size: 13px;
+    }
+    .button_group {
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 10px;
+    }
+    .button {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    .date_picker {
+        max-width: 98vw;
+    }
+    .categories {
+        gap: 6px;
+        margin: 10px 0;
+    }
+    .category_item {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    .selected_service_container {
+        padding: 8px;
+    }
+    .selected_service_name {
+        font-size: 13px;
+    }
+    .skill_level_select {
+        width: 100%;
+        font-size: 13px;
+        padding: 8px;
+    }
+    .master_block {
+        margin-bottom: 10px;
+    }
+    .master_item {
+        padding: 8px;
+        font-size: 13px;
+    }
+    .master_name {
+        font-size: 13px;
+    }
+    .master_info {
+        font-size: 11px;
+    }
+    .time_slots {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 6px;
+    }
+    .time_slot {
+        font-size: 12px;
+        padding: 6px 2px;
+    }
+    .confirm_section {
+        padding: 8px;
+    }
+    .confirm_info, .info_block, .info_row, .info_label, .info_value {
+        font-size: 12px;
+    }
+    .summary_block {
+        padding: 8px;
+    }
+    .total_row, .total_label, .total_value {
+        font-size: 13px;
+    }
+}

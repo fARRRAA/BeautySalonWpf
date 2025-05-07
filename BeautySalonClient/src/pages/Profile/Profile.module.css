@@ -556,3 +556,178 @@
         height: 150px;
     }
 }
+
+@media (max-width: 600px) {
+    .profile {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .profile_title {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    .profile_content {
+        flex-direction: column;
+        gap: 12px;
+        padding: 10px;
+    }
+    .profile_wrapper {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .profile_photo .photo {
+        width: 90px;
+        height: 90px;
+    }
+    .profile_info {
+        width: 100%;
+        gap: 10px;
+    }
+    .info_group {
+        padding: 10px;
+    }
+    .group_title {
+        font-size: 15px;
+        margin-bottom: 8px;
+        padding-bottom: 4px;
+    }
+    .appointments_list>.group_title {
+        font-size: 18px;
+        margin-bottom: 8px;
+        padding-bottom: 4px;
+    }
+    .info_item {
+        margin-bottom: 6px;
+    }
+    .label {
+        width: 80px;
+        font-size: 12px;
+    }
+    .value {
+        font-size: 12px;
+    }
+    .profile_stats {
+        gap: 8px;
+        margin-top: 8px;
+    }
+    .stats_item {
+        padding: 8px 10px;
+    }
+    .stats_value {
+        font-size: 14px;
+    }
+    .stats_label {
+        font-size: 10px;
+    }
+    .appointments_list {
+        margin-top: 10px;
+    }
+    .appointment_card {
+        width: 99vw;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+    .appointment_header {
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+    }
+    .appointment_date {
+        font-size: 13px;
+    }
+    .appointment_status {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+    .appointment_master {
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+    .master_photo {
+        width: 32px;
+        height: 32px;
+    }
+    .master_name {
+        font-size: 12px;
+    }
+    .master_qualification {
+        font-size: 10px;
+    }
+    .appointment_time {
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+    .time_slot {
+        font-size: 10px;
+    }
+    .service_item {
+        font-size: 12px;
+    }
+    .appointment_footer {
+        flex-direction: column;
+        gap: 4px;
+    }
+    .appointment_total {
+        font-size: 13px;
+    }
+    .cancel_button {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+    .no_appointments {
+        font-size: 13px;
+        padding: 10px;
+    }
+    .orders_container {
+        padding: 8px;
+    }
+    .orders_title {
+        font-size: 18px;
+    }
+    .orders_subtitle {
+        font-size: 12px;
+    }
+    .orders_collapse {
+        gap: 6px;
+    }
+    .order_panel {
+        padding: 8px;
+    }
+    .order_header {
+        flex-direction: column;
+        gap: 4px;
+    }
+    .order_id, .order_date, .order_sum {
+        font-size: 12px;
+    }
+    .order_info_item {
+        font-size: 12px;
+    }
+    .product_item {
+        flex-direction: column;
+        gap: 4px;
+        padding: 4px;
+    }
+    .product_image_container {
+        width: 40px;
+        height: 40px;
+    }
+    .product_name {
+        font-size: 12px;
+    }
+    .product_category, .product_price_info, .product_price, .product_quantity, .product_total {
+        font-size: 11px;
+    }
+    .order_footer {
+        flex-direction: column;
+        gap: 4px;
+    }
+    .total_sum {
+        font-size: 13px;
+    }
+    .loading_container, .error_message, .no_orders {
+        font-size: 13px;
+        padding: 10px;
+    }
+}

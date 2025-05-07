@@ -128,3 +128,52 @@
         transform: translateY(0);
     }
 }
+
+@media (max-width: 600px) {
+    .login_inner {
+        margin-bottom: 30px;
+        width: 100vw;
+        min-width: 0;
+        padding: 0;
+    }
+    .login_title {
+        font-size: 22px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        word-break: break-word;
+    }
+    .login_form {
+        padding: 6vw 2vw;
+        margin-top: 6px;
+        border-radius: 8px;
+        width: 100vw;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+    .form_item input {
+        width: 92vw;
+        min-width: 0;
+        font-size: 13px;
+        padding: 8px 6px;
+    }
+    .form_item label {
+        font-size: 12px;
+        left: 8px;
+        max-width: 80vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .submit_btn {
+        font-size: 13px;
+        padding: 8px 0;
+        margin-top: 8px;
+    }
+    .register {
+        font-size: 13px;
+        margin-top: 8px;
+        display: block;
+        text-align: center;
+        word-break: break-word;
+    }
+}
